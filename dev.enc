@@ -1,0 +1,26 @@
+#General_Configuration
+SPRING_APPLICATION_NAME=Grade Portal Service
+#Server_Configuration
+SERVER_PORT=8080
+SERVER_CONTEXT_PATH=/api
+#Database_Configuration
+DB_URL=ENC[AES256_GCM,data:QJDiti6hoRgkMg5CLH0Vj3sBLKqTXCwJJheQ2M6GkW6ZjHWpNnRLo4v76Hej2wEBoeuJCiq6,iv:5eNQFRbaHorTgkua8bcG9cFFqLuwowUD52Zb0v+FrPk=,tag:tIgCCdXDYDVFC7SX614ATQ==,type:str]
+DB_USERNAME=ENC[AES256_GCM,data:a84ezsmPRSM=,iv:YBPG08PsFnS6LAVqnaOlhXql/X53zDjU3CpDR/ZkmTI=,tag:ShhKsMI21TNtaJNhiwG04Q==,type:str]
+DB_PASSWORD=ENC[AES256_GCM,data:vnVNoCC4sdI=,iv:qJN37wnsBWHHdWjSEGbbhLPIuqUSwh2WvnbIL69kav8=,tag:9RvT9Jk1NcgmcHHvxQ1AJQ==,type:str]
+DB_DRIVER=org.postgresql.Driver
+#OAuth2_Configuration
+GOOGLE_CLIENT_ID=ENC[AES256_GCM,data:+f/aGBfe5rQsDdVU2l7adMF8iRHO,iv:5DEtyHOJ/8oveObu3Ro7BtsIFlOveVtj7nvhobjbZeM=,tag:CJHYnuGGllRqqWvjcMD/9w==,type:str]
+GOOGLE_CLIENT_SECRET=ENC[AES256_GCM,data:zWNnccaN+VaJP88GBouRZX9O8qOUjX7ikA==,iv:DNGZ76Q+c9/j73GrK2Ls1tPP0ylDXPvxgV3htG7YXvs=,tag:4wgiGlxahNTWZYeBVRmRtw==,type:str]
+GOOGLE_REDIRECT_URI=ENC[AES256_GCM,data:gBlXiIbbm0aVA5DphbQzIgd0RWt3xIDtolc93wDsOiOl/w==,iv:aaE3lF/jjPK2tSf8tfhDpwVFbzjE2YAqBYW/OkOYl/A=,tag:y9VCMd0qyCieav8HlnSLTQ==,type:str]
+GOOGLE_AUTH_URI=ENC[AES256_GCM,data:+5Pk8ZGq1PTJwXizV0W+tXxIWUVpgLK6oQCNJYcGMCuORm/JlNt720etgYU=,iv:JDMQTjTV4iE84ABg3SbIclWFza5aoLj5J7gsbVsA9vI=,tag:59jmO6ZpyO1cakr/3cTMiQ==,type:str]
+GOOGLE_TOKEN_URI=ENC[AES256_GCM,data:7f6qtrRh5mTsXCVeNc1WjnWLksuXwMW04E8/SKcALyon5FZx+Ko9DblW,iv:aKrMXy+g0Szk0pCHzHigFMwxSSrC9+kcJLu5oduo6hU=,tag:NC02rIKTMFew3M3p3hA/Xw==,type:str]
+GOOGLE_USER_INFO_URI=ENC[AES256_GCM,data:EHNeLWZbWCHYNNwtjWAH9SOskg+XGlxYodkGcZkStCx1Ce3vCIiDrIc6ydgL,iv:or5yLsUic8L9gI9NJLQgV/RbFJCp1i0lYOm3dAewYfM=,tag:joItc5AD9oJebYW3YvIarw==,type:str]
+GOOGLE_USER_NAME_ATTRIBUTE=ENC[AES256_GCM,data:j1gs,iv:9XmqbQpgeraMA0VnxlKtNh9wvmI6Vwa5QywMFVsFEvU=,tag:B+bav/V3iOwtpeKPztLc2g==,type:str]
+#Time_Zone_Configuration
+JACKSON_TIME_ZONE=ENC[AES256_GCM,data:OTPQMbvostaokArglp+8pQ==,iv:Kyclp8f9gl1cMZINcAUl7nyd5SOuDwdAzQ5xjiiR4Rk=,tag:ojRIcTC8LQpx89EgeqDJAQ==,type:str]
+sops_age__list_0__map_enc=-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMTzZMWEQ1Y0dOaSttYXBG\nQlZTTitoTWxoZXFqNHdhbHFiaE1OeDFISldrCnVvNFFVRnlMaVNzRjQyOEZHZ0pp\nN2hrRFpyUWkreCs2ZE1STXd2V0xzRlUKLS0tIFpvaTRDS28ySngwS2RmbnZGSW5E\nRzA3c0FUNFo0cUFDQSt6M25Cc0VuVHMKsIT8iUR2HtdVPknRoPHqq5Abd+1nx6Hg\n0HFJXkcheKHAEgSKpbQNVsXz7tE90R1XJfyC/mGVhtQ8Rhj1skqgMQ==\n-----END AGE ENCRYPTED FILE-----\n
+sops_age__list_0__map_recipient=age1zl8ergdmu9a3q7gz69msmqqkh5gvhwlvac9gsdqlykjzsj7uu4jqdc8dph
+sops_encrypted_regex=^(DB_URL|DB_USERNAME|DB_PASSWORD|GOOGLE_CLIENT_ID|GOOGLE_CLIENT_SECRET|GOOGLE_REDIRECT_URI|GOOGLE_AUTH_URI|GOOGLE_TOKEN_URI|GOOGLE_USER_INFO_URI|GOOGLE_USER_NAME_ATTRIBUTE|JACKSON_TIME_ZONE)$
+sops_lastmodified=2024-10-20T13:31:21Z
+sops_mac=ENC[AES256_GCM,data:v8UAc1v6rGfRekt+/LJfFBx9KFDP/3js2zRVxq/B47NLftT7dFIxyShQVVOE0e0/+sJ1l+Zkr/jqHD0lO3sEzx2JMbMi1mbLFGHYE0QqBG+GCC/MwUoFIiAjtlkBdB58d1ytPkY7FkIS/BJN0YtXLs5ONAgt4ToKNfBxW/OwaX4=,iv:qTnE8Nq7/JztCTZjZDd4kstnFgHSmnic7ZXhwibUFbk=,tag:ySkfgjJU1ow1KW43YSXXQw==,type:str]
+sops_version=3.9.1

@@ -1,0 +1,64 @@
+# Ignore Maven build files
+target/
+!.mvn/wrapper/maven-wrapper.jar
+**/src/main/**/target/
+**/src/test/**/target/
+
+# Ignore logs
+*.log
+logs/
+log/
+
+# Ignore temp and backup files
+*.swp
+*.bak
+*.tmp
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore STS (Spring Tool Suite) specific files
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Ignore IntelliJ IDEA specific files
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Ignore NetBeans specific files
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+**/src/main/**/build/
+**/src/test/**/build/
+
+# Ignore Eclipse specific files
+*.metadata
+*.classpath
+*.project
+*.settings/
+
+# Ignore Visual Studio Code specific files
+.vscode/
+
+# Ignore environment files
+.env
+key.txt
+
+# Ignore Maven Wrapper files
+mvnw
+mvnw.cmd
+
+# Ignore generated help file
+HELP.md

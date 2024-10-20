@@ -1,0 +1,5 @@
+---
+creation_rules:
+  - path_regex: .*.env$
+    encrypted_regex: ^(DB_URL|DB_USERNAME|DB_PASSWORD|GOOGLE_CLIENT_ID|GOOGLE_CLIENT_SECRET|GOOGLE_REDIRECT_URI|GOOGLE_AUTH_URI|GOOGLE_TOKEN_URI|GOOGLE_USER_INFO_URI|GOOGLE_USER_NAME_ATTRIBUTE|JACKSON_TIME_ZONE)$
+    age: age1zl8ergdmu9a3q7gz69msmqqkh5gvhwlvac9gsdqlykjzsj7uu4jqdc8dph
