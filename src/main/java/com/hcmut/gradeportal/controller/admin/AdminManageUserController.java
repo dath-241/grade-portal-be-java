@@ -14,28 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcmut.gradeportal.dtos.student.StudentDto;
 import com.hcmut.gradeportal.dtos.student.StudentDtoConverter;
-import com.hcmut.gradeportal.dtos.student.reponse.CreateBulkStudentReponse;
 import com.hcmut.gradeportal.dtos.student.request.CreateStudentRequest;
 import com.hcmut.gradeportal.dtos.student.request.GetStudentRequest;
+import com.hcmut.gradeportal.dtos.student.response.CreateBulkStudentResponse;
 import com.hcmut.gradeportal.dtos.teacher.TeacherDto;
 import com.hcmut.gradeportal.dtos.teacher.TeacherDtoConverter;
-import com.hcmut.gradeportal.dtos.teacher.reponse.CreateBulkTeacherReponse;
 import com.hcmut.gradeportal.dtos.teacher.request.CreateTeacherRequest;
 import com.hcmut.gradeportal.dtos.teacher.request.GetTeacherRequest;
-import com.hcmut.gradeportal.reponse.ApiResponse;
+import com.hcmut.gradeportal.dtos.teacher.response.CreateBulkTeacherResponse;
+import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.StudentService;
 import com.hcmut.gradeportal.service.TeacherService;
 
 @RestController
-@RequestMapping("/admin/manage-account")
-public class AdminManageAccountController {
+@RequestMapping("/admin/manage-user")
+public class AdminManageUserController {
     private final TeacherDtoConverter teacherDtoConverter;
     private final StudentDtoConverter studentDtoConverter;
 
     private final TeacherService teacherService;
     private final StudentService studentService;
 
-    public AdminManageAccountController(TeacherService teacherService, StudentService studentService,
+    public AdminManageUserController(TeacherService teacherService, StudentService studentService,
             TeacherDtoConverter teacherDtoConverter, StudentDtoConverter studentDtoConverter) {
         this.teacherDtoConverter = teacherDtoConverter;
         this.studentDtoConverter = studentDtoConverter;
@@ -223,32 +223,32 @@ public class AdminManageAccountController {
 
     // Create a list of teachers
     @PostMapping("/create-bulk-teachers")
-    public ResponseEntity<ApiResponse<List<CreateBulkTeacherReponse>>> createBulkTeachers(
+    public ResponseEntity<ApiResponse<List<CreateBulkTeacherResponse>>> createBulkTeachers(
             @RequestBody List<CreateTeacherRequest> requests) {
         try {
-            List<CreateBulkTeacherReponse> responses = new ArrayList<>();
+            List<CreateBulkTeacherResponse> responses = new ArrayList<>();
 
             for (CreateTeacherRequest request : requests) {
                 try {
                     TeacherDto teacherDto = teacherDtoConverter.convert(teacherService.createTeacher(request)); // Chuyển
                                                                                                                 // sang
                                                                                                                 // DTO
-                    responses.add(new CreateBulkTeacherReponse(teacherDto.email(), HttpStatus.OK.value(),
+                    responses.add(new CreateBulkTeacherResponse(teacherDto.email(), HttpStatus.OK.value(),
                             "Teacher created successfully"));
                 } catch (IllegalArgumentException e) {
-                    responses.add(new CreateBulkTeacherReponse(request.getEmail(), HttpStatus.BAD_REQUEST.value(),
+                    responses.add(new CreateBulkTeacherResponse(request.getEmail(), HttpStatus.BAD_REQUEST.value(),
                             e.getMessage()));
                 } catch (Exception e) {
-                    responses.add(new CreateBulkTeacherReponse(request.getEmail(),
+                    responses.add(new CreateBulkTeacherResponse(request.getEmail(),
                             HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to create teacher"));
                 }
             }
 
-            ApiResponse<List<CreateBulkTeacherReponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+            ApiResponse<List<CreateBulkTeacherResponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
                     "Teachers created", responses);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            ApiResponse<List<CreateBulkTeacherReponse>> response = new ApiResponse<>(
+            ApiResponse<List<CreateBulkTeacherResponse>> response = new ApiResponse<>(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to create teachers", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -277,32 +277,32 @@ public class AdminManageAccountController {
 
     // Create a list of students
     @PostMapping("/create-bulk-students")
-    public ResponseEntity<ApiResponse<List<CreateBulkStudentReponse>>> createBulkStudents(
+    public ResponseEntity<ApiResponse<List<CreateBulkStudentResponse>>> createBulkStudents(
             @RequestBody List<CreateStudentRequest> requests) {
         try {
-            List<CreateBulkStudentReponse> responses = new ArrayList<>();
+            List<CreateBulkStudentResponse> responses = new ArrayList<>();
 
             for (CreateStudentRequest request : requests) {
                 try {
                     StudentDto studentDto = studentDtoConverter.convert(studentService.createStudent(request)); // Chuyển
                                                                                                                 // sang
                                                                                                                 // DTO
-                    responses.add(new CreateBulkStudentReponse(studentDto.email(), HttpStatus.OK.value(),
+                    responses.add(new CreateBulkStudentResponse(studentDto.email(), HttpStatus.OK.value(),
                             "Student created successfully"));
                 } catch (IllegalArgumentException e) {
-                    responses.add(new CreateBulkStudentReponse(request.getEmail(), HttpStatus.BAD_REQUEST.value(),
+                    responses.add(new CreateBulkStudentResponse(request.getEmail(), HttpStatus.BAD_REQUEST.value(),
                             e.getMessage()));
                 } catch (Exception e) {
-                    responses.add(new CreateBulkStudentReponse(request.getEmail(),
+                    responses.add(new CreateBulkStudentResponse(request.getEmail(),
                             HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to create student"));
                 }
             }
 
-            ApiResponse<List<CreateBulkStudentReponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+            ApiResponse<List<CreateBulkStudentResponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
                     "Students created", responses);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            ApiResponse<List<CreateBulkStudentReponse>> response = new ApiResponse<>(
+            ApiResponse<List<CreateBulkStudentResponse>> response = new ApiResponse<>(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to create students", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

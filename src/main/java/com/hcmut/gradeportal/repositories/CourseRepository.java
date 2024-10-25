@@ -1,5 +1,6 @@
 package com.hcmut.gradeportal.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,7 @@ import com.hcmut.gradeportal.entities.Course;
 public interface CourseRepository extends JpaRepository<Course, String> {
 
     Optional<Course> findByCourseCode(String courseCode);
+
+    List<Course> findByCredit(int credit);
 
 }

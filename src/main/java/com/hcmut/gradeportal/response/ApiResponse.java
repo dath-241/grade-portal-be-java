@@ -1,4 +1,4 @@
-package com.hcmut.gradeportal.reponse;
+package com.hcmut.gradeportal.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
