@@ -1,5 +1,8 @@
 package com.hcmut.gradeportal.dtos.course;
 
-public class CourseDto {
+public record CourseDto(
+        String courseCode,
+        String courseName,
+        Integer credit) {
 
 }
