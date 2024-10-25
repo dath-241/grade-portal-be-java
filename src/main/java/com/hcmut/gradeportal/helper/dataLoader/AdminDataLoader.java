@@ -24,6 +24,7 @@ public class AdminDataLoader {
 
     public Set<CreateAdminRequest> loadAdminData() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:baseData/adminData.json");
-        return objectMapper.readValue(resource.getInputStream(), new TypeReference<Set<CreateAdminRequest>>() {});
+        return objectMapper.readValue(resource.getInputStream(), new TypeReference<Set<CreateAdminRequest>>() {
+        });
     }
 }

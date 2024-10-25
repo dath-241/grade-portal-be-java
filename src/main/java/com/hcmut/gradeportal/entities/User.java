@@ -1,34 +1,41 @@
 package com.hcmut.gradeportal.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.Table;
 import lombok.Data;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.MappedSuperclass;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.hcmut.gradeportal.entities.enums.Role;
 
 @Data
-@Entity
-@Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+@MappedSuperclass
+public abstract class User {
 
     @Id
-    private String id;  // Chuyển ID thành String
+    private String id; // Chuyển ID thành String
 
+    @NotNull
+    @NotBlank
     private Role role;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLogin;
 
+    @NotBlank
+    @Column(unique = true)
     private String email;
     private String familyName;
     private String givenName;
+    private String phone;
+
+    private String Faculty;
 
     // No-args constructor
     public User() {

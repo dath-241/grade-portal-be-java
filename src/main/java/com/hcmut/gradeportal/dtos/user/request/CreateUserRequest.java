@@ -1,5 +1,6 @@
 package com.hcmut.gradeportal.dtos.user.request;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.hcmut.gradeportal.entities.enums.Role;
@@ -10,7 +11,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateUserRequest {
-    @NotNull
+    @NotBlank
     private Role role;
 
     @NotNull
@@ -25,4 +26,8 @@ public class CreateUserRequest {
     private String teacherId;
 
     private String studentId;
+
+    private String phone;
+
+    private String faculty;
 }
