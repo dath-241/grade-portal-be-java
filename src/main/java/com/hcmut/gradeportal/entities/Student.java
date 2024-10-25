@@ -1,6 +1,9 @@
 package com.hcmut.gradeportal.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,6 +16,9 @@ public class Student extends User {
 
     private String studentId;
 
+    @ManyToMany(mappedBy = "listOfStudents")
+    private List<CourseClass> listOfCourseClasses;
+
     // Constructors
     public Student() {
         super();
@@ -22,5 +28,4 @@ public class Student extends User {
         super();
         this.studentId = studentId;
     }
-    // Getters and setters
 }

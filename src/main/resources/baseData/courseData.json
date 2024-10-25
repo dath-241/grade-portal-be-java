@@ -1,0 +1,307 @@
+[
+  {
+    "courseCode": "LA1003",
+    "courseName": "Anh văn 1",
+    "credit": 2
+  },
+  {
+    "courseCode": "PE1001",
+    "courseName": "Giáo dục thể chất",
+    "credit": 0
+  },
+  {
+    "courseCode": "MT1003",
+    "courseName": "Giải tích 1",
+    "credit": 4
+  },
+  {
+    "courseCode": "PH1003",
+    "courseName": "Vật lý 1",
+    "credit": 4
+  },
+  {
+    "courseCode": "CO1005",
+    "courseName": "Nhập môn điện toán",
+    "credit": 4
+  },
+  {
+    "courseCode": "CO1023",
+    "courseName": "Hệ thống số",
+    "credit": 3
+  },
+  {
+    "courseCode": "LA1005",
+    "courseName": "Anh văn 2",
+    "credit": 2
+  },
+  {
+    "courseCode": "PE1002",
+    "courseName": "Giáo dục thể chất",
+    "credit": 0
+  },
+  {
+    "courseCode": "MT1005",
+    "courseName": "Giải tích 2",
+    "credit": 4
+  },
+  {
+    "courseCode": "MT1007",
+    "courseName": "Đại số tuyến tính",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO1007",
+    "courseName": "Cấu trúc rời rạc cho khoa học máy tính",
+    "credit": 4
+  },
+  {
+    "courseCode": "CO1027",
+    "courseName": "Kỹ thuật lập trình",
+    "credit": 3
+  },
+  {
+    "courseCode": "PH1007",
+    "courseName": "Thí nghiệm vật lý",
+    "credit": 1
+  },
+  {
+    "courseCode": "MI1003",
+    "courseName": "Giáo dục quốc phòng",
+    "credit": 0
+  },
+  {
+    "courseCode": "LA1007",
+    "courseName": "Anh văn 3",
+    "credit": 2
+  },
+  {
+    "courseCode": "SP1031",
+    "courseName": "Triết học Mác - Lênin",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO2007",
+    "courseName": "Kiến trúc máy tính",
+    "credit": 4
+  },
+  {
+    "courseCode": "CO2011",
+    "courseName": "Mô hình hóa toán học",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO2003",
+    "courseName": "Cấu trúc dữ liệu và giải thuật",
+    "credit": 4
+  },
+  {
+    "courseCode": "LA1009",
+    "courseName": "Anh văn 4",
+    "credit": 2
+  },
+  {
+    "courseCode": "SP1033",
+    "courseName": "Kinh tế chính trị Mác - Lênin",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO2017",
+    "courseName": "Hệ điều hành",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO2039",
+    "courseName": "Lập trình nâng cao",
+    "credit": 3
+  },
+  {
+    "courseCode": "MT2013",
+    "courseName": "Xác suất và thống kê",
+    "credit": 4
+  },
+  {
+    "courseCode": "SP1035",
+    "courseName": "Chủ nghĩa xã hội khoa học",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO3093",
+    "courseName": "Mạng máy tính",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO2013",
+    "courseName": "Hệ cơ sở dữ liệu",
+    "credit": 4
+  },
+  {
+    "courseCode": "CO3001",
+    "courseName": "Công nghệ phần mềm",
+    "credit": 3
+  },
+  {
+    "courseCode": "CH1003",
+    "courseName": "Hóa đại cương",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3101",
+    "courseName": "Đồ án tổng hợp - hướng trí tuệ nhân tạo",
+    "credit": 1
+  },
+  {
+    "courseCode": "CO3103",
+    "courseName": "Đồ án tổng hợp - hướng công nghệ phần mềm",
+    "credit": 1
+  },
+  {
+    "courseCode": "CO3105",
+    "courseName": "Đồ án tổng hợp - hướng hệ thống thông tin",
+    "credit": 1
+  },
+  {
+    "courseCode": "SP1039",
+    "courseName": "Lịch sử Đảng Cộng sản Việt Nam",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO2001",
+    "courseName": "Kỹ năng chuyên nghiệp cho kỹ sư",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO2005",
+    "courseName": "Nguyên lý ngôn ngữ lập trình",
+    "credit": 4
+  },
+  {
+    "courseCode": "CO3335",
+    "courseName": "Thực tập ngoài trường",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO3107",
+    "courseName": "Thực tập đồ án môn học đa ngành - hướng trí tuệ nhân tạo",
+    "credit": 1
+  },
+  {
+    "courseCode": "CO3109",
+    "courseName": "Thực tập đồ án môn học đa ngành - hướng công nghệ phần mềm",
+    "credit": 1
+  },
+  {
+    "courseCode": "CO3111",
+    "courseName": "Thực tập đồ án môn học đa ngành - hướng hệ thống thông tin",
+    "credit": 1
+  },
+  {
+    "courseCode": "SP1037",
+    "courseName": "Tư tưởng Hồ Chí Minh",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO4029",
+    "courseName": "Đồ án chuyên ngành",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO4037",
+    "courseName": "Hệ thống thông tin quản lý",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO4039",
+    "courseName": "Bảo mật sinh trắc",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3021",
+    "courseName": "Hệ quản trị cơ sở dữ liệu",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3023",
+    "courseName": "Cơ sở dữ liệu phân tán và hướng đối tượng",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3115",
+    "courseName": "Phân tích và thiết kế hệ thống",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3027",
+    "courseName": "Thương mại điện tử",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3029",
+    "courseName": "Khai phá dữ liệu",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO3033",
+    "courseName": "Bảo mật hệ thống thông tin",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO4031",
+    "courseName": "Kho dữ liệu và hệ hỗ trợ quyết định",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO4033",
+    "courseName": "Phân tích dữ liệu lớn và trí tuệ kinh doanh",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO4035",
+    "courseName": "Hệ hoạch định tài nguyên tổ chức",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO4037",
+    "courseName": "Hệ thống thông tin quản lý",
+    "credit": 3
+  },
+  {
+    "courseCode": "CO4039",
+    "courseName": "Bảo mật sinh trắc",
+    "credit": 3
+  },
+  {
+    "courseCode": "IM1013",
+    "courseName": "Kinh tế học đại cương",
+    "credit": 3
+  },
+  {
+    "courseCode": "IM1023",
+    "courseName": "Quản trị kinh doanh cho kỹ sư",
+    "credit": 3
+  },
+  {
+    "courseCode": "IM1027",
+    "courseName": "Kinh tế kỹ thuật",
+    "credit": 3
+  },
+  {
+    "courseCode": "IM1033",
+    "courseName": "Quản lý sản xuất cho kỹ sư",
+    "credit": 3
+  },
+  {
+    "courseCode": "IM1053",
+    "courseName": "Quản lý dự án cho kỹ sư",
+    "credit": 3
+  },
+  {
+    "courseCode": "SP1007",
+    "courseName": "Pháp luật Việt Nam đại cương",
+    "credit": 2
+  },
+  {
+    "courseCode": "CO4337",
+    "courseName": "Đồ án tốt nghiệp (Khoa học Máy tính)",
+    "credit": 4
+  }
+]

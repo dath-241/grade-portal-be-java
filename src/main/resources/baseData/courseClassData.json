@@ -1,0 +1,177 @@
+[
+  {
+    "courseCode": "CO3105",
+    "semesterCode": "HK233",
+    "className": "L10",
+    "teacherId": "2213951",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO3093",
+    "semesterCode": "HK233",
+    "className": "L09",
+    "teacherId": "2211629",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO2039",
+    "semesterCode": "HK241",
+    "className": "L01",
+    "teacherId": "2211629",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO3103",
+    "semesterCode": "HK241",
+    "className": "L06",
+    "teacherId": "2212303",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "MT2013",
+    "semesterCode": "HK231",
+    "className": "L04",
+    "teacherId": "2212303",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO3001",
+    "semesterCode": "HK223",
+    "className": "L03",
+    "teacherId": "2213951",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO2013",
+    "semesterCode": "HK241",
+    "className": "L06",
+    "teacherId": "2212303",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "MT2013",
+    "semesterCode": "HK223",
+    "className": "L02",
+    "teacherId": "2211629",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "SP1035",
+    "semesterCode": "HK233",
+    "className": "L10",
+    "teacherId": "2212303",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO2013",
+    "semesterCode": "HK233",
+    "className": "L08",
+    "teacherId": "2211599",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO3093",
+    "semesterCode": "HK231",
+    "className": "L06",
+    "teacherId": "2210128",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO3103",
+    "semesterCode": "HK241",
+    "className": "L01",
+    "teacherId": "2210128",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO2013",
+    "semesterCode": "HK231",
+    "className": "L06",
+    "teacherId": "2210128",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "MT2013",
+    "semesterCode": "HK233",
+    "className": "L09",
+    "teacherId": "2212303",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO2013",
+    "semesterCode": "HK241",
+    "className": "L04",
+    "teacherId": "2211629",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO2013",
+    "semesterCode": "HK241",
+    "className": "L04",
+    "teacherId": "2211599",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "SP1035",
+    "semesterCode": "HK232",
+    "className": "L04",
+    "teacherId": "2213951",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "SP1035",
+    "semesterCode": "HK233",
+    "className": "L03",
+    "teacherId": "2211629",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO3093",
+    "semesterCode": "HK232",
+    "className": "L01",
+    "teacherId": "2211599",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO3105",
+    "semesterCode": "HK233",
+    "className": "L03",
+    "teacherId": "2210128",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO3001",
+    "semesterCode": "HK232",
+    "className": "L06",
+    "teacherId": "2210128",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO3101",
+    "semesterCode": "HK232",
+    "className": "L02",
+    "teacherId": "2211599",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO3103",
+    "semesterCode": "HK241",
+    "className": "L03",
+    "teacherId": "2210128",
+    "classStatus": "Completed"
+  },
+  {
+    "courseCode": "CO3001",
+    "semesterCode": "HK231",
+    "className": "L07",
+    "teacherId": "2211629",
+    "classStatus": "inProgress"
+  },
+  {
+    "courseCode": "CO2039",
+    "semesterCode": "HK233",
+    "className": "L01",
+    "teacherId": "2211629",
+    "classStatus": "inProgress"
+  }
+]

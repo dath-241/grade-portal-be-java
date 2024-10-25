@@ -1,0 +1,92 @@
+[
+  {
+    "semesterCode": "HK191",
+    "semesterName": "Học kỳ 1 năm 2019-2020",
+    "semesterDuration": "2019-2020"
+  },
+  {
+    "semesterCode": "HK192",
+    "semesterName": "Học kỳ 2 năm 2019-2020",
+    "semesterDuration": "2019-2020"
+  },
+  {
+    "semesterCode": "HK193",
+    "semesterName": "Học kỳ hè năm 2019-2020",
+    "semesterDuration": "2019-2020"
+  },
+  {
+    "semesterCode": "HK201",
+    "semesterName": "Học kỳ 1 năm 2020-2021",
+    "semesterDuration": "2020-2021"
+  },
+  {
+    "semesterCode": "HK202",
+    "semesterName": "Học kỳ 2 năm 2020-2021",
+    "semesterDuration": "2020-2021"
+  },
+  {
+    "semesterCode": "HK203",
+    "semesterName": "Học kỳ hè năm 2020-2021",
+    "semesterDuration": "2020-2021"
+  },
+  {
+    "semesterCode": "HK211",
+    "semesterName": "Học kỳ 1 năm 2021-2022",
+    "semesterDuration": "2021-2022"
+  },
+  {
+    "semesterCode": "HK212",
+    "semesterName": "Học kỳ 2 năm 2021-2022",
+    "semesterDuration": "2021-2022"
+  },
+  {
+    "semesterCode": "HK213",
+    "semesterName": "Học kỳ hè năm 2021-2022",
+    "semesterDuration": "2021-2022"
+  },
+  {
+    "semesterCode": "HK221",
+    "semesterName": "Học kỳ 1 năm 2022-2023",
+    "semesterDuration": "2022-2023"
+  },
+  {
+    "semesterCode": "HK222",
+    "semesterName": "Học kỳ 2 năm 2022-2023",
+    "semesterDuration": "2022-2023"
+  },
+  {
+    "semesterCode": "HK223",
+    "semesterName": "Học kỳ hè năm 2022-2023",
+    "semesterDuration": "2022-2023"
+  },
+  {
+    "semesterCode": "HK231",
+    "semesterName": "Học kỳ 1 năm 2023-2024",
+    "semesterDuration": "2023-2024"
+  },
+  {
+    "semesterCode": "HK232",
+    "semesterName": "Học kỳ 2 năm 2023-2024",
+    "semesterDuration": "2023-2024"
+  },
+  {
+    "semesterCode": "HK233",
+    "semesterName": "Học kỳ hè năm 2023-2024",
+    "semesterDuration": "2023-2024"
+  },
+  {
+    "semesterCode": "HK241",
+    "semesterName": "Học kỳ 1 năm 2024-2025",
+    "semesterDuration": "2024-2025"
+  },
+  {
+    "semesterCode": "HK242",
+    "semesterName": "Học kỳ 2 năm 2024-2025",
+    "semesterDuration": "2024-2025"
+  },
+  {
+    "semesterCode": "HK243",
+    "semesterName": "Học kỳ hè năm 2024-2025",
+    "semesterDuration": "2024-2025"
+  }
+]

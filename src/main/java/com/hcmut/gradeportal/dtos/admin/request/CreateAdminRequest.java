@@ -1,6 +1,6 @@
 package com.hcmut.gradeportal.dtos.admin.request;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,12 +8,18 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateAdminRequest {
-    @NotNull
+    @NotBlank
     private String email;
 
-    @NotNull
+    @NotBlank
     private String familyName;
 
-    @NotNull
+    @NotBlank
     private String givenName;
+
+    @NotBlank
+    private String phone;
+
+    @NotBlank
+    private String faculty;
 }
