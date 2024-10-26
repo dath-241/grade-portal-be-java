@@ -17,7 +17,9 @@
     •
     <a href="../../report.md"><strong>Báo cáo tiến độ </strong></a>
     •
-    <a href="../../../docs/document.md"><strong>Hướng dẫn sử dụng</strong></a>
+    <a href="../../../docs/user-guide.md"><strong>Hướng dẫn sử dụng</strong></a>
+    •
+    <a href="../../../docs/document.md"><strong>Tài liệu dự án</strong></a>
     <br />
     <br />
   </p>

@@ -17,7 +17,9 @@
     •
     <a href="./reports/report.md"><strong>Báo cáo tiến độ </strong></a>
     •
-    <a href="./docs/document.md"><strong>Hướng dẫn sử dụng</strong></a>
+    <a href="./docs/user-guide.md"><strong>Hướng dẫn sử dụng</strong></a>
+    •
+    <a href="./docs/document.md"><strong>Tài liệu dự án</strong></a>
     <br />
     <br />
   </p>
@@ -38,9 +40,12 @@
 | 1   | Trần Đại Việt      | Product Owner | 2213951         | [Github](https://github.com/VietTranDai) |
 | 2   | Phạm Văn Quốc Việt | Developer     | 2213950         | [Github](https://github.com/phaiHP)      |
 | 3   | Nguyễn Nhật Khoa   | Developer     | 2211629         | [Github](https://github.com/Sherllgen)   |
-| 4   | Phạm Viết Anh      | Developer     | 2210128         | [Github](https://github.com/vietank62)   |
+| 4   | Phạm Việt Anh      | Developer     | 2210128         | [Github](https://github.com/vietank62)   |
 | 5   | Nguyễn Gia Nguyên  | Developer     | 2212303         | [Github](https://github.com/NguyenBk22)  |
 | 6   | Lê Đăng Khoa       | Developer     | 2211599         | [Github](https://github.com/thisIsKhoa)  |
+
+- [Backend Server]()
+- [API docs]()
 
 <!-- ABOUT THE PROJECT -->
 
@@ -90,7 +95,7 @@ Cuối cùng, mục tiêu của Grade Portal là góp phần vào quá trình hi
 
 ## Hướng dẫn sử dụng
 
-Hướng dẫn chi tiết về cách tải và chạy ứng dùng ở [đây](./docs/document.md).
+Hướng dẫn chi tiết về cách tải và chạy ứng dùng ở [đây](./docs/user-guide.md).
 
 **Lưu ý**: Vì ứng dụng vẫn đang trong giai đoạn phát triển nên một số chức năng sẽ không được đầy đủ như mong muốn.
 
