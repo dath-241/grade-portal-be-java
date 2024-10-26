@@ -17,7 +17,9 @@
     •
     <a href="#progress_report"><strong>Báo cáo tiến độ </strong></a>
     •
-    <a href="../docs/document.md"><strong>Hướng dẫn sử dụng</strong></a>
+    <a href="../docs/user-guide.md"><strong>Hướng dẫn sử dụng</strong></a>
+    •
+    <a href="../docs/document.md"><strong>Tài liệu dự án</strong></a>
     <br />
     <br />
   </p>
@@ -36,7 +38,7 @@
 | 1   | Trần Đại Việt      | Product Owner | 2213951         | [Github](https://github.com/VietTranDai) |
 | 2   | Phạm Văn Quốc Việt | Developer     | 2213950         | [Github](https://github.com/phaiHP)      |
 | 3   | Nguyễn Nhật Khoa   | Developer     | 2211629         | [Github](https://github.com/Sherllgen)   |
-| 4   | Phạm Viết Anh      | Developer     | 2210128         | [Github](https://github.com/vietank62)   |
+| 4   | Phạm Việt Anh      | Developer     | 2210128         | [Github](https://github.com/vietank62)   |
 | 5   | Nguyễn Gia Nguyên  | Developer     | 2212303         | [Github](https://github.com/NguyenBk22)  |
 | 6   | Lê Đăng Khoa       | Developer     | 2211599         | [Github](https://github.com/thisIsKhoa)  |
 
@@ -69,7 +71,7 @@ Kế hoạch làm việc chung của môn học như sau:
 | 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
 | 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
 | 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
-| 2210128 | Phạm Viết Anh      | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
+| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
 | 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
 | 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
 
