@@ -8,4 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentClassInfoController {
     public StudentClassInfoController() {
     }
+
+    ///////////////// All Get request for student class info /////////////////
+
 }

@@ -34,7 +34,7 @@ public class Semester {
 
     // Phương thức tạo tên học kỳ từ mã học kỳ (semesterCode)
     private String generateSemesterName(String semesterCode) {
-        String semesterPart = semesterCode.substring(2, 3); // Lấy phần chỉ học kỳ (1, 2, hoặc 3)
+        String semesterPart = semesterCode.substring(4, 5); // Lấy phần chỉ học kỳ (1, 2, hoặc 3)
         switch (semesterPart) {
             case "1":
                 return "Học kỳ 1";
@@ -50,7 +50,7 @@ public class Semester {
     // Phương thức tạo khoảng thời gian học kỳ từ mã học kỳ (semesterCode)
     private String generateSemesterDuration(String semesterCode) {
         String yearPart = semesterCode.substring(3); // Lấy phần năm (ví dụ: "241" -> 2024)
-        int startYear = 2000 + Integer.parseInt(yearPart.substring(0, 2)); // Tạo năm học từ mã
+        int startYear = 2000 + Integer.parseInt(yearPart.substring(2, 4)); // Tạo năm học từ mã
         return startYear + "-" + (startYear + 1);
     }
 }

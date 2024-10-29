@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "teacher")
 public class Teacher extends User {
-    
+
     private String teacherId;
 
     // Constructors
@@ -22,7 +22,16 @@ public class Teacher extends User {
         super();
         this.teacherId = teacherId;
     }
-    
+
     // Getters and setters
+
+    public String getTeacherId() {
+        return this.teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+        this.setUpdatedAt();
+    }
 
 }
