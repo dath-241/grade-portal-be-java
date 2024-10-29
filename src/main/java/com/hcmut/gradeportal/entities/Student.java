@@ -28,4 +28,23 @@ public class Student extends User {
         super();
         this.studentId = studentId;
     }
+
+    public String getStudentId() {
+        return this.studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+        this.setUpdatedAt();
+    }
+
+    public List<CourseClass> getListOfCourseClasses() {
+        return this.listOfCourseClasses;
+    }
+
+    public void setListOfCourseClasses(List<CourseClass> listOfCourseClasses) {
+        this.listOfCourseClasses = listOfCourseClasses;
+        this.setUpdatedAt();
+    }
+
 }

@@ -18,6 +18,15 @@ public class AdminService {
     }
 
     ////////////// Service for get method - read data //////////////
+    // Lấy thông tin cá nhân
+    public Admin getAdminById(String id) {
+        Optional<Admin> admin = adminRepository.findById(id);
+        if (admin.isPresent()) {
+            return admin.get();
+        } else {
+            throw new IllegalArgumentException("Admin not found");
+        }
+    }
 
     ////////////// Service for post method - create data //////////////
     // Tạo một admin mới
