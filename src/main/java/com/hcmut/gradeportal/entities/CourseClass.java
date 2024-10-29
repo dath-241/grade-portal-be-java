@@ -3,6 +3,8 @@ package com.hcmut.gradeportal.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotNull;
 
 import com.hcmut.gradeportal.entities.enums.ClassStatus;
@@ -49,6 +51,9 @@ public class CourseClass {
     }, inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "id"))
     private List<Student> listOfStudents;
 
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
     @NotNull
     private ClassStatus classStatus;
 
@@ -56,6 +61,8 @@ public class CourseClass {
     public CourseClass() {
         this.classStatus = ClassStatus.inProgress;
         this.listOfStudents = new ArrayList<>();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public CourseClass(String courseCode, String semesterCode, String className) {
@@ -63,6 +70,83 @@ public class CourseClass {
         this.courseCode = courseCode;
         this.semesterCode = semesterCode;
         this.className = className;
+    }
+
+    // Getters and Setters
+
+    public void setUpdatedAt() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getCourseCode() {
+        return this.courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getSemesterCode() {
+        return this.semesterCode;
+    }
+
+    public void setSemesterCode(String semesterCode) {
+        this.semesterCode = semesterCode;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getClassName() {
+        return this.className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public Course getCourse() {
+        return this.course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public Teacher getTeacher() {
+        return this.teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public List<Student> getListOfStudents() {
+        return this.listOfStudents;
+    }
+
+    public void setListOfStudents(List<Student> listOfStudents) {
+        this.listOfStudents = listOfStudents;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public ClassStatus getClassStatus() {
+        return this.classStatus;
+    }
+
+    public void setClassStatus(ClassStatus classStatus) {
+        this.classStatus = classStatus;
+        this.updatedAt = LocalDateTime.now();
     }
 
 }

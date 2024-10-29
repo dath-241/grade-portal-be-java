@@ -55,4 +55,79 @@ public class Admin {
         this.Faculty = Faculty;
     }
 
+    // Getters and Setters
+
+    public String getId() {
+        return this.id;
+    }
+
+    public Role getRole() {
+        return this.role;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getLastLogin() {
+        return this.lastLogin;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getFamilyName() {
+        return this.familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getGivenName() {
+        return this.givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getFaculty() {
+        return this.Faculty;
+    }
+
+    public void setFaculty(String Faculty) {
+        this.Faculty = Faculty;
+        this.updatedAt = LocalDateTime.now();
+    }
+
 }

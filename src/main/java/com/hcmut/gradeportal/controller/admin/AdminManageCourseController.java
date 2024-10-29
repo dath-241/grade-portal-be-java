@@ -32,7 +32,7 @@ public class AdminManageCourseController {
 
     ///////////////// All Get request for manage course /////////////////
     // Get all courses
-    @GetMapping("/get-all-courses")
+    @GetMapping("/get-all")
     public ResponseEntity<ApiResponse<List<CourseDto>>> getAllCourses() {
         try {
             List<CourseDto> courseDtos = courseDtoConverter.convert(courseService.getAllCourses());
@@ -48,7 +48,7 @@ public class AdminManageCourseController {
     }
 
     // Get course by course code
-    @GetMapping("/get-course-by-course-code/{courseCode}")
+    @GetMapping("/get-by-course-code/{courseCode}")
     public ResponseEntity<ApiResponse<CourseDto>> getCourseByCourseCode(@PathVariable String courseCode) {
         try {
             CourseDto courseDto = courseDtoConverter.convert(courseService.getCourseByCourseCode(courseCode));
@@ -67,7 +67,7 @@ public class AdminManageCourseController {
 
     ///////////////// All Post request for manage course /////////////////
     // Create a new course
-    @PostMapping("/create-course")
+    @PostMapping("/create")
     public ResponseEntity<ApiResponse<CourseDto>> createCourse(@RequestBody CreateCourseRequest request) {
         try {
             CourseDto courseDto = courseDtoConverter.convert(courseService.createCourse(request));
@@ -86,7 +86,7 @@ public class AdminManageCourseController {
     }
 
     // Create a list of courses
-    @PostMapping("/create-bulk-courses")
+    @PostMapping("/create-bulk")
     public ResponseEntity<ApiResponse<List<CreateBulkCourseResponse>>> createBulkCourses(
             @RequestBody List<CreateCourseRequest> requests) {
         try {

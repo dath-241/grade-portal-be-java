@@ -1,17 +1,16 @@
 package com.hcmut.gradeportal.dtos.courseClass.request;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.util.List;
-
-import com.hcmut.gradeportal.entities.enums.ClassStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CreateCourseClassRequest {
+public class UpdateStudentsInClassRequest {
     @NotBlank
     private String courseCode;
 
@@ -21,9 +20,6 @@ public class CreateCourseClassRequest {
     @NotBlank
     private String className;
 
-    private String teacherId;
-
-    private List<String> studentIds;
-
-    private ClassStatus classStatus;
+    @NotNull
+    private List<String> newStudentIds;
 }

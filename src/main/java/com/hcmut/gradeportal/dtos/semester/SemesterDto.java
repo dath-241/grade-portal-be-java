@@ -1,5 +1,8 @@
 package com.hcmut.gradeportal.dtos.semester;
 
-public class SemesterDto {
+public record SemesterDto(
+        String semesterCode,
+        String semesterName,
+        String semesterDuration) {
 
 }
