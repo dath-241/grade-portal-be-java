@@ -376,4 +376,31 @@ public class CourseClassService {
         // Thay đổi course code của lớp học
 
         //////////// Service for delete method - delete data //////////////
+
+        // Remove a student from all courses by Id
+        public void removeStudentFromAllClasses(String studentId) {
+                // Tìm sinh viên theo ID
+                Student student = studentRepository.findById(studentId)
+                        .orElseThrow(() -> new IllegalArgumentException("Student not found with ID: " + studentId));
+            
+                // Lấy danh sách các lớp học mà sinh viên đang tham gia
+                List<CourseClass> courseClasses = student.getListOfCourseClasses();
+            
+                for (CourseClass courseClass : courseClasses) {
+ 
+                    // Xóa sinh viên khỏi danh sách sinh viên trong lớp học
+                    List<Student> studentsInClass = courseClass.getListOfStudents();
+                    studentsInClass.remove(student);
+                    
+                    // Cập nhật lớp học
+                    courseClass.setListOfStudents(studentsInClass);
+                    
+                    // Lưu lớp học đã cập nhật
+                    courseClassRepository.save(courseClass);
+                }
+            
+                // Xóa sinh viên khỏi danh sách lớp học của sinh viên
+                student.setListOfCourseClasses(new ArrayList<>());
+                studentRepository.save(student);
+        }
 }
