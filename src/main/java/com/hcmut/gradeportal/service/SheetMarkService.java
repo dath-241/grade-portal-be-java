@@ -202,5 +202,16 @@ public class SheetMarkService {
 
         }
 
+        
         ////////////// Service for delete method - delete data //////////////
+        
+        // Delete all sheet mark of a student by id
+        public void deleteAllSheetMarkOfStudentById(String id) {
+                List<SheetMark> sheetMarks = sheetMarkRepository.findByStudentId(id);
+                
+                if (sheetMarks != null && !sheetMarks.isEmpty()) {
+                        sheetMarkRepository.deleteAll(sheetMarks);
+                }
+        }
+            
 }
