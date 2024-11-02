@@ -1,14 +1,17 @@
 package com.hcmut.gradeportal.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hcmut.gradeportal.dtos.student.request.CreateStudentRequest;
 import com.hcmut.gradeportal.dtos.student.request.GetStudentRequest;
+import com.hcmut.gradeportal.dtos.student.request.UpdateStudentRequest;
 import com.hcmut.gradeportal.entities.Student;
 import com.hcmut.gradeportal.entities.enums.Role;
 import com.hcmut.gradeportal.repositories.StudentRepository;
@@ -112,6 +115,49 @@ public class StudentService {
     }
 
     ////////////// Service for put method - update data //////////////
+    // Update a student information
+    @Transactional
+    public Student updateStudent(UpdateStudentRequest request) {
+        if(request.getStudentId() == null) {
+            throw new IllegalArgumentException("Student id is required.");
+        }
+
+        Student student = studentRepository.findByStudentId(request.getStudentId())
+            .orElseThrow(() -> new IllegalArgumentException("Student not found for Student id: " + request.getStudentId()));
+
+        Optional.ofNullable(request.getNewEmail()).ifPresent(student::setEmail);
+        Optional.ofNullable(request.getNewFamilyName()).ifPresent(student::setFamilyName);
+        Optional.ofNullable(request.getNewGivenName()).ifPresent(student::setGivenName);
+        Optional.ofNullable(request.getNewPhone()).ifPresent(student::setPhone);
+        Optional.ofNullable(request.getNewFaculty()).ifPresent(student::setFaculty);
+
+        return studentRepository.save(student);
+    }
+
+    // Update a list of students
+    @Transactional
+    public List<Student> updateStudents(List<UpdateStudentRequest> requests) {
+        List<Student> updatedStudents = new ArrayList<>();
+
+        for (UpdateStudentRequest request : requests) {
+            if(request.getStudentId() == null) {
+                throw new IllegalArgumentException("Student id is required.");
+            }
+
+            Student student = studentRepository.findByStudentId(request.getStudentId())
+                .orElseThrow(() -> new IllegalArgumentException("Student not found for Student id: " + request.getStudentId()));
+
+            Optional.ofNullable(request.getNewEmail()).ifPresent(student::setEmail);
+            Optional.ofNullable(request.getNewFamilyName()).ifPresent(student::setFamilyName);
+            Optional.ofNullable(request.getNewGivenName()).ifPresent(student::setGivenName);
+            Optional.ofNullable(request.getNewPhone()).ifPresent(student::setPhone);
+            Optional.ofNullable(request.getNewFaculty()).ifPresent(student::setFaculty);
+
+            updatedStudents.add(student);
+        }
+
+        return studentRepository.saveAll(updatedStudents);
+    }
 
     ////////////// Service for delete method - delete data //////////////
 
