@@ -114,6 +114,7 @@ public class StudentService {
         }
     }
 
+    
     ////////////// Service for put method - update data //////////////
     // Update a student information
     @Transactional
@@ -160,5 +161,17 @@ public class StudentService {
     }
 
     ////////////// Service for delete method - delete data //////////////
+    
+    // Delete a student by id
+    public void deleteStudentById(String id) {
+        Optional<Student> student = studentRepository.findById(id);
+        
+        if (student.isEmpty()) {
+            throw new IllegalStateException("Student not found with ID: " + id);
+        } else {
+            studentRepository.delete(student.get());
+        }
+
+    }
 
 }

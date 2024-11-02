@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,8 @@ import com.hcmut.gradeportal.dtos.teacher.request.CreateTeacherRequest;
 import com.hcmut.gradeportal.dtos.teacher.request.GetTeacherRequest;
 import com.hcmut.gradeportal.dtos.teacher.response.CreateBulkTeacherResponse;
 import com.hcmut.gradeportal.response.ApiResponse;
+import com.hcmut.gradeportal.service.CourseClassService;
+import com.hcmut.gradeportal.service.SheetMarkService;
 import com.hcmut.gradeportal.service.StudentService;
 import com.hcmut.gradeportal.service.TeacherService;
 
@@ -36,14 +39,23 @@ public class AdminManageUserController {
 
     private final TeacherService teacherService;
     private final StudentService studentService;
+    private final SheetMarkService sheetMarkService;
+    private final CourseClassService courseClassService;
 
-    public AdminManageUserController(TeacherService teacherService, StudentService studentService,
-            TeacherDtoConverter teacherDtoConverter, StudentDtoConverter studentDtoConverter) {
+    public AdminManageUserController(
+        TeacherService teacherService, StudentService studentService, 
+        SheetMarkService sheetMarkService, CourseClassService courseClassService,
+        TeacherDtoConverter teacherDtoConverter, StudentDtoConverter studentDtoConverter) {
+
         this.teacherDtoConverter = teacherDtoConverter;
         this.studentDtoConverter = studentDtoConverter;
 
+
         this.teacherService = teacherService;
         this.studentService = studentService;
+		this.sheetMarkService = sheetMarkService;
+        this.courseClassService = courseClassService;
+
     }
 
     /////////////// All get request for manage account - Teacher ///////////////
@@ -357,5 +369,38 @@ public class AdminManageUserController {
     /////////////// All delete request for manage account - Teacher ///////////////
 
     /////////////// All delete request for manage account - Student ///////////////
+
+    // Delete student by Id
+    @DeleteMapping("/students/{id}")
+    public ResponseEntity<ApiResponse<StudentDto>> deleteStudentByStudentId(@PathVariable String id) {
+        try {
+            studentService.getStudentById(id);
+
+            // Xóa điểm của sinh viên
+            sheetMarkService.deleteAllSheetMarkOfStudentById(id);
+
+            // Xóa sinh viên khỏi tất cả các lớp
+            courseClassService.removeStudentFromAllClasses(id);
+
+            // Xóa sinh viên
+            studentService.deleteStudentById(id);
+
+            // Phản hồi thành công
+            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Student deleted successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+            
+        } catch (IllegalStateException | IllegalArgumentException e) {
+
+            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            
+        } catch (Exception e) {
+
+            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to delete student", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
