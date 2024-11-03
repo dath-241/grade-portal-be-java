@@ -2,12 +2,6 @@ spring:
   application:
     name: ${SPRING_APPLICATION_NAME}
 
-  # Cấu hình server (có thể bỏ qua nếu không cần)
-  # server:
-  #   port: ${SERVER_PORT}
-  #   servlet:
-  #     context-path: ${SERVER_CONTEXT_PATH}
-
   # Cấu hình dữ liệu
   datasource:
     url: ${DB_URL}
@@ -43,13 +37,18 @@ spring:
             scope:
               - email
               - profile
-        provider:
-          google:
-            authorization-uri: ${GOOGLE_AUTH_URI}
-            token-uri: ${GOOGLE_TOKEN_URI}
-            user-info-uri: ${GOOGLE_USER_INFO_URI}
-            user-name-attribute: ${GOOGLE_USER_NAME_ATTRIBUTE}
 
   # Cấu hình thời gian
   jackson:
     time-zone: ${JACKSON_TIME_ZONE}
+
+# Cấu hình JWT
+jwt:
+  secret-key: ${JWT_SECRET_KEY}
+  expiration-time: ${JWT_EXPIRATION_TIME}
+
+# Cấu hình server (có thể bỏ qua nếu không cần)
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH}
