@@ -1,4 +1,7 @@
 spring:
+  config:
+    import: optional:file:.env
+
   application:
     name: ${SPRING_APPLICATION_NAME}
 

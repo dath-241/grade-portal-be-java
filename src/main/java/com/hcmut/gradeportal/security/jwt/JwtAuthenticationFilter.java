@@ -7,6 +7,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +23,8 @@ import java.util.Collections;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final String SECRET_KEY = "your_secret_key";
+    @Value("${jwt.secret-key}")
+    private String JWT_SECRET_KEY;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
@@ -32,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.substring(7);
             try {
                 Claims claims = Jwts.parser()
-                        .setSigningKey(SECRET_KEY)
+                        .setSigningKey(JWT_SECRET_KEY)
                         .parseClaimsJws(token)
                         .getBody();
 

@@ -5,16 +5,44 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.hcmut.gradeportal.dtos.admin.request.CreateAdminRequest;
+import com.hcmut.gradeportal.dtos.auth.response.AuthResponse;
 import com.hcmut.gradeportal.entities.Admin;
 import com.hcmut.gradeportal.entities.enums.Role;
 import com.hcmut.gradeportal.repositories.AdminRepository;
+import com.hcmut.gradeportal.security.GoogleTokenVerifierService;
+import com.hcmut.gradeportal.security.jwt.JwtService;
 
 @Service
 public class AdminService {
     private final AdminRepository adminRepository;
+    private final GoogleTokenVerifierService googleTokenVerifierService;
+    private final JwtService jwtService;
 
-    public AdminService(AdminRepository adminRepository) {
+    public AdminService(AdminRepository adminRepository, GoogleTokenVerifierService googleTokenVerifierService,
+            JwtService jwtService) {
         this.adminRepository = adminRepository;
+        this.googleTokenVerifierService = googleTokenVerifierService;
+        this.jwtService = jwtService;
+    }
+
+    //////////// Service for login method ////////////
+    // Login with google authentication
+    public AuthResponse<Admin> login(String idToken) {
+        try {
+            var payload = googleTokenVerifierService.verify(idToken);
+
+            String email = payload.getEmail();
+            String userId = payload.getSubject();
+
+            Optional<Admin> admin = adminRepository.findByEmailAndRole(email, Role.ADMIN);
+            if (admin.isPresent()) {
+                return new AuthResponse<>(jwtService.generateToken(userId, Role.ADMIN), admin.get(), Role.ADMIN);
+            } else {
+                throw new IllegalArgumentException("Admin not found");
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid ID token");
+        }
     }
 
     ////////////// Service for get method - read data //////////////
