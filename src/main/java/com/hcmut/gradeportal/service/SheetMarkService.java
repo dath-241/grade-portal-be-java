@@ -207,6 +207,9 @@ public class SheetMarkService {
         
         // Delete all sheet mark of a student by id
         public void deleteAllSheetMarkOfStudentById(String id) {
+                studentRepository.findById(id)
+                        .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+                
                 List<SheetMark> sheetMarks = sheetMarkRepository.findByStudentId(id);
                 
                 if (sheetMarks != null && !sheetMarks.isEmpty()) {
