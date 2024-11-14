@@ -45,6 +45,48 @@ public class CourseService {
         course.setCourseCode(createCourseRequest.getCourseCode());
         course.setCourseName(createCourseRequest.getCourseName());
         course.setCredit(createCourseRequest.getCredit());
+
+        Integer totalCoefficient = 0;
+
+        if (createCourseRequest.getCoefficient_of_BT() == null) {
+            throw new IllegalArgumentException("Coefficient of BT is required");
+        } else {
+            totalCoefficient += createCourseRequest.getCoefficient_of_BT();
+            course.setCoefficient_of_BT(createCourseRequest.getCoefficient_of_BT());
+        }
+
+        if (createCourseRequest.getCoefficient_of_BTL() == null) {
+            throw new IllegalArgumentException("Coefficient of TH is required");
+        } else {
+            totalCoefficient += createCourseRequest.getCoefficient_of_BTL();
+            course.setCoefficient_of_BTL(createCourseRequest.getCoefficient_of_BTL());
+        }
+
+        if (createCourseRequest.getCoefficient_of_TN() == null) {
+            throw new IllegalArgumentException("Coefficient of TH is required");
+        } else {
+            totalCoefficient += createCourseRequest.getCoefficient_of_TN();
+            course.setCoefficient_of_TN(createCourseRequest.getCoefficient_of_TN());
+        }
+
+        if (createCourseRequest.getCoefficient_of_GK() == null) {
+            throw new IllegalArgumentException("Coefficient of GK is required");
+        } else {
+            totalCoefficient += createCourseRequest.getCoefficient_of_GK();
+            course.setCoefficient_of_GK(createCourseRequest.getCoefficient_of_GK());
+        }
+
+        if (createCourseRequest.getCoefficient_of_CK() == null) {
+            throw new IllegalArgumentException("Coefficient of CK is required");
+        } else {
+            totalCoefficient += createCourseRequest.getCoefficient_of_CK();
+            course.setCoefficient_of_CK(createCourseRequest.getCoefficient_of_CK());
+        }
+
+        if (totalCoefficient != 100) {
+            throw new IllegalArgumentException("Total coefficient must be 100");
+        }
+
         return courseRepository.save(course);
     }
 }

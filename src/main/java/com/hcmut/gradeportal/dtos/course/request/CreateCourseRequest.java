@@ -17,4 +17,19 @@ public class CreateCourseRequest {
 
     @Min(0)
     private Integer credit;
+
+    @Min(0)
+    private Integer coefficient_of_TN;
+
+    @Min(0)
+    private Integer coefficient_of_BT;
+
+    @Min(0)
+    private Integer coefficient_of_BTL;
+
+    @Min(0)
+    private Integer coefficient_of_GK;
+
+    @Min(0)
+    private Integer coefficient_of_CK;
 }
