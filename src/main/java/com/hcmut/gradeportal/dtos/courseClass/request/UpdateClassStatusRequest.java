@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ChangeTeacherRequest {
+public class UpdateClassStatusRequest {
     @NotBlank
     private String courseCode;
 
@@ -15,7 +15,5 @@ public class ChangeTeacherRequest {
 
     @NotBlank
     private String className;
-
-    @NotBlank
-    private String teacherId;
+    
 }
