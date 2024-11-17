@@ -49,7 +49,7 @@ public class Semester {
 
     // Phương thức tạo khoảng thời gian học kỳ từ mã học kỳ (semesterCode)
     private String generateSemesterDuration(String semesterCode) {
-        String yearPart = semesterCode.substring(3); // Lấy phần năm (ví dụ: "241" -> 2024)
+        String yearPart = semesterCode; // Lấy phần năm (ví dụ: "241" -> 2024)
         int startYear = 2000 + Integer.parseInt(yearPart.substring(2, 4)); // Tạo năm học từ mã
         return startYear + "-" + (startYear + 1);
     }
