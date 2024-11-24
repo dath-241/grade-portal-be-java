@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                            Online Java Compiler.
-                Code, Compile, Run and Debug java program online.
-Write your code in this editor and press "Run" button to execute it.
-
-*******************************************************************************/
-
 package com.hcmut.gradeportal.controller.admin;
 
 import java.util.ArrayList;
@@ -166,5 +158,4 @@ public class AdminManageCourseController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }
