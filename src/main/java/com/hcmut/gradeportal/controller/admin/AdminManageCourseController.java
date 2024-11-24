@@ -1,3 +1,11 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
 package com.hcmut.gradeportal.controller.admin;
 
 import java.util.ArrayList;
@@ -11,11 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.hcmut.gradeportal.dtos.course.CourseDto;
 import com.hcmut.gradeportal.dtos.course.CourseDtoConverter;
 import com.hcmut.gradeportal.dtos.course.request.CreateCourseRequest;
+import com.hcmut.gradeportal.dtos.course.request.GetCourseRequest;
 import com.hcmut.gradeportal.dtos.course.response.CreateBulkCourseResponse;
+///import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequest;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.CourseService;
 
@@ -118,6 +129,42 @@ public class AdminManageCourseController {
     }
 
     ///////////////// All Put request for manage course /////////////////
+    // Update course details
+    @PostMapping("/update-course")
+    public ResponseEntity<ApiResponse<CourseDto>> updateCourse(@RequestBody CreateCourseRequest request) {
+        try {
+            CourseDto courseDto = courseDtoConverter.convert(courseService.updateCourse(request));
+            ApiResponse<CourseDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Update course successfully",
+                    courseDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<CourseDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<CourseDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Update course failed", 
+                    null);      
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     ///////////////// All Delete request for manage course /////////////////
+    // Delete a course using request body
+    @DeleteMapping("/delete")
+    public ResponseEntity<ApiResponse<Void>> deleteCourse(@RequestBody GetCourseRequest request) {
+        try {
+            // Directly pass the CreateCourseRequest object to the service method
+            courseService.deleteCourse(request);
+            ApiResponse<Void> response = new ApiResponse<>(HttpStatus.OK.value(), "Delete course successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<Void> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<Void> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Deleted course failed", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
