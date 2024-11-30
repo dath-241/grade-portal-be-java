@@ -262,7 +262,6 @@ public class CourseClassService {
 
                 return newClass;
         }
-        
 
         ////////////// Service for put method - update data //////////////
 
@@ -374,6 +373,7 @@ public class CourseClassService {
 
                 return courseClass;
         }
+
         // Thêm sinh viên vào lớp học
         public CourseClass addStudentToClass(AddStudentRequest request) {
                 // Tìm sinh viên theo Id trong request
@@ -415,27 +415,55 @@ public class CourseClassService {
 
                 return courseClass;
         }
+
         // Cập nhập trạng thái của lớp học
+        public CourseClass updateStatusCourseClass(UpdateClassStatusRequest request) {
+                // CourseClass
+                // updateClass=courseClassRepository.findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(cou,se,nam,ClassStatus.inProgress);
+                // CourseClass
+                // updateClass=courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(cou,se,nam).get();
+                CourseClass updateClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                                request.getCourseCode(), request.getSemesterCode(), request.getClassName())
+                                .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+                if (updateClass.getClassStatus() == ClassStatus.Completed)
+                        return updateClass;
+                List<Student> liststudent = updateClass.getListOfStudents();
+                boolean iscompleted = true;
+                for (Student student : liststudent) {
+                        if (sheetMarkRepository.findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(student.getId(),
+                                        updateClass.getCourseCode(), updateClass.getSemesterCode(),
+                                        updateClass.getClassName()).get().getCK().isEmpty()) {
+                                iscompleted = false;
+                                break;
+                        }
+                }
+                if (iscompleted) {
+                        updateClass.setClassStatus(ClassStatus.Completed);
+                        courseClassRepository.save(updateClass);
+                }
+                return updateClass;
+        }
 
         // Thay đổi course code của lớp học
 
         //////////// Service for delete method - delete data //////////////
-        public CourseClass deleteCourseClass(UpdateClassStatusRequest request){
+        public CourseClass deleteCourseClass(UpdateClassStatusRequest request) {
                 CourseClass deleteClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
-                for(int i=0; i<deleteClass.getListOfStudents().size();i++){
-                        Student temp=deleteClass.getListOfStudents().get(i);
+                for (int i = 0; i < deleteClass.getListOfStudents().size(); i++) {
+                        Student temp = deleteClass.getListOfStudents().get(i);
                         sheetMarkRepository.deleteByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                temp.getId(), deleteClass.getCourseCode(), deleteClass.getSemesterCode(), deleteClass.getClassName());
+                                        temp.getId(), deleteClass.getCourseCode(), deleteClass.getSemesterCode(),
+                                        deleteClass.getClassName());
                         // for(int j=0;j<temp.getListOfCourseClasses().size();j++){
-                        //         if(temp.getListOfCourseClasses().get(j)==deleteClass){
-                        //                 temp.getListOfCourseClasses().remove();
-                        //                 studentRepository.save(temp);
-                        //                 break;
-                        //         }
+                        // if(temp.getListOfCourseClasses().get(j)==deleteClass){
+                        // temp.getListOfCourseClasses().remove();
+                        // studentRepository.save(temp);
+                        // break;
                         // }
-                        List<CourseClass> templist=temp.getListOfCourseClasses();
+                        // }
+                        List<CourseClass> templist = temp.getListOfCourseClasses();
                         templist.remove(deleteClass);
                         temp.setListOfCourseClasses(templist);
                         studentRepository.save(temp);
@@ -443,24 +471,16 @@ public class CourseClassService {
                 deleteClass.setListOfStudents(new ArrayList<Student>());
                 courseClassRepository.save(deleteClass);
                 courseClassRepository.deleteByCourseCodeAndSemesterCodeAndClassName(
-                deleteClass.getCourseCode(),deleteClass.getSemesterCode(),deleteClass.getClassName());
+                                deleteClass.getCourseCode(), deleteClass.getSemesterCode(), deleteClass.getClassName());
                 return deleteClass;
         }
-        public CourseClass getclass(String cou, String se,String nam){
-                return courseClassRepository.findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(cou,se,nam,ClassStatus.inProgress);}
 
+        public CourseClass getclass(String cou, String se, String nam) {
+                return courseClassRepository.findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(cou, se, nam,
+                                ClassStatus.inProgress);
+        }
 
-
-
-
-
-
-
-
-
-
-
-                //////////// Service for delete method - delete data //////////////
+        //////////// Service for delete method - delete data //////////////
 
         // Xóa sinh viên ra khỏi tất cả các lớp mà sinh viên đang tham gia
         public void removeStudentFromAllClasses(String studentId) {
@@ -490,6 +510,8 @@ public class CourseClassService {
                 studentRepository.save(student);
         }
 
+        // Xóa sinh viên ra khỏi một lớp và đồng thời xóa bảng điểm của sinh viên trong
+        // lớp đó
         // Xóa sinh viên ra khỏi một lớp và đồng thời xóa bảng điểm của sinh viên trong
         // lớp đó
         public void removeStudentFromClass(RemoveStudentRequest request) {
@@ -527,30 +549,5 @@ public class CourseClassService {
                         studentRepository.save(student);
                 }
         }
-        public CourseClass updateStatusCourseClass(UpdateClassStatusRequest request){
-                //CourseClass updateClass=courseClassRepository.findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(cou,se,nam,ClassStatus.inProgress);
-                //CourseClass updateClass=courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(cou,se,nam).get();
-                CourseClass updateClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
-                                request.getCourseCode(), request.getSemesterCode(), request.getClassName())
-                                .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
-                if(updateClass.getClassStatus()==ClassStatus.Completed)
-                        return updateClass;
-                List<Student> liststudent=updateClass.getListOfStudents();
-                boolean iscompleted=true;
-                for(Student student:liststudent)
-                {
-                        if(sheetMarkRepository.findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(student.getId(), 
-                        updateClass.getCourseCode(), updateClass.getSemesterCode(), updateClass.getClassName()).get().getCK().isEmpty())
-                        {
-                                iscompleted=false;break;
-                        }
-                }
-                if(iscompleted) {
-                        updateClass.setClassStatus(ClassStatus.Completed);
-                        courseClassRepository.save(updateClass);
-                }
-                return updateClass;
-        }
-        //có thể thêm request về del class
-         
+
 }
