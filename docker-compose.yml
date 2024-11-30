@@ -6,29 +6,17 @@ services:
     container_name: gradeportal_app
     ports:
       - "8080:8080"
-    environment:
-      SPRING_APPLICATION_NAME: ${SPRING_APPLICATION_NAME}
-      SERVER_PORT: ${SERVER_PORT}
-      DB_URL: ${DB_URL}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
-      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
-      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI}
-      GOOGLE_AUTH_URI: ${GOOGLE_AUTH_URI}
-      GOOGLE_TOKEN_URI: ${GOOGLE_TOKEN_URI}
-      GOOGLE_USER_INFO_URI: ${GOOGLE_USER_INFO_URI}
-      GOOGLE_USER_NAME_ATTRIBUTE: ${GOOGLE_USER_NAME_ATTRIBUTE}
-      JACKSON_TIME_ZONE: ${JACKSON_TIME_ZONE}
+    env_file:
+      - .env
     depends_on:
       - db
 
   db:
-    image: postgres:17 # Phiên bản PostgreSQL là 17, đồng bộ với thông tin của bạn
+    image: postgres:17
     container_name: gradeportal_db
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: HCMUT_Grade_Portal_DB
     ports:
       - "5432:5432"

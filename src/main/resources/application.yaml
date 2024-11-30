@@ -1,12 +1,21 @@
+# Cấu hình server (có thể bỏ qua nếu không cần)
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always # Hiển thị chi tiết trạng thái health
+
 spring:
   application:
     name: ${SPRING_APPLICATION_NAME}
-
-  # Cấu hình server (có thể bỏ qua nếu không cần)
-  # server:
-  #   port: ${SERVER_PORT}
-  #   servlet:
-  #     context-path: ${SERVER_CONTEXT_PATH}
 
   # Cấu hình dữ liệu
   datasource:
