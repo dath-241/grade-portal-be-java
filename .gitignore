@@ -59,6 +59,7 @@ key.txt
 # Ignore Maven Wrapper files
 mvnw
 mvnw.cmd
+docker-compose.yml
 
 # Ignore generated help file
 HELP.md
