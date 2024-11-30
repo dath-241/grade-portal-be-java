@@ -4,15 +4,6 @@ server:
   servlet:
     context-path: ${SERVER_CONTEXT_PATH}
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: always # Hiển thị chi tiết trạng thái health
-
 spring:
   application:
     name: ${SPRING_APPLICATION_NAME}
