@@ -374,17 +374,17 @@ public class CourseClassService {
         }
 
         // Thêm sinh viên vào lớp học
-        public CourseClass addStudentToClass (AddStudentRequest request){
+        public CourseClass addStudentToClass(AddStudentRequest request) {
                 // Tìm sinh viên theo Id trong request
                 Student student = studentRepository.findById(request.getStudentId())
-                        .orElseThrow(() -> new IllegalArgumentException("Student not found with ID: " + request.getStudentId()));
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "Student not found with ID: " + request.getStudentId()));
 
                 // Tìm lớp học dựa trên thông tin trong request
                 CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
-                        request.getCourseCode(), request.getSemesterCode(), request.getClassName())
-                        .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+                                request.getCourseCode(), request.getSemesterCode(), request.getClassName())
+                                .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
-                
                 // Báo lỗi nếu sinh viên đã tham gia vào lớp học
                 if (courseClass.getListOfStudents().contains(student)) {
                         throw new IllegalArgumentException("Student is already enrolled in this class");
@@ -409,12 +409,11 @@ public class CourseClassService {
                                 student.getListOfCourseClasses().add(courseClass);
                                 studentRepository.save(student);
                         }
-                        
+
                 }
-                
+
                 return courseClass;
         }
-
 
         // Cập nhập trạng thái của lớp học
 
@@ -426,40 +425,43 @@ public class CourseClassService {
         public void removeStudentFromAllClasses(String studentId) {
                 // Tìm sinh viên theo ID
                 Student student = studentRepository.findById(studentId)
-                        .orElseThrow(() -> new IllegalArgumentException("Student not found with ID: " + studentId));
-            
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "Student not found with ID: " + studentId));
+
                 // Lấy danh sách các lớp học mà sinh viên đang tham gia
                 List<CourseClass> courseClasses = student.getListOfCourseClasses();
-            
+
                 for (CourseClass courseClass : courseClasses) {
- 
+
                         // Xóa sinh viên khỏi danh sách sinh viên trong lớp học
                         List<Student> studentsInClass = courseClass.getListOfStudents();
                         studentsInClass.remove(student);
-                        
+
                         // Cập nhật lớp học
                         courseClass.setListOfStudents(studentsInClass);
-                        
+
                         // Lưu lớp học đã cập nhật
                         courseClassRepository.save(courseClass);
                 }
-            
+
                 // Xóa sinh viên khỏi danh sách lớp học của sinh viên
                 student.setListOfCourseClasses(new ArrayList<>());
                 studentRepository.save(student);
         }
 
-        // Xóa sinh viên ra khỏi một lớp và đồng thời xóa bảng điểm của sinh viên trong lớp đó
+        // Xóa sinh viên ra khỏi một lớp và đồng thời xóa bảng điểm của sinh viên trong
+        // lớp đó
         public void removeStudentFromClass(RemoveStudentRequest request) {
                 // Tìm sinh viên theo Id trong request
                 Student student = studentRepository.findById(request.getStudentId())
-                        .orElseThrow(() -> new IllegalArgumentException("Student not found with ID: " + request.getStudentId()));
-                
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "Student not found with ID: " + request.getStudentId()));
+
                 // Tìm lớp học dựa trên thông tin trong request
                 CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
-                        request.getCourseCode(), request.getSemesterCode(), request.getClassName())
-                        .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
-                
+                                request.getCourseCode(), request.getSemesterCode(), request.getClassName())
+                                .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+
                 // Báo lỗi nếu sinh viên chưa tham gia lớp học
                 if (!courseClass.getListOfStudents().contains(student)) {
                         throw new IllegalArgumentException("Student is not enrolled in this class");
@@ -467,12 +469,13 @@ public class CourseClassService {
 
                 // Tìm bảng điểm của sinh viên trong lớp học theo thông tin trong request
                 SheetMark sheetMark = sheetMarkRepository.findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                        request.getStudentId(), request.getCourseCode(), request.getSemesterCode(), request.getClassName())
-                        .orElseThrow(() -> new IllegalArgumentException("Sheet mark not found"));
-                
+                                request.getStudentId(), request.getCourseCode(), request.getSemesterCode(),
+                                request.getClassName())
+                                .orElseThrow(() -> new IllegalArgumentException("Sheet mark not found"));
+
                 // Xóa bảng điểm của sinh viên
                 sheetMarkRepository.delete(sheetMark);
-                
+
                 // Xóa sinh viên khỏi danh sách sinh viên của lớp học
                 if (courseClass.getListOfStudents().remove(student)) {
                         courseClassRepository.save(courseClass);
@@ -483,5 +486,5 @@ public class CourseClassService {
                         studentRepository.save(student);
                 }
         }
-    
+
 }
