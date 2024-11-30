@@ -43,12 +43,6 @@ spring:
             scope:
               - email
               - profile
-        provider:
-          google:
-            authorization-uri: ${GOOGLE_AUTH_URI}
-            token-uri: ${GOOGLE_TOKEN_URI}
-            user-info-uri: ${GOOGLE_USER_INFO_URI}
-            user-name-attribute: ${GOOGLE_USER_NAME_ATTRIBUTE}
 
   # Cấu hình thời gian
   jackson:
