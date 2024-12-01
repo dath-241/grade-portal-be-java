@@ -2,18 +2,15 @@ package com.hcmut.gradeportal.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-// import org.springframework.security.authentication.AuthenticationManager;
-// import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.hcmut.gradeportal.repositories.AdminRepository;
 import com.hcmut.gradeportal.repositories.StudentRepository;
 import com.hcmut.gradeportal.repositories.TeacherRepository;
 import com.hcmut.gradeportal.service.UserService;
-
 
 
 @EnableWebSecurity
@@ -39,7 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login").permitAll()
+                .requestMatchers("/", "/login", "/logout").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/teacher/**").hasRole("TEACHER")
                 .requestMatchers("/student/**").hasRole("USER")
@@ -47,10 +44,16 @@ public class SecurityConfig {
             )
             .oauth2Login(oauth2 -> oauth2
                 .userInfoEndpoint(userInfo -> userInfo
-                    .userService(userService()) // Sử dụng CustomOAuth2UserService
+                    .userService(userService()) // Sử dụng Custom vervice
                 )
-                .defaultSuccessUrl("/user", true)
-                .failureUrl("/login?error")
+                .defaultSuccessUrl("/user", true) // Dẫn đến api để lấy thông tin người dùng
+                .failureUrl("/error")
+            )
+            .exceptionHandling(ex -> ex
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    response.setStatus(403);
+                    response.getWriter().write("Forbidden: Access is denied.");
+                })
             )
 
             .logout(logout -> logout.logoutSuccessUrl("/").permitAll());
