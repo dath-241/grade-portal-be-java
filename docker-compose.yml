@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: trandaiviet/gradeportal-app:latest
     container_name: gradeportal_app
     ports:
       - "8080:8080"
