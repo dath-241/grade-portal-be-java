@@ -30,10 +30,13 @@ public class GradePortalServiceApplication {
             System.setProperty("SERVER_CONTEXT_PATH", dotenv.get("SERVER_CONTEXT_PATH"));
             System.setProperty("GOOGLE_CLIENT_ID", dotenv.get("GOOGLE_CLIENT_ID"));
             System.setProperty("GOOGLE_CLIENT_SECRET", dotenv.get("GOOGLE_CLIENT_SECRET"));
+            System.setProperty("GOOGLE_REDIRECT_URI", dotenv.get("GOOGLE_REDIRECT_URI"));
+            System.setProperty("GOOGLE_AUTH_URI", dotenv.get("GOOGLE_AUTH_URI"));
+            System.setProperty("GOOGLE_TOKEN_URI", dotenv.get("GOOGLE_TOKEN_URI"));
+            System.setProperty("GOOGLE_USER_INFO_URI", dotenv.get("GOOGLE_USER_INFO_URI"));
+            System.setProperty("GOOGLE_USER_NAME_ATTRIBUTE", dotenv.get("GOOGLE_USER_NAME_ATTRIBUTE"));
             System.setProperty("JACKSON_TIME_ZONE", dotenv.get("JACKSON_TIME_ZONE"));
-        }
-
+	    }
         SpringApplication.run(GradePortalServiceApplication.class, args);
     }
-
 }
