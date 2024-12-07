@@ -1,15 +1,15 @@
 package com.hcmut.gradeportal.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
 import com.hcmut.gradeportal.entities.enums.ClassStatus;
 import com.hcmut.gradeportal.entities.idsOfEntities.CourseClassId;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -49,6 +49,8 @@ public class CourseClass {
             @JoinColumn(name = "semesterCode", referencedColumnName = "semesterCode"),
             @JoinColumn(name = "className", referencedColumnName = "className")
     }, inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "id"))
+    
+    @ElementCollection
     private List<Student> listOfStudents;
 
     private LocalDateTime createdAt;

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.hcmut.gradeportal.entities.CourseClass;
 import com.hcmut.gradeportal.entities.idsOfEntities.CourseClassId;
 
+
 @Repository
 public interface CourseClassRepository
         extends JpaRepository<CourseClass, CourseClassId>, JpaSpecificationExecutor<CourseClass> {
 
-    Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
+        Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
             String className);
-
 }

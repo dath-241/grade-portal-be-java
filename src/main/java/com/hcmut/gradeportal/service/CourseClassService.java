@@ -1,7 +1,7 @@
 package com.hcmut.gradeportal.service;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -76,6 +76,164 @@ public class CourseClassService {
                 return courseClassRepository.findAll(spec);
         }
 
+        public List<CourseClass> teacherGetClassBySpecification(String teacherId, GetCourseClassRequest request) {
+                if (teacherId == null || teacherId.isEmpty()) {
+                        throw new IllegalArgumentException("Teacher ID cannot be null or empty");
+                }
+                
+                Optional<Teacher> teacher = teacherRepository.findById(teacherId);
+                if (!teacher.isPresent()) {
+                        throw new IllegalArgumentException("Teacher not found with ID: " + teacherId);
+                }
+                Student student = null;
+                if (request.getStudentId() != null && !request.getStudentId().isEmpty()) {
+                        student = studentRepository.findById(request.getStudentId())
+                                        .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+                }
+                Specification<CourseClass> spec = Specification
+                        .where(CourseClassSpecification.hasTeacherId(teacherId))
+                        .and(CourseClassSpecification.hasCourseCode(request.getCourseCode()))
+                        .and(CourseClassSpecification.hasSemesterCode(request.getSemesterCode()))
+                        .and(CourseClassSpecification.hasClassName(request.getClassName()))
+                        .and(CourseClassSpecification.hasClassStatus(request.getClassStatus()))
+                        .and(CourseClassSpecification.hasStudent(student));
+                    
+                return courseClassRepository.findAll(spec);
+        }
+
+        public List<CourseClass> studentGetClassBySpecification(String studentId, GetCourseClassRequest request) {
+                if (studentId == null || studentId.isEmpty()) {
+                        throw new IllegalArgumentException("Student ID cannot be null or empty");
+                }
+                Specification<CourseClass> spec = Specification
+                        .where(CourseClassSpecification.hasStudent(
+                                studentRepository.findById(studentId)
+                                .orElseThrow(() -> new IllegalArgumentException("Student not found with ID: " + studentId))
+                        ))
+                        .and(CourseClassSpecification.hasCourseCode(request.getCourseCode()))
+                        .and(CourseClassSpecification.hasSemesterCode(request.getSemesterCode()))
+                        .and(CourseClassSpecification.hasTeacherId(request.getTeacherId()))
+                        .and(CourseClassSpecification.hasClassName(request.getClassName()))
+                        .and(CourseClassSpecification.hasClassStatus(request.getClassStatus()));
+                    
+                return courseClassRepository.findAll(spec);
+        }
+
+        //get course class by student id
+
+        public List<CourseClass> getClassByStudentId(String studentId) {
+                if (studentId == null || studentId.isEmpty()) {
+                        throw new IllegalArgumentException("Student ID cannot be null or empty");
+                }
+
+                List<CourseClass> courseClasses = courseClassRepository.findAll();
+                List<CourseClass> filteredClasses = new ArrayList<>();
+
+                for (CourseClass courseClass : courseClasses) {
+                        List<Student> studentsOfClass = courseClass.getListOfStudents();
+                        for (Student student : studentsOfClass) {
+                                if (studentId.equals(student.getStudentId())) {
+                                        filteredClasses.add(courseClass);
+                                        break;
+                                }
+                        }
+                }
+
+                if (filteredClasses.isEmpty()) {
+                        throw new IllegalArgumentException("No classes found for the given student ID");
+                }
+                
+                return filteredClasses;
+        }
+        
+        //get course class by student_user id
+
+        public List<CourseClass> getClassByStudentUserId(String UserId) {
+                if (UserId == null || UserId.isEmpty()) {
+                        throw new IllegalArgumentException("Student ID cannot be null or empty");
+                }
+
+                List<CourseClass> courseClasses = courseClassRepository.findAll();
+                List<CourseClass> filteredClasses = new ArrayList<>();
+
+                for (CourseClass courseClass : courseClasses) {
+                        List<Student> studentsOfClass = courseClass.getListOfStudents();
+                        for (Student student : studentsOfClass) {
+                                if (UserId.equals(student.getId())) {
+                                        filteredClasses.add(courseClass);
+                                        break;
+                                }
+                        }
+                }
+
+                if (filteredClasses.isEmpty()) {
+                        throw new IllegalArgumentException("No classes found for the given student ID");
+                }
+                return filteredClasses;
+        }
+
+        // get course class by teacher id
+
+        public List<CourseClass> getClassByTeacherId(String teacherId) {
+                if (teacherId == null || teacherId.isEmpty()) {
+                        throw new IllegalArgumentException("Teacher ID cannot be null or empty");
+                }
+
+                List<CourseClass> courseClasses = courseClassRepository.findAll();
+                List<CourseClass> filteredClasses = new ArrayList<>();
+
+                for (CourseClass courseClass : courseClasses) {
+                        if(teacherId.equals(courseClass.getTeacher().getTeacherId())) {
+                            filteredClasses.add(courseClass);
+                        }
+                }
+
+                if (filteredClasses.isEmpty()) {
+                        throw new IllegalArgumentException("No classes found for the given teacher ID");
+                }
+                return filteredClasses;
+        }
+
+        public List<CourseClass> getClassByTeacherUserId(String UserId) {
+                if (UserId == null || UserId.isEmpty()) {
+                        throw new IllegalArgumentException("Teacher ID cannot be null or empty");
+                }
+
+                List<CourseClass> courseClasses = courseClassRepository.findAll();
+                List<CourseClass> filteredClasses = new ArrayList<>();
+
+                for (CourseClass courseClass : courseClasses) {
+                        if(UserId.equals(courseClass.getTeacher().getId())) {
+                            filteredClasses.add(courseClass);
+                        }
+                }
+
+                if (filteredClasses.isEmpty()) {
+                        throw new IllegalArgumentException("No classes found for the given teacher ID");
+                }
+                return filteredClasses;
+        }
+
+        // get student  info by course class
+        public List<Student> getStudentsByTeacherClass(String teacherId, String courseCode, String semesterCode, String className) {
+                Teacher teacher = teacherRepository.findById(teacherId)
+                        .orElseThrow(() -> new IllegalArgumentException("Teacher not found with ID: " + teacherId));
+                CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                        courseCode, semesterCode, className)
+                        .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+                if (!courseClass.getTeacher().equals(teacher)) {
+                        throw new IllegalArgumentException("Teacher does not teach this class");
+                }
+                return courseClass.getListOfStudents();
+        }
+
+        // get teacher info by course class
+        public Teacher getTeacherByClass(String courseCode, String semesterCode, String className) {
+                CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                        courseCode, semesterCode, className)
+                        .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+                return courseClass.getTeacher();
+        }
         ////////////// Service for post method - create data //////////////
 
         // Hàm này dùng khi init dữ liệu, lúc này teacherId sẽ là teacherId của Teacher
@@ -262,6 +420,7 @@ public class CourseClassService {
                 return newClass;
         }
 
+
         ////////////// Service for put method - update data //////////////
 
         // Thay đổi giáo viên của lớp học
@@ -270,7 +429,7 @@ public class CourseClassService {
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
-                if (courseClass.getTeacher() == null || courseClass.getTeacher().getTeacherId() == "") {
+                if (courseClass.getTeacher() == null || courseClass.getTeacher().getTeacherId().equals("")) {
                         Teacher teacher = teacherRepository.findById(request.getTeacherId())
                                         .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
 
@@ -482,6 +641,11 @@ public class CourseClassService {
                 if (student.getListOfCourseClasses().remove(courseClass)) {
                         studentRepository.save(student);
                 }
+        }
+
+        public CourseClass getAllCourseClassesByStudentId(String userId) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'getAllCourseClassesByStudentId'");
         }
     
 }
