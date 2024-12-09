@@ -25,9 +25,8 @@ public class CourseService {
     private final SheetMarkRepository sheetMarkRepository;
     private final StudentRepository studentRepository;
 
-
-    public CourseService(CourseRepository courseRepository, CourseClassRepository courseClassRepository, 
-                            SheetMarkRepository sheetMarkRepository, StudentRepository studentRepository) {
+    public CourseService(CourseRepository courseRepository, CourseClassRepository courseClassRepository,
+            SheetMarkRepository sheetMarkRepository, StudentRepository studentRepository) {
         this.courseRepository = courseRepository;
         this.courseClassRepository = courseClassRepository;
         this.sheetMarkRepository = sheetMarkRepository;
@@ -174,24 +173,26 @@ public class CourseService {
     public void deleteCourse(GetCourseRequest request) {
         // Verify if the course exists
         Course course = courseRepository.findByCourseCode(request.getCourseCode())
-            .orElseThrow(() -> new IllegalArgumentException("Course not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
         // Fetch and delete all related CourseClass records
         List<CourseClass> courseClasses = courseClassRepository.findAll()
-            .stream()
-            .filter(cc -> cc.getCourseCode().equals(request.getCourseCode()))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(cc -> cc.getCourseCode().equals(request.getCourseCode()))
+                .collect(Collectors.toList());
 
         for (CourseClass courseClass : courseClasses) {
-             // For each student in the course class, delete associated marks and remove class from student's list
+            // For each student in the course class, delete associated marks and remove
+            // class from student's list
             for (int i = 0; i < courseClass.getListOfStudents().size(); i++) {
                 Student temp = courseClass.getListOfStudents().get(i);
 
-                 // Delete sheet marks for the student in this course class
+                // Delete sheet marks for the student in this course class
                 sheetMarkRepository.deleteByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                    temp.getId(), courseClass.getCourseCode(), courseClass.getSemesterCode(), courseClass.getClassName());
+                        temp.getId(), courseClass.getCourseCode(), courseClass.getSemesterCode(),
+                        courseClass.getClassName());
 
-                 // Remove the course class from the student's list of courses
+                // Remove the course class from the student's list of courses
                 List<CourseClass> tempList = new ArrayList<>(temp.getListOfCourseClasses());
                 tempList.remove(courseClass); // Remove the current course class
                 temp.setListOfCourseClasses(tempList);

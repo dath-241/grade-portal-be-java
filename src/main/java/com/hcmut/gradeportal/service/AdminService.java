@@ -28,8 +28,8 @@ public class AdminService {
     private final SheetMarkRepository sheetMarkRepository;
 
     public AdminService(AdminRepository adminRepository,
-                        CourseClassRepository courseClassRepository,
-                        SheetMarkRepository sheetMarkRepository) {
+            CourseClassRepository courseClassRepository,
+            SheetMarkRepository sheetMarkRepository) {
         this.adminRepository = adminRepository;
         this.courseClassRepository = courseClassRepository;
         this.sheetMarkRepository = sheetMarkRepository;
@@ -68,49 +68,53 @@ public class AdminService {
     ////////////// Service for put method - update data //////////////
 
     ////////////// Service for delete method - delete data //////////////
-    public List<HallOfFame> halloffame(HallOfFameRequest request){
-        List<HallOfFame> temp= new ArrayList<>();
+    public List<HallOfFame> halloffame(HallOfFameRequest request) {
+        List<HallOfFame> temp = new ArrayList<>();
         Specification<CourseClass> spec = Specification
-                                .where(CourseClassSpecification.hasCourseCode(request.getCourseCode()))
-                                .and(CourseClassSpecification.hasSemesterCode(request.getSemesterCode()))
-                                .and(CourseClassSpecification.hasClassStatus(ClassStatus.Completed));
+                .where(CourseClassSpecification.hasCourseCode(request.getCourseCode()))
+                .and(CourseClassSpecification.hasSemesterCode(request.getSemesterCode()))
+                .and(CourseClassSpecification.hasClassStatus(ClassStatus.Completed));
 
-                // Truy vấn dữ liệu từ database
-                List<CourseClass> listClass= courseClassRepository.findAll(spec);
-        for(CourseClass courseclass:listClass){
-            for(Student student:courseclass.getListOfStudents()){
-                Optional<SheetMark> sheetmark = sheetMarkRepository.findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                    student.getId(), courseclass.getCourseCode(), courseclass.getSemesterCode(), courseclass.getClassName());
-                
+        // Truy vấn dữ liệu từ database
+        List<CourseClass> listClass = courseClassRepository.findAll(spec);
+        for (CourseClass courseclass : listClass) {
+            for (Student student : courseclass.getListOfStudents()) {
+                Optional<SheetMark> sheetmark = sheetMarkRepository
+                        .findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
+                                student.getId(), courseclass.getCourseCode(), courseclass.getSemesterCode(),
+                                courseclass.getClassName());
+
                 HallOfFame hallOfFame = new HallOfFame(student, sheetmark.get().getBT(),
-                sheetmark.get().getTN(),sheetmark.get().getBTL(),sheetmark.get().getGK(),sheetmark.get().getCK(),sheetmark.get().getFinalMark());
-                int i=0;
-                for(; i<temp.size();i++){
-                    if(hallOfFame.getFinalMark()>temp.get(i).getFinalMark()) break;
+                        sheetmark.get().getTN(), sheetmark.get().getBTL(), sheetmark.get().getGK(),
+                        sheetmark.get().getCK(), sheetmark.get().getFinalMark());
+                int i = 0;
+                for (; i < temp.size(); i++) {
+                    if (hallOfFame.getFinalMark() > temp.get(i).getFinalMark())
+                        break;
                 }
                 temp.add(i, hallOfFame);
-                
+
             }
         }
         int a = request.getNoOfStudents();
         int i = a;
         double epsilon = 1e-9;
-        
-        if(i>temp.size())
-        {
+
+        if (i > temp.size()) {
             return temp;
-        }else{
+        } else {
             List<HallOfFame> result;
-            while(Math.abs(temp.get(a-1).getFinalMark()-temp.get(i-1).getFinalMark())<epsilon&&i<=temp.size())
-            {
+            while (Math.abs(temp.get(a - 1).getFinalMark() - temp.get(i - 1).getFinalMark()) < epsilon
+                    && i <= temp.size()) {
                 i++;
-                if(i>temp.size())break;
+                if (i > temp.size())
+                    break;
             }
-            
-            result=temp.subList(0, i-1);
+
+            result = temp.subList(0, i - 1);
             return result;
         }
-        
+
     }
 
 }

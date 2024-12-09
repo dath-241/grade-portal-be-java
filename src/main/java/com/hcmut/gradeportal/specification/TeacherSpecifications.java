@@ -10,7 +10,8 @@ public class TeacherSpecifications {
 
     public static Specification<Teacher> hasEmail(String email) {
         return (root, query,
-                builder) -> (email != null && email.equals("")) ? builder.like(root.get("email"), "%" + email + "%") : null;
+                builder) -> (email != null && email.equals("")) ? builder.like(root.get("email"), "%" + email + "%")
+                        : null;
     }
 
     public static Specification<Teacher> hasFamilyName(String familyName) {
@@ -28,7 +29,8 @@ public class TeacherSpecifications {
 
     public static Specification<Teacher> hasPhone(String phone) {
         return (root, query,
-                builder) -> (phone != null && phone.equals("")) ? builder.like(root.get("phone"), "%" + phone + "%") : null;
+                builder) -> (phone != null && phone.equals("")) ? builder.like(root.get("phone"), "%" + phone + "%")
+                        : null;
     }
 
     public static Specification<Teacher> hasFaculty(String faculty) {

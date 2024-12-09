@@ -28,12 +28,13 @@ public class StudentClassInfoController {
     private final CourseClassDtoConverter courseClassDtoConverter;
     private final TeacherDtoConverter teacherDtoConverter;
 
-    public StudentClassInfoController(CourseClassService courseClassService, CourseClassDtoConverter 
-    courseClassDtoConverter, TeacherDtoConverter teacherDtoConverter) {
+    public StudentClassInfoController(CourseClassService courseClassService,
+            CourseClassDtoConverter courseClassDtoConverter, TeacherDtoConverter teacherDtoConverter) {
         this.courseClassService = courseClassService;
         this.courseClassDtoConverter = courseClassDtoConverter;
         this.teacherDtoConverter = teacherDtoConverter;
     }
+
     @GetMapping("/get-class-by-student-id/{studentId}")
     public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassByStudentId(@PathVariable String studentId) {
         try {
@@ -41,11 +42,12 @@ public class StudentClassInfoController {
                     .convert(courseClassService.getClassByStudentId(studentId));
             ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get classes",
                     courseClassDtos);
-            
-            return new ResponseEntity<>(response, HttpStatus.OK);  
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalStateException | IllegalArgumentException e) {
-    
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+
+            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             // Phản hồi lỗi
@@ -62,11 +64,12 @@ public class StudentClassInfoController {
                     .convert(courseClassService.getClassByStudentUserId(UserId));
             ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get classes",
                     courseClassDtos);
-            
-            return new ResponseEntity<>(response, HttpStatus.OK);  
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalStateException | IllegalArgumentException e) {
-    
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+
+            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             // Phản hồi lỗi
@@ -75,6 +78,7 @@ public class StudentClassInfoController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     // get class by specification
     @GetMapping("/student-get-class-by-specification/{studentId}")
     public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassBySpecification(
@@ -98,6 +102,7 @@ public class StudentClassInfoController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     // get teacher info by class
     @GetMapping("/get-teacher-info-by-class/{courseCode}/{semesterCode}/{className}")
     public ResponseEntity<ApiResponse<TeacherDto>> getTeacherInfoByClass(
@@ -111,8 +116,7 @@ public class StudentClassInfoController {
             ApiResponse<TeacherDto> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Teacher information retrieved successfully",
-                    teacherDto
-            );
+                    teacherDto);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             ApiResponse<TeacherDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),

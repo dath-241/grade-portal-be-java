@@ -201,19 +201,18 @@ public class SheetMarkService {
 
         }
 
-        
         ////////////// Service for delete method - delete data //////////////
-        
+
         // Delete all sheet mark of a student by id
         public void deleteAllSheetMarkOfStudentById(String id) {
                 studentRepository.findById(id)
-                        .orElseThrow(() -> new IllegalArgumentException("Student not found"));
-                
+                                .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+
                 List<SheetMark> sheetMarks = sheetMarkRepository.findByStudentId(id);
-                
+
                 if (sheetMarks != null && !sheetMarks.isEmpty()) {
                         sheetMarkRepository.deleteAll(sheetMarks);
                 }
         }
-            
+
 }

@@ -17,7 +17,6 @@ import com.hcmut.gradeportal.entities.HallOfFame;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.AdminService;
 
-
 @RestController
 @RequestMapping("/admin/auth")
 public class AdminAuthController {
@@ -70,5 +69,4 @@ public class AdminAuthController {
         }
     }
 
-    
 }

@@ -36,7 +36,7 @@ public class GradePortalServiceApplication {
             System.setProperty("GOOGLE_USER_INFO_URI", dotenv.get("GOOGLE_USER_INFO_URI"));
             System.setProperty("GOOGLE_USER_NAME_ATTRIBUTE", dotenv.get("GOOGLE_USER_NAME_ATTRIBUTE"));
             System.setProperty("JACKSON_TIME_ZONE", dotenv.get("JACKSON_TIME_ZONE"));
-	    }
+        }
         SpringApplication.run(GradePortalServiceApplication.class, args);
     }
 }

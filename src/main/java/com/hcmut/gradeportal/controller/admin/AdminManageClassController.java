@@ -23,8 +23,6 @@ import com.hcmut.gradeportal.dtos.courseClass.request.UpdateStudentsInClassReque
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.CourseClassService;
 
-
-
 @RestController
 @RequestMapping("/admin/manage-class")
 public class AdminManageClassController {
@@ -141,14 +139,17 @@ public class AdminManageClassController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/path/{cou}/{se}/{nam}")
-    public CourseClassDto getMethodName(@PathVariable String cou,@PathVariable String se,@PathVariable String nam) {
-         CourseClassDto courseClassDto=courseClassDtoConverter
-        .convert(courseClassService.getclass(cou,se,nam));
+    public CourseClassDto getMethodName(@PathVariable String cou, @PathVariable String se, @PathVariable String nam) {
+        CourseClassDto courseClassDto = courseClassDtoConverter
+                .convert(courseClassService.getclass(cou, se, nam));
         return courseClassDto;
     }
+
     @PutMapping("/update-class-status")
-    public ResponseEntity<ApiResponse<CourseClassDto>> UpdateClassStatus(@RequestBody UpdateClassStatusRequest request) {
+    public ResponseEntity<ApiResponse<CourseClassDto>> UpdateClassStatus(
+            @RequestBody UpdateClassStatusRequest request) {
         try {
             CourseClassDto courseClassDto = courseClassDtoConverter
                     .convert(courseClassService.updateStatusCourseClass(request));
@@ -165,6 +166,7 @@ public class AdminManageClassController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @DeleteMapping("/delete-class")
     public ResponseEntity<ApiResponse<CourseClassDto>> DeleteClass(@RequestBody UpdateClassStatusRequest request) {
         try {
@@ -183,7 +185,7 @@ public class AdminManageClassController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     // @DeleteMapping("/deleteclass")
     // public CourseClass deleteclass(@RequestBody )
     /////////////////////// All Delete request for manage class

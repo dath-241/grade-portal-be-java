@@ -15,14 +15,15 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface CourseClassRepository
-        extends JpaRepository<CourseClass, CourseClassId>, JpaSpecificationExecutor<CourseClass> {
+                extends JpaRepository<CourseClass, CourseClassId>, JpaSpecificationExecutor<CourseClass> {
 
         Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
-            String className);
-    @Modifying
-    @Transactional
-    void deleteByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,String className);
+                        String className);
 
-    CourseClass findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(String courseCode, String semesterCode,
-       String className,ClassStatus classStatus);
+        @Modifying
+        @Transactional
+        void deleteByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode, String className);
+
+        CourseClass findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(String courseCode, String semesterCode,
+                        String className, ClassStatus classStatus);
 }
