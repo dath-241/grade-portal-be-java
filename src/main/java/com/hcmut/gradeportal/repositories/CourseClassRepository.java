@@ -17,7 +17,7 @@ import jakarta.transaction.Transactional;
 public interface CourseClassRepository
         extends JpaRepository<CourseClass, CourseClassId>, JpaSpecificationExecutor<CourseClass> {
 
-    Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
+        Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
             String className);
     @Modifying
     @Transactional
