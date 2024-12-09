@@ -13,11 +13,11 @@
   <p align="center">
     Dự án hướng đến mục tiêu xây dựng một trang web cung cấp dịch vụ quản lý điểm số tiện lợi nhanh chóng dành cho sinh viên và giảng viên trong nhà trường.
     <br />
-    <a href="../README.md"><strong>Tổng quan dự án</strong></a>
+    <a href="../../README.md"><strong>Tổng quan dự án</strong></a>
     •
-    <a href="../reports/report.md"><strong>Báo cáo tiến độ</strong></a>
+    <a href="../../reports/report.md"><strong>Báo cáo tiến độ</strong></a>
     •
-    <a href="./user-guide.md"><strong>Hướng dẫn sử dụng</strong></a>
+    <a href="../user-guide.md"><strong>Hướng dẫn sử dụng</strong></a>
     •
     <a href="../document.md"><strong> Tài liệu dự án</strong></a>
     <br />

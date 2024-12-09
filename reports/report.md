@@ -55,6 +55,8 @@ Kế hoạch làm việc chung của môn học như sau:
 |  #1  | 29.09.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_09_29_24.md) | [Result](/reports/weeklyReport/weekly_result/result_09_29_24.md) |
 |  #2  | 03.10.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_10_03_24.md) | [Result](/reports/weeklyReport/weekly_result/result_10_03_24.md) |
 |  #3  | 19.10.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_10_19_24.md) | [Result](/reports/weeklyReport/weekly_result/result_10_19_24.md) |
+|  #4  | 27.10.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_10_27_24.md) | [Result](/reports/weeklyReport/weekly_result/result_10_27_24.md) |
+|  #5  | 03.11.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_11_03_24.md) | [Result](/reports/weeklyReport/weekly_result/result_11_03_24.md) |
 
 ## Tự đánh giá tiến độ thành viên
 
@@ -68,12 +70,12 @@ Kế hoạch làm việc chung của môn học như sau:
 
 | MSSV    | Tên thành viên     | Vai trò | Tuần 1 | Tuần 2 | Tuần 3 | Tuần 4 | Tuần 5 | Tuần 6 | Tuần 7 | Tuần 8 | Tuần 9 | Tuần 10 |
 | ------- | ------------------ | ------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------- |
-| 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
-| 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
-| 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
-| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
-| 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
-| 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -      | -       |
+| 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
+| 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
+| 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
+| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
+| 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
+| 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
 
 ### Đánh giá của nhóm
 

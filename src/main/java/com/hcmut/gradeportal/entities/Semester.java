@@ -35,21 +35,17 @@ public class Semester {
     // Phương thức tạo tên học kỳ từ mã học kỳ (semesterCode)
     private String generateSemesterName(String semesterCode) {
         String semesterPart = semesterCode.substring(4, 5); // Lấy phần chỉ học kỳ (1, 2, hoặc 3)
-        switch (semesterPart) {
-            case "1":
-                return "Học kỳ 1";
-            case "2":
-                return "Học kỳ 2";
-            case "3":
-                return "Học kỳ hè";
-            default:
-                return "Không xác định";
-        }
+        return switch (semesterPart) {
+            case "1" -> "Học kỳ 1";
+            case "2" -> "Học kỳ 2";
+            case "3" -> "Học kỳ hè";
+            default -> "Không xác định";
+        };
     }
 
     // Phương thức tạo khoảng thời gian học kỳ từ mã học kỳ (semesterCode)
     private String generateSemesterDuration(String semesterCode) {
-        String yearPart = semesterCode.substring(3); // Lấy phần năm (ví dụ: "241" -> 2024)
+        String yearPart = semesterCode; // Lấy phần năm (ví dụ: "241" -> 2024)
         int startYear = 2000 + Integer.parseInt(yearPart.substring(2, 4)); // Tạo năm học từ mã
         return startYear + "-" + (startYear + 1);
     }

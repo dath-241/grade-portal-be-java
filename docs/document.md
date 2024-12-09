@@ -38,7 +38,7 @@
 3. [Mô hình hệ thống](#mô-hình-hệ-thống)
 4. [Thiết kế CSDL](#thiết-kế-csdl)
 5. [Tài liệu API](#tài-liệu-api)
-6. [Hướng dẫn triển khai](#hướng-dẫn-triển-khai)
+6. [Deploy Guide](#hướng-dẫn-triển-khai)
 7. [Hướng dẫn sử dụng](#hướng-dẫn-sử-dụng)
 8. [Quy trình Git Flow](#quy-trình-git-flow)
 9. [Tài liệu tham khảo](#tài-liệu-tham-khảo)
@@ -66,19 +66,23 @@ Dự án Grade Portal nhằm mục đích cung cấp một hệ thống quản l
 
 ## 3. Mô hình hệ thống <a id="mô-hình-hệ-thống"></a>
 
+![Layered Architecture](./system-architecture/LayeredArchitecture.png)
+
 - Phần này sẽ mô tả kiến trúc hệ thống của dự án, bao gồm các thành phần chính như:
   - Mô hình lớp ứng dụng
-  - Sơ đồ kiến trúc (được cung cấp trong file `system-architecture.md`)
-  - Chưa cập nhập
+  - Sơ đồ kiến trúc được hiện thực chi tiết và được áp dụng trong hệ thống.
+  - Tài liệu chi tiết về `System Architecture` sẽ ở [đây](./system-architecture/system-architecture.md)
 
 ---
 
 ## 4. Thiết kế CSDL <a id="thiết-kế-csdl"></a>
 
+![Database Design](./database-design/EERD.png)
+
 - Chi tiết thiết kế cơ sở dữ liệu (database) bao gồm:
   - Các bảng, cột, kiểu dữ liệu và quan hệ.
   - Được trình bày trong file `database-design.md`.
-  - Chưa cập nhập
+  - Tài liệu chi tiết về `Database Design` sẽ ở [đây](./database-design/database-design.md)
 
 ---
 
@@ -90,17 +94,19 @@ Dự án Grade Portal nhằm mục đích cung cấp một hệ thống quản l
   - Tham số đầu vào và đầu ra
   - Ví dụ về request/response
   - File chi tiết có trong `api-document.md`.
-  - Chưa cập nhập
+  - Api Document sẽ hiện thực tại [đây](./api-document/api-document.md)
 
 ---
 
-## 6. Hướng dẫn triển khai <a id="hướng-dẫn-triển-khai"></a>
+## 6. Deploy Guide <a id="hướng-dẫn-triển-khai"></a>
 
-- Hướng dẫn chi tiết về cách triển khai hệ thống:
+![alt text](./deploy-guide/DeploymentDiagram.png)
+
+- Tài liệu chi tiết về cách triển khai hệ thống:
   - Yêu cầu hệ thống (Java, Spring Boot, Docker, etc.)
   - Cách build và chạy ứng dụng.
   - File hướng dẫn cụ thể có trong `deploy-guide.md`.
-  - Chưa cập nhập
+  - Tài liệu chi tiết về Deploy Guide sẽ nằm ở [đây](./deploy-guide/deploy-guide.md)
 
 ---
 

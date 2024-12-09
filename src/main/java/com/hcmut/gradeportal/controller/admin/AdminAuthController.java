@@ -1,5 +1,7 @@
 package com.hcmut.gradeportal.controller.admin;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,9 @@ import com.hcmut.gradeportal.dtos.admin.AdminDto;
 import com.hcmut.gradeportal.dtos.admin.AdminDtoConverter;
 import com.hcmut.gradeportal.dtos.auth.request.AuthRequestForAdmin;
 import com.hcmut.gradeportal.dtos.auth.response.AuthResponse;
+import com.hcmut.gradeportal.dtos.halloffame.HallOfFameRequest;
 import com.hcmut.gradeportal.entities.Admin;
+import com.hcmut.gradeportal.entities.HallOfFame;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.AdminService;
 
@@ -77,4 +81,19 @@ public class AdminAuthController {
     ///////////////// All Put request for admin auth /////////////////
 
     ///////////////// All Delete request for admin auth /////////////////
+    @GetMapping("/hall")
+    public ResponseEntity<ApiResponse<List<HallOfFame>>> getAllClasses(@RequestBody HallOfFameRequest request) {
+        try {
+            List<HallOfFame> courseClassDtos = adminService.halloffame(request);
+            ApiResponse<List<HallOfFame>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get all classes",
+                    courseClassDtos);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            ApiResponse<List<HallOfFame>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

@@ -1,7 +1,10 @@
-spring:
-  config:
-    import: optional:file:.env
+# Cấu hình server (có thể bỏ qua nếu không cần)
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH}
 
+spring:
   application:
     name: ${SPRING_APPLICATION_NAME}
 
@@ -44,14 +47,3 @@ spring:
   # Cấu hình thời gian
   jackson:
     time-zone: ${JACKSON_TIME_ZONE}
-
-# Cấu hình JWT
-jwt:
-  secret-key: ${JWT_SECRET_KEY}
-  expiration-time: ${JWT_EXPIRATION_TIME}
-
-# Cấu hình server (có thể bỏ qua nếu không cần)
-server:
-  port: ${SERVER_PORT}
-  servlet:
-    context-path: ${SERVER_CONTEXT_PATH}

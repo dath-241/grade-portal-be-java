@@ -114,17 +114,17 @@ public class StudentService {
         }
     }
 
-    
     ////////////// Service for put method - update data //////////////
     // Update a student information
     @Transactional
     public Student updateStudent(UpdateStudentRequest request) {
-        if(request.getStudentId() == null) {
+        if (request.getStudentId() == null) {
             throw new IllegalArgumentException("Student id is required.");
         }
 
         Student student = studentRepository.findByStudentId(request.getStudentId())
-            .orElseThrow(() -> new IllegalArgumentException("Student not found for Student id: " + request.getStudentId()));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Student not found for Student id: " + request.getStudentId()));
 
         Optional.ofNullable(request.getNewEmail()).ifPresent(student::setEmail);
         Optional.ofNullable(request.getNewFamilyName()).ifPresent(student::setFamilyName);
@@ -141,12 +141,13 @@ public class StudentService {
         List<Student> updatedStudents = new ArrayList<>();
 
         for (UpdateStudentRequest request : requests) {
-            if(request.getStudentId() == null) {
+            if (request.getStudentId() == null) {
                 throw new IllegalArgumentException("Student id is required.");
             }
 
             Student student = studentRepository.findByStudentId(request.getStudentId())
-                .orElseThrow(() -> new IllegalArgumentException("Student not found for Student id: " + request.getStudentId()));
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Student not found for Student id: " + request.getStudentId()));
 
             Optional.ofNullable(request.getNewEmail()).ifPresent(student::setEmail);
             Optional.ofNullable(request.getNewFamilyName()).ifPresent(student::setFamilyName);
@@ -161,11 +162,11 @@ public class StudentService {
     }
 
     ////////////// Service for delete method - delete data //////////////
-    
+
     // Delete a student by id
     public void deleteStudentById(String id) {
         Optional<Student> student = studentRepository.findById(id);
-        
+
         if (student.isEmpty()) {
             throw new IllegalStateException("Student not found with ID: " + id);
         } else {

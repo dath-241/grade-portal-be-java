@@ -17,7 +17,13 @@ public class CourseDtoConverter {
         return new CourseDto(
                 from.getCourseCode(),
                 from.getCourseName(),
-                from.getCredit());
+                from.getCredit(),
+                from.getCoefficient_of_TN(),
+                from.getCoefficient_of_BT(),
+                from.getCoefficient_of_BTL(),
+                from.getCoefficient_of_GK(),
+                from.getCoefficient_of_CK());
+
     }
 
     public List<CourseDto> convert(List<Course> from) {

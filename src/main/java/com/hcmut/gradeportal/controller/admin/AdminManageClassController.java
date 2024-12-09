@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import com.hcmut.gradeportal.dtos.courseClass.CourseClassDtoConverter;
 import com.hcmut.gradeportal.dtos.courseClass.request.ChangeTeacherRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.CreateCourseClassRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequest;
+import com.hcmut.gradeportal.dtos.courseClass.request.UpdateClassStatusRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.UpdateStudentsInClassRequest;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.CourseClassService;
@@ -137,6 +140,54 @@ public class AdminManageClassController {
         }
     }
 
+    @GetMapping("/path/{cou}/{se}/{nam}")
+    public CourseClassDto getMethodName(@PathVariable String cou, @PathVariable String se, @PathVariable String nam) {
+        CourseClassDto courseClassDto = courseClassDtoConverter
+                .convert(courseClassService.getclass(cou, se, nam));
+        return courseClassDto;
+    }
+
+    @PutMapping("/update-class-status")
+    public ResponseEntity<ApiResponse<CourseClassDto>> UpdateClassStatus(
+            @RequestBody UpdateClassStatusRequest request) {
+        try {
+            CourseClassDto courseClassDto = courseClassDtoConverter
+                    .convert(courseClassService.updateStatusCourseClass(request));
+            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Update class status",
+                    courseClassDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                    null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete-class")
+    public ResponseEntity<ApiResponse<CourseClassDto>> DeleteClass(@RequestBody UpdateClassStatusRequest request) {
+        try {
+            CourseClassDto courseClassDto = courseClassDtoConverter
+                    .convert(courseClassService.deleteCourseClass(request));
+            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Delete class",
+                    courseClassDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                    null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // @DeleteMapping("/deleteclass")
+    // public CourseClass deleteclass(@RequestBody )
     /////////////////////// All Delete request for manage class
     /////////////////////// ///////////////////////
 

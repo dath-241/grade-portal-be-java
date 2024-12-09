@@ -43,17 +43,16 @@ public class AdminManageUserController {
     private final CourseClassService courseClassService;
 
     public AdminManageUserController(
-        TeacherService teacherService, StudentService studentService, 
-        SheetMarkService sheetMarkService, CourseClassService courseClassService,
-        TeacherDtoConverter teacherDtoConverter, StudentDtoConverter studentDtoConverter) {
+            TeacherService teacherService, StudentService studentService,
+            SheetMarkService sheetMarkService, CourseClassService courseClassService,
+            TeacherDtoConverter teacherDtoConverter, StudentDtoConverter studentDtoConverter) {
 
         this.teacherDtoConverter = teacherDtoConverter;
         this.studentDtoConverter = studentDtoConverter;
 
-
         this.teacherService = teacherService;
         this.studentService = studentService;
-		this.sheetMarkService = sheetMarkService;
+        this.sheetMarkService = sheetMarkService;
         this.courseClassService = courseClassService;
 
     }
@@ -332,7 +331,8 @@ public class AdminManageUserController {
         try {
 
             StudentDto studentDto = studentDtoConverter.convert(studentService.updateStudent(request));
-            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Student updated successfully", studentDto);
+            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Student updated successfully",
+                    studentDto);
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } catch (IllegalArgumentException e) {
@@ -342,26 +342,31 @@ public class AdminManageUserController {
 
         } catch (Exception e) {
 
-            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update student", null);
+            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to update student", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     // Update a list of students information
     @PutMapping("/update-students")
-    public ResponseEntity<ApiResponse<List<StudentDto>>> updateStudents(@RequestBody List<UpdateStudentRequest> requests) {
+    public ResponseEntity<ApiResponse<List<StudentDto>>> updateStudents(
+            @RequestBody List<UpdateStudentRequest> requests) {
         try {
 
             List<StudentDto> updatedStudents = studentDtoConverter.convert(studentService.updateStudents(requests));
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.OK.value(), "Students updated successfully", updatedStudents);
+            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Students updated successfully", updatedStudents);
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } catch (IllegalArgumentException e) {
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                    null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update students", null);
+            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to update students", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -386,14 +391,15 @@ public class AdminManageUserController {
             studentService.deleteStudentById(id);
 
             // Phản hồi thành công
-            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Student deleted successfully", null);
+            ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Student deleted successfully",
+                    null);
             return new ResponseEntity<>(response, HttpStatus.OK);
-            
+
         } catch (IllegalStateException | IllegalArgumentException e) {
 
             ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-            
+
         } catch (Exception e) {
 
             ApiResponse<StudentDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -401,6 +407,5 @@ public class AdminManageUserController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 }
