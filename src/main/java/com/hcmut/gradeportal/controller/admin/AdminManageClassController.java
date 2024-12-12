@@ -39,7 +39,7 @@ public class AdminManageClassController {
 
     /////////////////////// All Get request for manage class ///////////////////////
     // Get all classes
-    @GetMapping("/get-all-classes")
+    @GetMapping("/get-all")
     public ResponseEntity<ApiResponse<List<CourseClassDto>>> getAllClasses() {
         try {
             List<CourseClassDto> courseClassDtos = courseClassDtoConverter
