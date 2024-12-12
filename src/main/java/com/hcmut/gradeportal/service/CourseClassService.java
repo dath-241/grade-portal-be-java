@@ -593,7 +593,7 @@ public class CourseClassService {
                 for (Student student : liststudent) {
                         if (sheetMarkRepository.findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(student.getId(),
                                         updateClass.getCourseCode(), updateClass.getSemesterCode(),
-                                        updateClass.getClassName()).get().getCK().isEmpty()) {
+                                        updateClass.getClassName()).get().getFinalMark() == null) {
                                 iscompleted = false;
                                 break;
                         }

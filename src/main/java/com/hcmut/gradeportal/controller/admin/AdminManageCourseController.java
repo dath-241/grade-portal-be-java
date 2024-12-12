@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import com.hcmut.gradeportal.dtos.course.CourseDto;
 import com.hcmut.gradeportal.dtos.course.CourseDtoConverter;
 import com.hcmut.gradeportal.dtos.course.request.CreateCourseRequest;
-import com.hcmut.gradeportal.dtos.course.request.GetCourseRequest;
+import com.hcmut.gradeportal.dtos.course.request.UpdateCourseRequest;
 import com.hcmut.gradeportal.dtos.course.response.CreateBulkCourseResponse;
+import com.hcmut.gradeportal.dtos.course.response.UpdateBulkCourseResponse;
 ///import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequest;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.CourseService;
@@ -122,8 +124,8 @@ public class AdminManageCourseController {
 
     ///////////////// All Put request for manage course /////////////////
     // Update course details
-    @PostMapping("/update-course")
-    public ResponseEntity<ApiResponse<CourseDto>> updateCourse(@RequestBody CreateCourseRequest request) {
+    @PutMapping("/update-course")
+    public ResponseEntity<ApiResponse<CourseDto>> updateCourse(@RequestBody UpdateCourseRequest request) {
         try {
             CourseDto courseDto = courseDtoConverter.convert(courseService.updateCourse(request));
             ApiResponse<CourseDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Update course successfully",
@@ -140,13 +142,44 @@ public class AdminManageCourseController {
         }
     }
 
+    // Update list of courses
+    @PutMapping("/update-bulk")
+    public ResponseEntity<ApiResponse<List<UpdateBulkCourseResponse>>> updateCourses(
+            @RequestBody List<UpdateCourseRequest> requests) {
+        try {
+            List<UpdateBulkCourseResponse> responses = new ArrayList<>();
+            for (UpdateCourseRequest request : requests) {
+                try {
+                    CourseDto courseDto = courseDtoConverter.convert(courseService.updateCourse(request));
+                    responses.add(new UpdateBulkCourseResponse(courseDto.courseCode(), HttpStatus.OK.value(),
+                            "Update course successfully"));
+                } catch (IllegalArgumentException e) {
+                    responses.add(new UpdateBulkCourseResponse(request.getCourseCode(), HttpStatus.BAD_REQUEST.value(),
+                            e.getMessage()));
+                } catch (Exception e) {
+                    responses.add(new UpdateBulkCourseResponse(request.getCourseCode(),
+                            HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+                }
+            }
+
+            ApiResponse<List<UpdateBulkCourseResponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Update courses", responses);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            ApiResponse<List<UpdateBulkCourseResponse>> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to update courses", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     ///////////////// All Delete request for manage course /////////////////
     // Delete a course using request body
-    @DeleteMapping("/delete")
-    public ResponseEntity<ApiResponse<Void>> deleteCourse(@RequestBody GetCourseRequest request) {
+    @DeleteMapping("/delete/{courseCode}")
+    public ResponseEntity<ApiResponse<Void>> deleteCourse(@PathVariable String courseCode) {
         try {
             // Directly pass the CreateCourseRequest object to the service method
-            courseService.deleteCourse(request);
+            courseService.deleteCourse(courseCode);
             ApiResponse<Void> response = new ApiResponse<>(HttpStatus.OK.value(), "Delete course successfully", null);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
