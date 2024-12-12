@@ -134,8 +134,8 @@ public class AdminManageCourseController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             ApiResponse<CourseDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "Update course failed", 
-                    null);      
+                    "Update course failed",
+                    null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -47,3 +47,8 @@ spring:
   # Cấu hình thời gian
   jackson:
     time-zone: ${JACKSON_TIME_ZONE}
+
+# Cấu hình JWT
+jwt:
+  secret-key: ${JWT_SECRET_KEY}
+  expiration-time: ${JWT_EXPIRATION_TIME}

@@ -35,7 +35,7 @@ public abstract class User {
     private String givenName;
     private String phone;
 
-    private String Faculty;
+    private String faculty;
 
     // No-args constructor
     public User() {
@@ -122,11 +122,11 @@ public abstract class User {
     }
 
     public String getFaculty() {
-        return this.Faculty;
+        return this.faculty;
     }
 
     public void setFaculty(String Faculty) {
-        this.Faculty = Faculty;
+        this.faculty = Faculty;
         this.updatedAt = LocalDateTime.now();
     }
 

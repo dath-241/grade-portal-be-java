@@ -27,6 +27,11 @@ public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, J
                         @Param("semesterCode") String semesterCode,
                         @Param("className") String className);
 
+        @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId")
+        List<SheetMark> findByStudentId(@Param("studentId") String studentId);
+
+        List<SheetMark> findByTeacherId(String teacherId);
+
         @Modifying
         @Transactional
         @Query("DELETE FROM SheetMark sm WHERE sm.student.id = :studentId "
@@ -37,8 +42,4 @@ public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, J
                         @Param("courseCode") String courseCode,
                         @Param("semesterCode") String semesterCode,
                         @Param("className") String className);
-
-        @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId")
-        List<SheetMark> findByStudentId(@Param("studentId") String studentId);
-
 }

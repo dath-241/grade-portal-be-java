@@ -27,11 +27,11 @@ public class AdminDtoConverter {
                 from.getLastLogin());
     }
 
-    List<AdminDto> convert(List<Admin> from) {
+    public List<AdminDto> convert(List<Admin> from) {
         return from.stream().map(this::convert).collect(Collectors.toList());
     }
 
-    Optional<AdminDto> convert(Optional<Admin> from) {
+    public Optional<AdminDto> convert(Optional<Admin> from) {
         return from.map(this::convert);
     }
 }

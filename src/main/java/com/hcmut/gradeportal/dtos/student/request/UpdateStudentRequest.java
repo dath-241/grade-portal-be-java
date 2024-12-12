@@ -1,7 +1,6 @@
 package com.hcmut.gradeportal.dtos.student.request;
 
-import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class UpdateStudentRequest {
 
-    @NotNull
-    private String studentId;
-    
+    @NotBlank
+    private String userId;
+
     private String newEmail;
 
     private String newFamilyName;
@@ -22,5 +21,6 @@ public class UpdateStudentRequest {
     private String newPhone;
 
     private String newFaculty;
-}
 
+    private String newStudentId;
+}

@@ -1,6 +1,7 @@
 package com.hcmut.gradeportal.specification;
 
 import org.springframework.data.jpa.domain.Specification;
+
 import com.hcmut.gradeportal.entities.CourseClass;
 import com.hcmut.gradeportal.entities.Student;
 import com.hcmut.gradeportal.entities.enums.ClassStatus;
@@ -8,22 +9,22 @@ import com.hcmut.gradeportal.entities.enums.ClassStatus;
 public class CourseClassSpecification {
 
     public static Specification<CourseClass> hasCourseCode(String courseCode) {
-        return (root, query, builder) -> (courseCode == null || courseCode == "") ? null
+        return (root, query, builder) -> (courseCode == null || courseCode.equals("")) ? null
                 : builder.equal(root.get("courseCode"), courseCode);
     }
 
     public static Specification<CourseClass> hasSemesterCode(String semesterCode) {
-        return (root, query, builder) -> (semesterCode == null || semesterCode == "") ? null
+        return (root, query, builder) -> (semesterCode == null || semesterCode.equals("")) ? null
                 : builder.equal(root.get("semesterCode"), semesterCode);
     }
 
     public static Specification<CourseClass> hasClassName(String className) {
-        return (root, query, builder) -> (className == null || className == "") ? null
+        return (root, query, builder) -> (className == null || className.equals("")) ? null
                 : builder.equal(root.get("className"), className);
     }
 
     public static Specification<CourseClass> hasTeacherId(String teacherId) {
-        return (root, query, builder) -> (teacherId == null || teacherId == "") ? null
+        return (root, query, builder) -> (teacherId == null || teacherId.equals("")) ? null
                 : builder.equal(root.get("teacher").get("id"), teacherId);
     }
 

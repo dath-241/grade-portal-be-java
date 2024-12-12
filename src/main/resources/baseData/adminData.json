@@ -38,5 +38,13 @@
     "givenName": "Đăng Khoa",
     "phone": "0123456789",
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "ADMIN",
+    "email": "trandaiviet78@gmail.com",
+    "familyName": "Trần",
+    "givenName": "Đại Việt",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   }
 ]

@@ -1,6 +1,5 @@
 package com.hcmut.gradeportal.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,19 +8,48 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hcmut.gradeportal.dtos.auth.response.AuthResponse;
 import com.hcmut.gradeportal.dtos.student.request.CreateStudentRequest;
 import com.hcmut.gradeportal.dtos.student.request.GetStudentRequest;
 import com.hcmut.gradeportal.dtos.student.request.UpdateStudentRequest;
 import com.hcmut.gradeportal.entities.Student;
 import com.hcmut.gradeportal.entities.enums.Role;
 import com.hcmut.gradeportal.repositories.StudentRepository;
+import com.hcmut.gradeportal.security.GoogleTokenVerifierService;
+import com.hcmut.gradeportal.security.jwt.JwtService;
 
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    private final GoogleTokenVerifierService googleTokenVerifierService;
+    private final JwtService jwtService;
+
+    public StudentService(StudentRepository studentRepository, GoogleTokenVerifierService googleTokenVerifierService,
+            JwtService jwtService) {
         this.studentRepository = studentRepository;
+        this.googleTokenVerifierService = googleTokenVerifierService;
+        this.jwtService = jwtService;
+    }
+
+    //////////// Service for login method ////////////
+    // Login with google authentication
+    public AuthResponse<Student> login(String idToken) {
+        try {
+            var payload = googleTokenVerifierService.verify(idToken);
+
+            String email = payload.getEmail();
+            String userId = payload.getSubject();
+
+            Optional<Student> student = studentRepository.findByEmailAndRole(email, Role.STUDENT);
+            if (student.isPresent()) {
+                return new AuthResponse<>(jwtService.generateToken(userId, Role.STUDENT), student.get(), Role.STUDENT);
+            } else {
+                throw new IllegalArgumentException("Student not found");
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid ID token");
+        }
     }
 
     ////////////// Service for get method - read data //////////////
@@ -114,58 +142,34 @@ public class StudentService {
         }
     }
 
-    
     ////////////// Service for put method - update data //////////////
     // Update a student information
     @Transactional
     public Student updateStudent(UpdateStudentRequest request) {
-        if(request.getStudentId() == null) {
-            throw new IllegalArgumentException("Student id is required.");
+        if (request.getUserId() == null) {
+            throw new IllegalArgumentException("Student User id is required.");
         }
 
-        Student student = studentRepository.findByStudentId(request.getStudentId())
-            .orElseThrow(() -> new IllegalArgumentException("Student not found for Student id: " + request.getStudentId()));
+        Student student = studentRepository.findById(request.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Student not found with ID: " + request.getUserId()));
 
         Optional.ofNullable(request.getNewEmail()).ifPresent(student::setEmail);
         Optional.ofNullable(request.getNewFamilyName()).ifPresent(student::setFamilyName);
         Optional.ofNullable(request.getNewGivenName()).ifPresent(student::setGivenName);
         Optional.ofNullable(request.getNewPhone()).ifPresent(student::setPhone);
         Optional.ofNullable(request.getNewFaculty()).ifPresent(student::setFaculty);
+        Optional.ofNullable(request.getNewStudentId()).ifPresent(student::setStudentId);
 
         return studentRepository.save(student);
     }
 
-    // Update a list of students
-    @Transactional
-    public List<Student> updateStudents(List<UpdateStudentRequest> requests) {
-        List<Student> updatedStudents = new ArrayList<>();
-
-        for (UpdateStudentRequest request : requests) {
-            if(request.getStudentId() == null) {
-                throw new IllegalArgumentException("Student id is required.");
-            }
-
-            Student student = studentRepository.findByStudentId(request.getStudentId())
-                .orElseThrow(() -> new IllegalArgumentException("Student not found for Student id: " + request.getStudentId()));
-
-            Optional.ofNullable(request.getNewEmail()).ifPresent(student::setEmail);
-            Optional.ofNullable(request.getNewFamilyName()).ifPresent(student::setFamilyName);
-            Optional.ofNullable(request.getNewGivenName()).ifPresent(student::setGivenName);
-            Optional.ofNullable(request.getNewPhone()).ifPresent(student::setPhone);
-            Optional.ofNullable(request.getNewFaculty()).ifPresent(student::setFaculty);
-
-            updatedStudents.add(student);
-        }
-
-        return studentRepository.saveAll(updatedStudents);
-    }
-
     ////////////// Service for delete method - delete data //////////////
-    
+
     // Delete a student by id
     public void deleteStudentById(String id) {
         Optional<Student> student = studentRepository.findById(id);
-        
+
         if (student.isEmpty()) {
             throw new IllegalStateException("Student not found with ID: " + id);
         } else {
