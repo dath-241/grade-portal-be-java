@@ -1,44 +1,34 @@
 package com.hcmut.gradeportal.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import com.hcmut.gradeportal.security.jwt.JwtService;
 import com.hcmut.gradeportal.dtos.admin.request.CreateAdminRequest;
+import com.hcmut.gradeportal.dtos.admin.request.GetAdminRequest;
+import com.hcmut.gradeportal.dtos.admin.request.UpdateAdminRequest;
 import com.hcmut.gradeportal.security.GoogleTokenVerifierService;
 import com.hcmut.gradeportal.dtos.auth.response.AuthResponse;
-import com.hcmut.gradeportal.dtos.halloffame.HallOfFameRequest;
 import com.hcmut.gradeportal.entities.Admin;
-import com.hcmut.gradeportal.entities.CourseClass;
-import com.hcmut.gradeportal.entities.HallOfFame;
-import com.hcmut.gradeportal.entities.SheetMark;
-import com.hcmut.gradeportal.entities.Student;
-import com.hcmut.gradeportal.entities.enums.ClassStatus;
 import com.hcmut.gradeportal.entities.enums.Role;
 import com.hcmut.gradeportal.repositories.AdminRepository;
-import com.hcmut.gradeportal.repositories.CourseClassRepository;
-import com.hcmut.gradeportal.repositories.SheetMarkRepository;
-import com.hcmut.gradeportal.specification.CourseClassSpecification;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class AdminService {
     private final AdminRepository adminRepository;
-    private final CourseClassRepository courseClassRepository;
-    private final SheetMarkRepository sheetMarkRepository;
 
     private final GoogleTokenVerifierService googleTokenVerifierService;
     private final JwtService jwtService;
 
     public AdminService(AdminRepository adminRepository,
-            CourseClassRepository courseClassRepository,
-            SheetMarkRepository sheetMarkRepository, GoogleTokenVerifierService googleTokenVerifierService,
+            GoogleTokenVerifierService googleTokenVerifierService,
             JwtService jwtService) {
         this.adminRepository = adminRepository;
-        this.courseClassRepository = courseClassRepository;
-        this.sheetMarkRepository = sheetMarkRepository;
         this.googleTokenVerifierService = googleTokenVerifierService;
         this.jwtService = jwtService;
     }
@@ -74,6 +64,41 @@ public class AdminService {
         }
     }
 
+    // Lấy tât cả admin trong hệ thống
+    public List<Admin> getAllAdmins() {
+        return adminRepository.findAll();
+    }
+
+    // Lấy danh sách admin dựa trên các điều kiện tìm kiếm
+    public List<Admin> getAdminsBySpecification(GetAdminRequest request) {
+        // Kiểm tra và đặt các trường chuỗi rỗng thành null
+        String email = request.getEmail() != null && request.getEmail().isEmpty() ? null : request.getEmail();
+        String familyName = request.getFamilyName() != null && request.getFamilyName().isEmpty() ? null
+                : request.getFamilyName();
+        String givenName = request.getGivenName() != null && request.getGivenName().isEmpty() ? null
+                : request.getGivenName();
+        String phone = request.getPhone() != null && request.getPhone().isEmpty() ? null : request.getPhone();
+        String faculty = request.getFaculty() != null && request.getFaculty().isEmpty() ? null : request.getFaculty();
+
+        // Tạo một đối tượng Admin với các trường được set từ request
+        Admin adminProbe = new Admin();
+        adminProbe.setEmail(email);
+        adminProbe.setFamilyName(familyName);
+        adminProbe.setGivenName(givenName);
+        adminProbe.setPhone(phone);
+        adminProbe.setFaculty(faculty);
+
+        // Tạo một Example từ adminProbe
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues() // Bỏ qua các trường null
+                .withStringMatcher(ExampleMatcher.StringMatcher.EXACT)
+                .withIgnorePaths("createdAt", "updatedAt", "lastLogin", "role", "id"); // Bỏ qua các trường này
+
+        Example<Admin> example = Example.of(adminProbe, matcher);
+        // Tìm kiếm admin dựa trên example
+        return adminRepository.findAll(example);
+    }
+
     ////////////// Service for post method - create data //////////////
     // Tạo một admin mới
     public Admin createAdmin(CreateAdminRequest request) {
@@ -94,55 +119,34 @@ public class AdminService {
     }
 
     ////////////// Service for put method - update data //////////////
-
-    ////////////// Service for delete method - delete data //////////////
-    public List<HallOfFame> halloffame(HallOfFameRequest request) {
-        List<HallOfFame> temp = new ArrayList<>();
-        Specification<CourseClass> spec = Specification
-                .where(CourseClassSpecification.hasCourseCode(request.getCourseCode()))
-                .and(CourseClassSpecification.hasSemesterCode(request.getSemesterCode()))
-                .and(CourseClassSpecification.hasClassStatus(ClassStatus.Completed));
-
-        // Truy vấn dữ liệu từ database
-        List<CourseClass> listClass = courseClassRepository.findAll(spec);
-        for (CourseClass courseclass : listClass) {
-            for (Student student : courseclass.getListOfStudents()) {
-                Optional<SheetMark> sheetmark = sheetMarkRepository
-                        .findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                student.getId(), courseclass.getCourseCode(), courseclass.getSemesterCode(),
-                                courseclass.getClassName());
-
-                HallOfFame hallOfFame = new HallOfFame(student, sheetmark.get().getBT(),
-                        sheetmark.get().getTN(), sheetmark.get().getBTL(), sheetmark.get().getGK(),
-                        sheetmark.get().getCK(), sheetmark.get().getFinalMark());
-                int i = 0;
-                for (; i < temp.size(); i++) {
-                    if (hallOfFame.getFinalMark() > temp.get(i).getFinalMark())
-                        break;
-                }
-                temp.add(i, hallOfFame);
-
-            }
-        }
-        int a = request.getNoOfStudents();
-        int i = a;
-        double epsilon = 1e-9;
-
-        if (i > temp.size()) {
-            return temp;
-        } else {
-            List<HallOfFame> result;
-            while (Math.abs(temp.get(a - 1).getFinalMark() - temp.get(i - 1).getFinalMark()) < epsilon
-                    && i <= temp.size()) {
-                i++;
-                if (i > temp.size())
-                    break;
-            }
-
-            result = temp.subList(0, i - 1);
-            return result;
+    @Transactional
+    public Admin updateAdmin(UpdateAdminRequest request) {
+        if (request.getAdminId() == null) {
+            throw new IllegalArgumentException("Admin id is required.");
         }
 
+        Admin admin = adminRepository.findById(request.getAdminId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Admin not found for Admin id: " + request.getAdminId()));
+
+        Optional.ofNullable(request.getNewEmail()).ifPresent(admin::setEmail);
+        Optional.ofNullable(request.getNewFamilyName()).ifPresent(admin::setFamilyName);
+        Optional.ofNullable(request.getNewGivenName()).ifPresent(admin::setGivenName);
+        Optional.ofNullable(request.getNewPhone()).ifPresent(admin::setPhone);
+        Optional.ofNullable(request.getNewFaculty()).ifPresent(admin::setFaculty);
+
+        return adminRepository.save(admin);
     }
 
+    ////////////// Service for delete method - delete data //////////////
+    // Xóa một admin
+    public Admin deleteAdmin(String id) {
+        Optional<Admin> admin = adminRepository.findById(id);
+        if (admin.isEmpty()) {
+            throw new IllegalArgumentException("Admin not found");
+        }
+
+        adminRepository.deleteById(id);
+        return admin.get();
+    }
 }

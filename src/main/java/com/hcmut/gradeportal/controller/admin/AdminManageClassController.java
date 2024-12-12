@@ -1,5 +1,6 @@
 package com.hcmut.gradeportal.controller.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import com.hcmut.gradeportal.dtos.courseClass.request.CreateCourseClassRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.UpdateClassStatusRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.UpdateStudentsInClassRequest;
+import com.hcmut.gradeportal.dtos.courseClass.response.CreateBulkCourseClassResponse;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.CourseClassService;
 
@@ -76,8 +78,16 @@ public class AdminManageClassController {
         }
     }
 
-    /////////////////////// All Post request for manage class
-    /////////////////////// ///////////////////////
+    // Get class by path variable
+    @GetMapping("/path/{courseCode}/{semesterCode}/{className}")
+    public CourseClassDto getMethodName(@PathVariable String courseCode, @PathVariable String semesterCode,
+            @PathVariable String className) {
+        CourseClassDto courseClassDto = courseClassDtoConverter
+                .convert(courseClassService.getclass(courseCode, semesterCode, className));
+        return courseClassDto;
+    }
+
+    /////////////////////// All Post request for manage class //////////////
     // Create a new course class
     @PostMapping("/create-class")
     public ResponseEntity<ApiResponse<CourseClassDto>> createClass(@RequestBody CreateCourseClassRequest request) {
@@ -94,6 +104,42 @@ public class AdminManageClassController {
         } catch (Exception e) {
             ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Create a list of course classes
+    @PostMapping("/create-classes")
+    public ResponseEntity<ApiResponse<List<CreateBulkCourseClassResponse>>> createClasses(
+            @RequestBody List<CreateCourseClassRequest> requests) {
+        try {
+            List<CreateBulkCourseClassResponse> responses = new ArrayList<>();
+            for (CreateCourseClassRequest request : requests) {
+                try {
+                    CourseClassDto courseClassDto = courseClassDtoConverter
+                            .convert(courseClassService.createCourseClass(request));
+                    responses.add(new CreateBulkCourseClassResponse(courseClassDto.courseCode(),
+                            courseClassDto.semesterCode(),
+                            courseClassDto.className(), HttpStatus.OK.value(), "Create class successfully"));
+                } catch (IllegalArgumentException e) {
+                    responses.add(new CreateBulkCourseClassResponse(request.getCourseCode(), request.getSemesterCode(),
+                            request.getClassName(), HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+                } catch (Exception e) {
+                    responses.add(new CreateBulkCourseClassResponse(request.getCourseCode(), request.getSemesterCode(),
+                            request.getClassName(), HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+                }
+            }
+            ApiResponse<List<CreateBulkCourseClassResponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Create classes successfully", responses);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<List<CreateBulkCourseClassResponse>> response = new ApiResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<List<CreateBulkCourseClassResponse>> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -140,13 +186,6 @@ public class AdminManageClassController {
         }
     }
 
-    @GetMapping("/path/{cou}/{se}/{nam}")
-    public CourseClassDto getMethodName(@PathVariable String cou, @PathVariable String se, @PathVariable String nam) {
-        CourseClassDto courseClassDto = courseClassDtoConverter
-                .convert(courseClassService.getclass(cou, se, nam));
-        return courseClassDto;
-    }
-
     @PutMapping("/update-class-status")
     public ResponseEntity<ApiResponse<CourseClassDto>> UpdateClassStatus(
             @RequestBody UpdateClassStatusRequest request) {
@@ -167,6 +206,7 @@ public class AdminManageClassController {
         }
     }
 
+    /////////////////////// All Delete request for manage class //////////////
     @DeleteMapping("/delete-class")
     public ResponseEntity<ApiResponse<CourseClassDto>> DeleteClass(@RequestBody UpdateClassStatusRequest request) {
         try {
@@ -185,10 +225,4 @@ public class AdminManageClassController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // @DeleteMapping("/deleteclass")
-    // public CourseClass deleteclass(@RequestBody )
-    /////////////////////// All Delete request for manage class
-    /////////////////////// ///////////////////////
-
 }

@@ -20,11 +20,14 @@ import com.hcmut.gradeportal.dtos.student.request.CreateStudentRequest;
 import com.hcmut.gradeportal.dtos.student.request.GetStudentRequest;
 import com.hcmut.gradeportal.dtos.student.request.UpdateStudentRequest;
 import com.hcmut.gradeportal.dtos.student.response.CreateBulkStudentResponse;
+import com.hcmut.gradeportal.dtos.student.response.UpdateBulkStudentResponse;
 import com.hcmut.gradeportal.dtos.teacher.TeacherDto;
 import com.hcmut.gradeportal.dtos.teacher.TeacherDtoConverter;
 import com.hcmut.gradeportal.dtos.teacher.request.CreateTeacherRequest;
 import com.hcmut.gradeportal.dtos.teacher.request.GetTeacherRequest;
+import com.hcmut.gradeportal.dtos.teacher.request.UpdateTeacherRequest;
 import com.hcmut.gradeportal.dtos.teacher.response.CreateBulkTeacherResponse;
+import com.hcmut.gradeportal.dtos.teacher.response.UpdateBulkTeacherResponse;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.CourseClassService;
 import com.hcmut.gradeportal.service.SheetMarkService;
@@ -322,6 +325,55 @@ public class AdminManageUserController {
     }
 
     /////////////// All put request for manage account - Teacher ///////////////
+    /// Update a teacher information
+    @PutMapping("/update-teacher")
+    public ResponseEntity<ApiResponse<TeacherDto>> updateTeacher(@RequestBody UpdateTeacherRequest request) {
+        try {
+            TeacherDto teacherDto = teacherDtoConverter.convert(teacherService.updateTeacher(request));
+            ApiResponse<TeacherDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Teacher updated successfully",
+                    teacherDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
+        } catch (IllegalArgumentException e) {
+            ApiResponse<TeacherDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        } catch (Exception e) {
+            ApiResponse<TeacherDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to update teacher", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Update a list of teachers information
+    @PutMapping("/update-teachers")
+    public ResponseEntity<ApiResponse<List<UpdateBulkTeacherResponse>>> updateTeachers(
+            @RequestBody List<UpdateTeacherRequest> requests) {
+        try {
+            List<UpdateBulkTeacherResponse> responses = new ArrayList<>();
+
+            for (UpdateTeacherRequest request : requests) {
+                try {
+                    TeacherDto teacherDto = teacherDtoConverter.convert(teacherService.updateTeacher(request));
+                    responses.add(new UpdateBulkTeacherResponse(teacherDto.email(), HttpStatus.OK.value(),
+                            "Teacher updated successfully"));
+                } catch (IllegalArgumentException e) {
+                    responses.add(new UpdateBulkTeacherResponse(request.getUserId(), HttpStatus.BAD_REQUEST.value(),
+                            e.getMessage()));
+                } catch (Exception e) {
+                    responses.add(new UpdateBulkTeacherResponse(request.getUserId(),
+                            HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update teacher"));
+                }
+            }
+            ApiResponse<List<UpdateBulkTeacherResponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Teachers updated", responses);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            ApiResponse<List<UpdateBulkTeacherResponse>> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update teachers", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /////////////// All put request for manage account - Student ///////////////
 
@@ -350,28 +402,53 @@ public class AdminManageUserController {
 
     // Update a list of students information
     @PutMapping("/update-students")
-    public ResponseEntity<ApiResponse<List<StudentDto>>> updateStudents(
+    public ResponseEntity<ApiResponse<List<UpdateBulkStudentResponse>>> updateStudents(
             @RequestBody List<UpdateStudentRequest> requests) {
         try {
+            List<UpdateBulkStudentResponse> responses = new ArrayList<>();
 
-            List<StudentDto> updatedStudents = studentDtoConverter.convert(studentService.updateStudents(requests));
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.OK.value(),
-                    "Students updated successfully", updatedStudents);
+            for (UpdateStudentRequest request : requests) {
+                try {
+                    StudentDto studentDto = studentDtoConverter.convert(studentService.updateStudent(request));
+                    responses.add(new UpdateBulkStudentResponse(studentDto.email(), HttpStatus.OK.value(),
+                            "Student updated successfully"));
+                } catch (IllegalArgumentException e) {
+                    responses.add(new UpdateBulkStudentResponse(request.getUserId(), HttpStatus.BAD_REQUEST.value(),
+                            e.getMessage()));
+                } catch (Exception e) {
+                    responses.add(new UpdateBulkStudentResponse(request.getUserId(),
+                            HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update student"));
+                }
+            }
+            ApiResponse<List<UpdateBulkStudentResponse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Students updated", responses);
             return new ResponseEntity<>(response, HttpStatus.OK);
-
-        } catch (IllegalArgumentException e) {
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
-                    null);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-
         } catch (Exception e) {
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "Failed to update students", null);
+            ApiResponse<List<UpdateBulkStudentResponse>> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update students", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    /////////////// All delete request for manage account - Teacher ///////////////
+    /////////////// All delete request for manage account - Teacher///
+    /////////////// //////////////
+    @DeleteMapping("/delete-teacher/{teacherId}")
+    public ResponseEntity<ApiResponse<Void>> deleteTeacher(@PathVariable String teacherId) {
+        try {
+            teacherService.deleteTeacher(teacherId);
+            ApiResponse<Void> response = new ApiResponse<>(HttpStatus.OK.value(), "Teacher deleted successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
+        } catch (IllegalArgumentException e) {
+            ApiResponse<Void> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        } catch (Exception e) {
+            ApiResponse<Void> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to delete teacher", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /////////////// All delete request for manage account - Student ///////////////
 

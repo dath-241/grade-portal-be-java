@@ -1,5 +1,6 @@
 package com.hcmut.gradeportal.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,10 +21,12 @@ public interface CourseClassRepository
         Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
                         String className);
 
+        CourseClass findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(String courseCode, String semesterCode,
+                        String className, ClassStatus classStatus);
+
+        List<CourseClass> findByTeacherId(String teacherId);
+
         @Modifying
         @Transactional
         void deleteByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode, String className);
-
-        CourseClass findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(String courseCode, String semesterCode,
-                        String className, ClassStatus classStatus);
 }

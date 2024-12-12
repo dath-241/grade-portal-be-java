@@ -1,4 +1,4 @@
-package com.hcmut.gradeportal.dtos.student.request;
+package com.hcmut.gradeportal.dtos.admin.request;
 
 import javax.validation.constraints.NotBlank;
 
@@ -7,20 +7,12 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UpdateStudentRequest {
-
+public class UpdateAdminRequest {
     @NotBlank
-    private String userId;
-
+    private String adminId;
     private String newEmail;
-
     private String newFamilyName;
-
     private String newGivenName;
-
     private String newPhone;
-
     private String newFaculty;
-
-    private String newStudentId;
 }
