@@ -194,7 +194,7 @@ public class TeacherService {
         sheetMarkRepository.deleteAll(sheetMarks);
 
         // Xóa hoặc cập nhật CourseClass
-        List<CourseClass> courseClasses = courseClassRepository.findByTeacherId(id);
+        List<CourseClass> courseClasses = courseClassRepository.findByTeacher_Id(id);
         for (CourseClass courseClass : courseClasses) {
             courseClass.setTeacher(null); // Có thể đặt Teacher của lớp học là null
             courseClassRepository.save(courseClass); // Lưu lại lớp học

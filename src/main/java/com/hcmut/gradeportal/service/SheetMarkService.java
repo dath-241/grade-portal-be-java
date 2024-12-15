@@ -74,7 +74,7 @@ public class SheetMarkService {
                                 && request.getSemesterCode() != null && request.getSemesterCode() != ""
                                 && request.getClassName() != null && request.getClassName() != "") {
                         Optional<CourseClass> courseClass = courseClassRepository
-                                        .findByCourseCodeAndSemesterCodeAndClassName(request.getCourseCode(),
+                                        .findById_CourseCodeAndId_SemesterCodeAndId_ClassName(request.getCourseCode(),
                                                         request.getSemesterCode(), request.getClassName());
                         if (!courseClass.isPresent()) {
                                 throw new IllegalArgumentException("Course class not found");
@@ -110,7 +110,7 @@ public class SheetMarkService {
                 Teacher teacher = teacherRepository.findById(request.getTeacherId())
                                 .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
 
-                CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                CourseClass courseClass = courseClassRepository.findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
@@ -127,7 +127,7 @@ public class SheetMarkService {
                 Student student = studentRepository.findByEmailAndRole(request.getStudentEmail(), Role.STUDENT)
                                 .orElseThrow(() -> new IllegalArgumentException("Student not found"));
 
-                CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                CourseClass courseClass = courseClassRepository.findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
@@ -146,11 +146,25 @@ public class SheetMarkService {
                 courseClass.setUpdatedAt();
                 courseClassRepository.save(courseClass);
 
-                sheetMark.setBT(request.getBT());
-                sheetMark.setTN(request.getTN());
-                sheetMark.setBTL(request.getBTL());
-                sheetMark.setGK(request.getGK());
-                sheetMark.setCK(request.getCK());
+                if (request.getBT() != null) {
+                        sheetMark.setBT(request.getBT());
+                }
+                if (request.getTN() != null) {
+                        sheetMark.setTN(request.getTN());
+                }
+                if (request.getBTL() != null) {
+                        sheetMark.setBTL(request.getBTL());
+                }
+                if (request.getGK() != null) {
+                        sheetMark.setGK(request.getGK());
+                }
+                if (request.getCK() != null) {
+                        sheetMark.setCK(request.getCK());
+                }
+
+                if (request.getSheetMarkStatus() != null) {
+                        sheetMark.setSheetMarkStatus(request.getSheetMarkStatus());
+                }
 
                 if (request.getSheetMarkStatus() != null) {
                         sheetMark.setSheetMarkStatus(request.getSheetMarkStatus());
@@ -166,7 +180,7 @@ public class SheetMarkService {
                 Student student = studentRepository.findById(request.getStudentId())
                                 .orElseThrow(() -> new IllegalArgumentException("Student not found"));
 
-                CourseClass courseClass = courseClassRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                CourseClass courseClass = courseClassRepository.findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
@@ -185,11 +199,25 @@ public class SheetMarkService {
                 courseClass.setUpdatedAt();
                 courseClassRepository.save(courseClass);
 
-                sheetMark.setBT(request.getBT());
-                sheetMark.setTN(request.getTN());
-                sheetMark.setBTL(request.getBTL());
-                sheetMark.setGK(request.getGK());
-                sheetMark.setCK(request.getCK());
+                if (request.getBT() != null) {
+                        sheetMark.setBT(request.getBT());
+                }
+                if (request.getTN() != null) {
+                        sheetMark.setTN(request.getTN());
+                }
+                if (request.getBTL() != null) {
+                        sheetMark.setBTL(request.getBTL());
+                }
+                if (request.getGK() != null) {
+                        sheetMark.setGK(request.getGK());
+                }
+                if (request.getCK() != null) {
+                        sheetMark.setCK(request.getCK());
+                }
+
+                if (request.getSheetMarkStatus() != null) {
+                        sheetMark.setSheetMarkStatus(request.getSheetMarkStatus());
+                }
 
                 if (request.getSheetMarkStatus() != null) {
                         sheetMark.setSheetMarkStatus(request.getSheetMarkStatus());

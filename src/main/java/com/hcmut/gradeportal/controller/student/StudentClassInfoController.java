@@ -57,11 +57,11 @@ public class StudentClassInfoController {
         }
     }
 
-    @GetMapping("/get-class-by-student-user-id/{UserId}")
-    public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassByStudentUserId(@PathVariable String UserId) {
+    @GetMapping("/get-class-by-student-user-id/{userId}")
+    public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassByStudentUserId(@PathVariable String userId) {
         try {
             List<CourseClassDto> courseClassDtos = courseClassDtoConverter
-                    .convert(courseClassService.getClassByStudentUserId(UserId));
+                    .convert(courseClassService.getClassByStudentUserId(userId));
             ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get classes",
                     courseClassDtos);
 

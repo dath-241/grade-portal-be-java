@@ -2,77 +2,122 @@ package com.hcmut.gradeportal.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.hcmut.gradeportal.dtos.halloffame.HallOfFameRequest;
+import com.hcmut.gradeportal.dtos.hall_of_fame.GetHallOfFameRequest;
+import com.hcmut.gradeportal.dtos.hall_of_fame.TopGradeForCourse;
+import com.hcmut.gradeportal.dtos.sheetMark.SheetMarkDtoForHallOfFame;
+import com.hcmut.gradeportal.dtos.sheetMark.SheetMarkDtoForHallOfFameConverter;
+import com.hcmut.gradeportal.entities.Course;
 import com.hcmut.gradeportal.entities.CourseClass;
-import com.hcmut.gradeportal.entities.HallOfFame;
+import com.hcmut.gradeportal.entities.Semester;
 import com.hcmut.gradeportal.entities.SheetMark;
-import com.hcmut.gradeportal.entities.Student;
-import com.hcmut.gradeportal.entities.enums.ClassStatus;
 import com.hcmut.gradeportal.repositories.CourseClassRepository;
+import com.hcmut.gradeportal.repositories.CourseRepository;
+import com.hcmut.gradeportal.repositories.SemesterRepository;
 import com.hcmut.gradeportal.repositories.SheetMarkRepository;
 import com.hcmut.gradeportal.specification.CourseClassSpecification;
+import com.hcmut.gradeportal.specification.SheetMarkSpecification;
 
 @Service
 public class HallOfFameService {
+    private final CourseRepository courseRepository;
     private final CourseClassRepository courseClassRepository;
+    private final SemesterRepository semesterRepository;
     private final SheetMarkRepository sheetMarkRepository;
 
-    public HallOfFameService(CourseClassRepository courseClassRepository, SheetMarkRepository sheetMarkRepository) {
+    private final SheetMarkDtoForHallOfFameConverter sheetMarkDtoForHallOfFameConverter;
+
+    public HallOfFameService(CourseRepository courseRepository, CourseClassRepository courseClassRepository,
+            SemesterRepository semesterRepository, SheetMarkRepository sheetMarkRepository,
+            SheetMarkDtoForHallOfFameConverter sheetMarkDtoForHallOfFameConverter) {
+        this.courseRepository = courseRepository;
         this.courseClassRepository = courseClassRepository;
+        this.semesterRepository = semesterRepository;
         this.sheetMarkRepository = sheetMarkRepository;
+        this.sheetMarkDtoForHallOfFameConverter = sheetMarkDtoForHallOfFameConverter;
     }
 
-    public List<HallOfFame> halloffame(HallOfFameRequest request) {
-        List<HallOfFame> temp = new ArrayList<>();
-        Specification<CourseClass> spec = Specification
-                .where(CourseClassSpecification.hasCourseCode(request.getCourseCode()))
-                .and(CourseClassSpecification.hasSemesterCode(request.getSemesterCode()))
-                .and(CourseClassSpecification.hasClassStatus(ClassStatus.Completed));
+    // Get hall of fame for one course
+    public TopGradeForCourse getHallOfFameForCourse(GetHallOfFameRequest request) {
+        try {
+            String semeterCode = request.getSemesterCode();
+            String courseCode = request.getCourseCode();
+            Integer noOfRanks = (request.getNoOfRanks() == null) ? 10 : request.getNoOfRanks();
 
-        // Truy vấn dữ liệu từ database
-        List<CourseClass> listClass = courseClassRepository.findAll(spec);
-        for (CourseClass courseclass : listClass) {
-            for (Student student : courseclass.getListOfStudents()) {
-                Optional<SheetMark> sheetmark = sheetMarkRepository
-                        .findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                student.getId(), courseclass.getCourseCode(), courseclass.getSemesterCode(),
-                                courseclass.getClassName());
+            // Xử lý lỗi khi không tìm thấy Course hoặc Semester
+            Course course = courseRepository.findByCourseCode(courseCode)
+                    .orElseThrow(() -> new IllegalArgumentException("Course not found with code: " + courseCode));
 
-                HallOfFame hallOfFame = new HallOfFame(student, sheetmark.get().getBT(),
-                        sheetmark.get().getTN(), sheetmark.get().getBTL(), sheetmark.get().getGK(),
-                        sheetmark.get().getCK(), sheetmark.get().getFinalMark());
-                int i = 0;
-                for (; i < temp.size(); i++) {
-                    if (hallOfFame.getFinalMark() > temp.get(i).getFinalMark())
-                        break;
+            Semester semester = semesterRepository.findBySemesterCode(semeterCode)
+                    .orElseThrow(() -> new IllegalArgumentException("Semester not found with code: " + semeterCode));
+
+            // Tìm các SheetMark liên quan
+            Specification<SheetMark> spec = Specification
+                    .where(SheetMarkSpecification.hasCourseCode(courseCode))
+                    .and(SheetMarkSpecification.hasSemesterCode(semeterCode))
+                    .and(SheetMarkSpecification.hasNonNullFinalMark());
+
+            List<SheetMark> sheetMarks = sheetMarkRepository.findAll(spec);
+
+            if (sheetMarks.isEmpty()) {
+                throw new IllegalArgumentException(
+                        "No sheet marks found for course " + courseCode + " in semester " + semeterCode);
+            }
+
+            // Sắp xếp và lấy danh sách top sinh viên
+            sheetMarks.sort((a, b) -> Double.compare(b.getFinalMark(), a.getFinalMark()));
+            int count = 0;
+            List<SheetMarkDtoForHallOfFame> result = new ArrayList<>();
+
+            for (int i = 0; i < sheetMarks.size(); i++) {
+                SheetMark current = sheetMarks.get(i);
+                result.add(sheetMarkDtoForHallOfFameConverter.convert(current));
+
+                if (i == 0 || !sheetMarks.get(i).getFinalMark().equals(sheetMarks.get(i - 1).getFinalMark())) {
+                    count++;
                 }
-                temp.add(i, hallOfFame);
 
-            }
-        }
-        int a = request.getNoOfStudents();
-        int i = a;
-        double epsilon = 1e-9;
-
-        if (i > temp.size()) {
-            return temp;
-        } else {
-            List<HallOfFame> result;
-            while (Math.abs(temp.get(a - 1).getFinalMark() - temp.get(i - 1).getFinalMark()) < epsilon
-                    && i <= temp.size()) {
-                i++;
-                if (i > temp.size())
+                if (count == noOfRanks && (i + 1 == sheetMarks.size()
+                        || !current.getFinalMark().equals(sheetMarks.get(i + 1).getFinalMark()))) {
                     break;
+                }
             }
 
-            result = temp.subList(0, i - 1);
-            return result;
+            return new TopGradeForCourse(course.getCourseCode(), course.getCourseName(), semester.getSemesterCode(),
+                    semester.getSemesterName(), result);
+        } catch (IllegalArgumentException e) {
+            throw e; // Ném lại lỗi để Controller xử lý
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected error while fetching hall of fame for course", e);
+        }
+    }
+
+    // Get all hall of fame of all course in current semester
+    public List<TopGradeForCourse> getAllHallOfFame(GetHallOfFameRequest request) {
+        List<TopGradeForCourse> result = new ArrayList<>();
+        Semester semester = semesterRepository.findBySemesterCode(request.getSemesterCode())
+                .orElseThrow(() -> new IllegalArgumentException("Semester not found"));
+
+        List<String> courseCodes = new ArrayList<>();
+        Specification<CourseClass> spec = Specification
+                .where(CourseClassSpecification.hasSemesterCode(semester.getSemesterCode()));
+
+        List<CourseClass> courseClasses = courseClassRepository.findAll(spec);
+        for (CourseClass courseClass : courseClasses) {
+            if (!courseCodes.contains(courseClass.getId().getCourseCode())) {
+                courseCodes.add(courseClass.getId().getCourseCode());
+            }
         }
 
+        for (String courseCode : courseCodes) {
+            GetHallOfFameRequest getHallOfFameRequest = new GetHallOfFameRequest(courseCode, semester.getSemesterCode(),
+                    10);
+            result.add(getHallOfFameForCourse(getHallOfFameRequest));
+        }
+
+        return result;
     }
 }

@@ -46,5 +46,13 @@
     "givenName": "Đại Việt",
     "phone": "0123456789",
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "ADMIN",
+    "email": "viet.phamhcmutk22@hcmut.edu.vn",
+    "familyName": "Phạm",
+    "givenName": "Văn Quốc Việt",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   }
 ]
