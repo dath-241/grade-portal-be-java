@@ -11,6 +11,7 @@ import com.hcmut.gradeportal.dtos.course.request.CreateCourseRequest;
 import com.hcmut.gradeportal.dtos.course.request.UpdateCourseRequest;
 import com.hcmut.gradeportal.entities.Course;
 import com.hcmut.gradeportal.entities.CourseClass;
+import com.hcmut.gradeportal.entities.SheetMark;
 import com.hcmut.gradeportal.entities.Student;
 import com.hcmut.gradeportal.repositories.CourseClassRepository;
 import com.hcmut.gradeportal.repositories.SheetMarkRepository;
@@ -165,7 +166,18 @@ public class CourseService {
             throw new IllegalArgumentException("Total coefficient must equal 100");
         }
 
-        return courseRepository.save(course);
+        course = courseRepository.save(course);
+
+        List<SheetMark> sheetMarks = sheetMarkRepository.findByCourseCode(course.getCourseCode());
+
+        for (SheetMark sheetMark : sheetMarks) {
+            // Update finalMark
+            sheetMark.setUpdatedAt();
+            sheetMark.updateFinalMark();
+            sheetMarkRepository.save(sheetMark); // Save updated SheetMark
+        }
+
+        return course;
     }
 
     ////////////// Service for delete method - delete data //////////////
@@ -178,7 +190,7 @@ public class CourseService {
         // Fetch and delete all related CourseClass records
         List<CourseClass> courseClasses = courseClassRepository.findAll()
                 .stream()
-                .filter(cc -> cc.getCourseCode().equals(courseCode))
+                .filter(cc -> cc.getId().getCourseCode().equals(courseCode))
                 .collect(Collectors.toList());
 
         for (CourseClass courseClass : courseClasses) {
@@ -189,8 +201,8 @@ public class CourseService {
 
                 // Delete sheet marks for the student in this course class
                 sheetMarkRepository.deleteByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                        temp.getId(), courseClass.getCourseCode(), courseClass.getSemesterCode(),
-                        courseClass.getClassName());
+                        temp.getId(), courseClass.getId().getCourseCode(), courseClass.getId().getSemesterCode(),
+                        courseClass.getId().getClassName());
 
                 // Remove the course class from the student's list of courses
                 List<CourseClass> tempList = new ArrayList<>(temp.getListOfCourseClasses());

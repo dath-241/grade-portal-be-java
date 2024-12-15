@@ -9,49 +9,46 @@ import javax.validation.constraints.NotNull;
 import com.hcmut.gradeportal.entities.enums.ClassStatus;
 import com.hcmut.gradeportal.entities.idsOfEntities.CourseClassId;
 
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@IdClass(CourseClassId.class)
-@Table(name = "courseClass")
+@Table(name = "course_class")
 public class CourseClass {
-    @Id
-    private String courseCode;
 
-    @Id
-    private String semesterCode;
+    @EmbeddedId
+    private CourseClassId id;
 
-    @Id
-    private String className;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "courseCode", referencedColumnName = "courseCode", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @MapsId("courseCode")
+    @JoinColumn(name = "courseCode", referencedColumnName = "courseCode")
     private Course course;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacherId", referencedColumnName = "id")
-    private Teacher teacher;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @MapsId("semesterCode")
+    @JoinColumn(name = "semesterCode", referencedColumnName = "semesterCode")
+    private Semester semester;
 
     @ManyToMany
-    @JoinTable(name = "courseClassStudent", joinColumns = {
+    @JoinTable(name = "course_class_student", joinColumns = {
             @JoinColumn(name = "courseCode", referencedColumnName = "courseCode"),
             @JoinColumn(name = "semesterCode", referencedColumnName = "semesterCode"),
             @JoinColumn(name = "className", referencedColumnName = "className")
     }, inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "id"))
-    
-    @ElementCollection
-    private List<Student> listOfStudents;
+    private List<Student> listOfStudents = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacherId", referencedColumnName = "id")
+    private Teacher teacher;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -59,96 +56,47 @@ public class CourseClass {
     @NotNull
     private ClassStatus classStatus;
 
-    // No-args constructor
+    // Constructors
     public CourseClass() {
-        this.classStatus = ClassStatus.inProgress;
-        this.listOfStudents = new ArrayList<>();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public CourseClass(String courseCode, String semesterCode, String className) {
+    public CourseClass(CourseClassId id) {
         this();
-        this.courseCode = courseCode;
-        this.semesterCode = semesterCode;
-        this.className = className;
+        this.id = id;
     }
 
-    // Getters and Setters
-
-    public void setUpdatedAt() {
-        this.updatedAt = LocalDateTime.now();
+    // Getters và Setters
+    public CourseClassId getId() {
+        return id;
     }
 
-    public String getCourseCode() {
-        return this.courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public String getSemesterCode() {
-        return this.semesterCode;
-    }
-
-    public void setSemesterCode(String semesterCode) {
-        this.semesterCode = semesterCode;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public String getClassName() {
-        return this.className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Course getCourse() {
-        return this.course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Teacher getTeacher() {
-        return this.teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-        this.updatedAt = LocalDateTime.now();
+    public void setId(CourseClassId id) {
+        this.id = id;
     }
 
     public List<Student> getListOfStudents() {
-        return this.listOfStudents;
+        return listOfStudents;
     }
 
     public void setListOfStudents(List<Student> listOfStudents) {
         this.listOfStudents = listOfStudents;
-        this.updatedAt = LocalDateTime.now();
     }
 
     public LocalDateTime getCreatedAt() {
-        return this.createdAt;
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public LocalDateTime getUpdatedAt() {
-        return this.updatedAt;
+        return updatedAt;
     }
 
-    public ClassStatus getClassStatus() {
-        return this.classStatus;
-    }
-
-    public void setClassStatus(ClassStatus classStatus) {
-        this.classStatus = classStatus;
+    public void setUpdatedAt() {
         this.updatedAt = LocalDateTime.now();
     }
-
 }

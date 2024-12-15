@@ -16,11 +16,15 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, JpaSpecificationExecutor<SheetMark> {
+        @Query("SELECT sm FROM SheetMark sm WHERE sm.courseClass.id.courseCode = :courseCode")
+        List<SheetMark> findByCourseCode(@Param("courseCode") String courseCode);
+
+        List<SheetMark> findByTeacherId(String teacherId);
 
         @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId "
-                        + "AND sm.courseClass.courseCode = :courseCode "
-                        + "AND sm.courseClass.semesterCode = :semesterCode "
-                        + "AND sm.courseClass.className = :className")
+                        + "AND sm.courseClass.id.courseCode = :courseCode "
+                        + "AND sm.courseClass.id.semesterCode = :semesterCode "
+                        + "AND sm.courseClass.id.className = :className")
         Optional<SheetMark> findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
                         @Param("studentId") String studentId,
                         @Param("courseCode") String courseCode,
@@ -30,14 +34,12 @@ public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, J
         @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId")
         List<SheetMark> findByStudentId(@Param("studentId") String studentId);
 
-        List<SheetMark> findByTeacherId(String teacherId);
-
         @Modifying
         @Transactional
         @Query("DELETE FROM SheetMark sm WHERE sm.student.id = :studentId "
-                        + "AND sm.courseClass.courseCode = :courseCode "
-                        + "AND sm.courseClass.semesterCode = :semesterCode "
-                        + "AND sm.courseClass.className = :className")
+                        + "AND sm.courseClass.id.courseCode = :courseCode "
+                        + "AND sm.courseClass.id.semesterCode = :semesterCode "
+                        + "AND sm.courseClass.id.className = :className")
         void deleteByStudentIdAndCourseCodeAndSemesterCodeAndClassName(@Param("studentId") String studentId,
                         @Param("courseCode") String courseCode,
                         @Param("semesterCode") String semesterCode,

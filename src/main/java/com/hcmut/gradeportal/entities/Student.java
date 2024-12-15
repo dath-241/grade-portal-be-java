@@ -1,8 +1,10 @@
 package com.hcmut.gradeportal.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -16,8 +18,8 @@ public class Student extends User {
 
     private String studentId;
 
-    @ManyToMany(mappedBy = "listOfStudents")
-    private List<CourseClass> listOfCourseClasses;
+    @ManyToMany(mappedBy = "listOfStudents", fetch = FetchType.EAGER)
+    private List<CourseClass> listOfCourseClasses = new ArrayList<>();
 
     // Constructors
     public Student() {

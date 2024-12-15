@@ -47,7 +47,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Các endpoint không yêu cầu xác thực
                         .requestMatchers("/", "/health_check", "/login", "/error", "/oauth2/authorization/google",
-                                "/auth/login", "/admin/auth/login", "/hall-of-fame", "/init-data")
+                                "/auth/login", "/admin/auth/login", "/hall-of-fame", "/init-data",
+                                "/hall-of-fame/get-all")
                         .permitAll()
                         // OAuth2 login
                         .requestMatchers("/login/redirect", "/login/error").permitAll()

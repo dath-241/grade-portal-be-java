@@ -20,9 +20,9 @@ public class CourseClassDtoConverter {
         String teacherId = from.getTeacher() != null ? from.getTeacher().getId() : null;
 
         return new CourseClassDto(
-                from.getCourseCode(),
-                from.getSemesterCode(),
-                from.getClassName(),
+                from.getId().getCourseCode(),
+                from.getId().getSemesterCode(),
+                from.getId().getClassName(),
                 teacherId,
                 students,
                 from.getCreatedAt(),

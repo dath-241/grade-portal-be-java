@@ -43,5 +43,905 @@
     "studentId": "2211599",
     "phone": "0123456789",
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "viet.phamhcmutk22@hcmut.edu.vn",
+    "familyName": "Phạm",
+    "givenName": "Văn Quốc Việt",
+    "studentId": "2213950",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student1.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student1",
+    "studentId": "2219750",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student2.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student2",
+    "studentId": "2214300",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student3.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student3",
+    "studentId": "2216552",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student4.bku@hcmut.edu.vn",
+    "familyName": "Pham",
+    "givenName": "student4",
+    "studentId": "2216233",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student5.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "student5",
+    "studentId": "2213064",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student6.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student6",
+    "studentId": "2212765",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student7.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student7",
+    "studentId": "2217824",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student8.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "student8",
+    "studentId": "2219304",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student9.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student9",
+    "studentId": "2214978",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student10.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student10",
+    "studentId": "2218261",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student11.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student11",
+    "studentId": "2212351",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student12.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student12",
+    "studentId": "2211854",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student13.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student13",
+    "studentId": "2216655",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student14.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student14",
+    "studentId": "2217573",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student15.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "student15",
+    "studentId": "2215481",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student16.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student16",
+    "studentId": "2215789",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student17.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student17",
+    "studentId": "2215891",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student18.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student18",
+    "studentId": "2218703",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student19.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student19",
+    "studentId": "2215424",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student20.bku@hcmut.edu.vn",
+    "familyName": "Pham",
+    "givenName": "student20",
+    "studentId": "2211429",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student21.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student21",
+    "studentId": "2215783",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student22.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "student22",
+    "studentId": "2211115",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student23.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student23",
+    "studentId": "2219088",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student24.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student24",
+    "studentId": "2212213",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student25.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student25",
+    "studentId": "2215679",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student26.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student26",
+    "studentId": "2213419",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student27.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student27",
+    "studentId": "2211710",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student28.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student28",
+    "studentId": "2214287",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student29.bku@hcmut.edu.vn",
+    "familyName": "Pham",
+    "givenName": "student29",
+    "studentId": "2211640",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student30.bku@hcmut.edu.vn",
+    "familyName": "Do",
+    "givenName": "student30",
+    "studentId": "2212793",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student31.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student31",
+    "studentId": "2216326",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student32.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student32",
+    "studentId": "2214378",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student33.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student33",
+    "studentId": "2218491",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student34.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student34",
+    "studentId": "2214288",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student35.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student35",
+    "studentId": "2217908",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student36.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student36",
+    "studentId": "2215614",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student37.bku@hcmut.edu.vn",
+    "familyName": "Pham",
+    "givenName": "student37",
+    "studentId": "2211381",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student38.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student38",
+    "studentId": "2219446",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student39.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student39",
+    "studentId": "2219868",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student40.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student40",
+    "studentId": "2214459",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student41.bku@hcmut.edu.vn",
+    "familyName": "Tran",
+    "givenName": "student41",
+    "studentId": "2214567",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student42.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student42",
+    "studentId": "2214735",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student43.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student43",
+    "studentId": "2213389",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student44.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student44",
+    "studentId": "2212932",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student45.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "student45",
+    "studentId": "2218016",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student46.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student46",
+    "studentId": "2216506",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student47.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "student47",
+    "studentId": "2212415",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student48.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student48",
+    "studentId": "2217234",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student49.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student49",
+    "studentId": "2215547",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student50.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student50",
+    "studentId": "2212523",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student51.bku@hcmut.edu.vn",
+    "familyName": "Le",
+    "givenName": "student51",
+    "studentId": "2218225",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student52.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student52",
+    "studentId": "2214383",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student53.bku@hcmut.edu.vn",
+    "familyName": "Le",
+    "givenName": "student53",
+    "studentId": "2214110",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student54.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student54",
+    "studentId": "2219257",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student55.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student55",
+    "studentId": "2217830",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student56.bku@hcmut.edu.vn",
+    "familyName": "Le",
+    "givenName": "student56",
+    "studentId": "2213615",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student57.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "student57",
+    "studentId": "2214549",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student58.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student58",
+    "studentId": "2212944",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student59.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student59",
+    "studentId": "2215496",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student60.bku@hcmut.edu.vn",
+    "familyName": "Tran",
+    "givenName": "student60",
+    "studentId": "2215696",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student61.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student61",
+    "studentId": "2211367",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student62.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student62",
+    "studentId": "2213692",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student63.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student63",
+    "studentId": "2212830",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student64.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student64",
+    "studentId": "2212477",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student65.bku@hcmut.edu.vn",
+    "familyName": "Pham",
+    "givenName": "student65",
+    "studentId": "2212164",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student66.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "student66",
+    "studentId": "2216406",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student67.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student67",
+    "studentId": "2218507",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student68.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student68",
+    "studentId": "2215204",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student69.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student69",
+    "studentId": "2214870",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student70.bku@hcmut.edu.vn",
+    "familyName": "Le",
+    "givenName": "student70",
+    "studentId": "2216752",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student71.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "student71",
+    "studentId": "2216861",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student72.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student72",
+    "studentId": "2215241",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student73.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student73",
+    "studentId": "2218028",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student74.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "student74",
+    "studentId": "2216872",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student75.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "student75",
+    "studentId": "2212986",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student76.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "student76",
+    "studentId": "2219471",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student77.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student77",
+    "studentId": "2217760",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student78.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student78",
+    "studentId": "2217702",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student79.bku@hcmut.edu.vn",
+    "familyName": "Tran",
+    "givenName": "student79",
+    "studentId": "2212160",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student80.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "student80",
+    "studentId": "2212696",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student81.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "student81",
+    "studentId": "2217585",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student82.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student82",
+    "studentId": "2212510",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student83.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "student83",
+    "studentId": "2219096",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student84.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student84",
+    "studentId": "2215934",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student85.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student85",
+    "studentId": "2219560",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student86.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student86",
+    "studentId": "2215112",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student87.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student87",
+    "studentId": "2218142",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student88.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "student88",
+    "studentId": "2211232",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student89.bku@hcmut.edu.vn",
+    "familyName": "Do",
+    "givenName": "student89",
+    "studentId": "2213582",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student90.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student90",
+    "studentId": "2214457",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student91.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student91",
+    "studentId": "2217328",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student92.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student92",
+    "studentId": "2218097",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student93.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "student93",
+    "studentId": "2214442",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student94.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student94",
+    "studentId": "2212326",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student95.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "student95",
+    "studentId": "2217171",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student96.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "student96",
+    "studentId": "2216815",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student97.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "student97",
+    "studentId": "2217193",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student98.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "student98",
+    "studentId": "2218197",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "STUDENT",
+    "email": "student99.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "student99",
+    "studentId": "2218036",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   }
 ]

@@ -18,8 +18,8 @@ public class SheetMarkDtoConverter {
     public SheetMarkDto convert(SheetMark from) {
         return new SheetMarkDto(from.getId(), from.getStudent().getId(), from.getStudent().getEmail(),
                 from.getTeacher().getId(),
-                from.getCourseClass().getCourseCode(), from.getCourseClass().getSemesterCode(),
-                from.getCourseClass().getClassName(), from.getCreatedAt(), from.getUpdatedAt(), from.getBT(),
+                from.getCourseClass().getId().getCourseCode(), from.getCourseClass().getId().getSemesterCode(),
+                from.getCourseClass().getId().getClassName(), from.getCreatedAt(), from.getUpdatedAt(), from.getBT(),
                 from.getTN(), from.getBTL(), from.getGK(), from.getCK(), from.getFinalMark(),
                 from.getSheetMarkStatus());
     }
