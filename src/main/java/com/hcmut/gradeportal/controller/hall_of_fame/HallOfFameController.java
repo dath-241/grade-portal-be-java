@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcmut.gradeportal.dtos.halloffame.HallOfFameRequest;
-import com.hcmut.gradeportal.entities.HallOfFame;
+import com.hcmut.gradeportal.dtos.hall_of_fame.GetHallOfFameRequest;
+import com.hcmut.gradeportal.dtos.hall_of_fame.TopGradeForCourse;
 import com.hcmut.gradeportal.response.ApiResponse;
 import com.hcmut.gradeportal.service.HallOfFameService;
 
@@ -23,16 +23,44 @@ public class HallOfFameController {
         this.hallOfFameService = hallOfFameService;
     }
 
+    // Get hall of fame for course in one semester
     @GetMapping()
-    public ResponseEntity<ApiResponse<List<HallOfFame>>> getAllClasses(@RequestBody HallOfFameRequest request) {
+    public ResponseEntity<ApiResponse<TopGradeForCourse>> getHallOfFameByRequest(
+            @RequestBody GetHallOfFameRequest request) {
         try {
-            List<HallOfFame> courseClassDtos = hallOfFameService.halloffame(request);
-            ApiResponse<List<HallOfFame>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get all classes",
-                    courseClassDtos);
+            TopGradeForCourse topGradeForCourse = hallOfFameService.getHallOfFameForCourse(request);
+            ApiResponse<TopGradeForCourse> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Get hall of fame for course" + request.getCourseCode() + " in semester "
+                            + request.getSemesterCode(),
+                    topGradeForCourse);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<TopGradeForCourse> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                    null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            ApiResponse<List<HallOfFame>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ApiResponse<TopGradeForCourse> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<ApiResponse<List<TopGradeForCourse>>> getAllHallOfFame(
+            @RequestBody GetHallOfFameRequest request) {
+        try {
+            List<TopGradeForCourse> topGradeForCourses = hallOfFameService.getAllHallOfFame(request);
+            ApiResponse<List<TopGradeForCourse>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Get all hall of fame", topGradeForCourses);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<List<TopGradeForCourse>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<List<TopGradeForCourse>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

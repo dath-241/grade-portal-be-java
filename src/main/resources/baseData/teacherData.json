@@ -9,7 +9,7 @@
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   },
   {
-    "role": "STUDENT",
+    "role": "TEACHER",
     "email": "khoa.nguyenmbk22351@hcmut.edu.vn",
     "familyName": "Nguyễn",
     "givenName": "Nhật Khoa",
@@ -18,7 +18,7 @@
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   },
   {
-    "role": "STUDENT",
+    "role": "TEACHER",
     "email": "anh.phamviet241103@hcmut.edu.vn",
     "familyName": "Phạm",
     "givenName": "Việt Anh",
@@ -27,7 +27,7 @@
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   },
   {
-    "role": "STUDENT",
+    "role": "TEACHER",
     "email": "nguyen.nguyengiabk22@hcmut.edu.vn",
     "familyName": "Nguyễn",
     "givenName": "Gia Nguyên",
@@ -36,11 +36,335 @@
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   },
   {
-    "role": "STUDENT",
+    "role": "TEACHER",
     "email": "khoa.lebku@hcmut.edu.vn",
     "familyName": "Lê",
     "givenName": "Đăng Khoa",
     "teacherId": "2211599",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "viet.phamhcmutk22@hcmut.edu.vn",
+    "familyName": "Phạm",
+    "givenName": "Văn Quốc Việt",
+    "teacherId": "2211599",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher1.bku@hcmut.edu.vn",
+    "familyName": "Do",
+    "givenName": "teacher1",
+    "teacherId": "2213949",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher2.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "teacher2",
+    "teacherId": "2217230",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher3.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "teacher3",
+    "teacherId": "2213406",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher4.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "teacher4",
+    "teacherId": "2217083",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher5.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "teacher5",
+    "teacherId": "2219881",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher6.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "teacher6",
+    "teacherId": "2211381",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher7.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "teacher7",
+    "teacherId": "2213923",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher8.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "teacher8",
+    "teacherId": "2212696",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher9.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "teacher9",
+    "teacherId": "2214467",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher10.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "teacher10",
+    "teacherId": "2211771",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher11.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "teacher11",
+    "teacherId": "2216498",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher12.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "teacher12",
+    "teacherId": "2216740",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher13.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "teacher13",
+    "teacherId": "2219393",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher14.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "teacher14",
+    "teacherId": "2217909",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher15.bku@hcmut.edu.vn",
+    "familyName": "Pham",
+    "givenName": "teacher15",
+    "teacherId": "2217323",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher16.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "teacher16",
+    "teacherId": "2217691",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher17.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "teacher17",
+    "teacherId": "2215371",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher18.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "teacher18",
+    "teacherId": "2218277",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher19.bku@hcmut.edu.vn",
+    "familyName": "Bui",
+    "givenName": "teacher19",
+    "teacherId": "2215102",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher20.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "teacher20",
+    "teacherId": "2217170",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher21.bku@hcmut.edu.vn",
+    "familyName": "Le",
+    "givenName": "teacher21",
+    "teacherId": "2216825",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher22.bku@hcmut.edu.vn",
+    "familyName": "Duong",
+    "givenName": "teacher22",
+    "teacherId": "2212391",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher23.bku@hcmut.edu.vn",
+    "familyName": "Nguyen",
+    "givenName": "teacher23",
+    "teacherId": "2218962",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher24.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "teacher24",
+    "teacherId": "2215345",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher25.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "teacher25",
+    "teacherId": "2214407",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher26.bku@hcmut.edu.vn",
+    "familyName": "Vu",
+    "givenName": "teacher26",
+    "teacherId": "2213818",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher27.bku@hcmut.edu.vn",
+    "familyName": "Tran",
+    "givenName": "teacher27",
+    "teacherId": "2217168",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher28.bku@hcmut.edu.vn",
+    "familyName": "Do",
+    "givenName": "teacher28",
+    "teacherId": "2218908",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher29.bku@hcmut.edu.vn",
+    "familyName": "Phan",
+    "givenName": "teacher29",
+    "teacherId": "2219288",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher30.bku@hcmut.edu.vn",
+    "familyName": "Ngo",
+    "givenName": "teacher30",
+    "teacherId": "2219862",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher31.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "teacher31",
+    "teacherId": "2218341",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher32.bku@hcmut.edu.vn",
+    "familyName": "Ho",
+    "givenName": "teacher32",
+    "teacherId": "2218924",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher33.bku@hcmut.edu.vn",
+    "familyName": "Hoang",
+    "givenName": "teacher33",
+    "teacherId": "2214386",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher34.bku@hcmut.edu.vn",
+    "familyName": "Ly",
+    "givenName": "teacher34",
+    "teacherId": "2213163",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
+    "email": "teacher35.bku@hcmut.edu.vn",
+    "familyName": "Dang",
+    "givenName": "teacher35",
+    "teacherId": "2213296",
     "phone": "0123456789",
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   }

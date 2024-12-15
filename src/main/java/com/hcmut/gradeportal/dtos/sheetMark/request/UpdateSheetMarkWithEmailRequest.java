@@ -3,7 +3,6 @@ package com.hcmut.gradeportal.dtos.sheetMark.request;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.hcmut.gradeportal.entities.enums.SheetMarkStatus;
 
@@ -25,20 +24,15 @@ public class UpdateSheetMarkWithEmailRequest {
     @NotBlank
     String className;
 
-    @NotNull
     List<Double> BT;
 
-    @NotNull
     List<Double> TN;
 
-    @NotNull
     List<Double> BTL;
 
-    @NotNull
-    List<Double> GK;
+    Double GK;
 
-    @NotNull
-    List<Double> CK;
+    Double CK;
 
     SheetMarkStatus sheetMarkStatus;
 }

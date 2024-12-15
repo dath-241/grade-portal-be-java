@@ -4,6 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -23,24 +24,30 @@ public class Course {
     private Integer credit;
 
     @NotNull
+    @Basic(fetch = jakarta.persistence.FetchType.EAGER) // Đảm bảo luôn tải khi truy vấn
     private Integer coefficient_of_TN;
 
     @NotNull
+    @Basic(fetch = jakarta.persistence.FetchType.EAGER) // Đảm bảo luôn tải khi truy vấn
     private Integer coefficient_of_BT;
 
     @NotNull
+    @Basic(fetch = jakarta.persistence.FetchType.EAGER) // Đảm bảo luôn tải khi truy vấn
     private Integer coefficient_of_BTL;
 
     @NotNull
+    @Basic(fetch = jakarta.persistence.FetchType.EAGER) // Đảm bảo luôn tải khi truy vấn
     private Integer coefficient_of_GK;
 
     @NotNull
+    @Basic(fetch = jakarta.persistence.FetchType.EAGER) // Đảm bảo luôn tải khi truy vấn
     private Integer coefficient_of_CK;
 
     // No-args constructor
     public Course() {
     }
 
+    // All-args constructor
     public Course(String courseCode, String courseName, Integer credit, Integer coefficient_of_TN,
             Integer coefficient_of_BT, Integer coefficient_of_BTL, Integer coefficient_of_GK,
             Integer coefficient_of_CK) {

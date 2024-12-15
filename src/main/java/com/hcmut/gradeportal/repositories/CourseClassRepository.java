@@ -18,15 +18,17 @@ import jakarta.transaction.Transactional;
 public interface CourseClassRepository
                 extends JpaRepository<CourseClass, CourseClassId>, JpaSpecificationExecutor<CourseClass> {
 
-        Optional<CourseClass> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
-                        String className);
+        // Sửa lại để sử dụng id.<field>
+        Optional<CourseClass> findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
+                        String courseCode, String semesterCode, String className);
 
-        CourseClass findByCourseCodeAndSemesterCodeAndClassNameAndClassStatus(String courseCode, String semesterCode,
-                        String className, ClassStatus classStatus);
+        CourseClass findById_CourseCodeAndId_SemesterCodeAndId_ClassNameAndClassStatus(
+                        String courseCode, String semesterCode, String className, ClassStatus classStatus);
 
-        List<CourseClass> findByTeacherId(String teacherId);
+        List<CourseClass> findByTeacher_Id(String teacherId); // Nếu Teacher có trường "id"
 
         @Modifying
         @Transactional
-        void deleteByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode, String className);
+        void deleteById_CourseCodeAndId_SemesterCodeAndId_ClassName(
+                        String courseCode, String semesterCode, String className);
 }

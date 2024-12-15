@@ -3,14 +3,31 @@ package com.hcmut.gradeportal.entities.idsOfEntities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CourseClassId implements Serializable {
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
+@Embeddable
+public class CourseClassId implements Serializable {
+    @Column(name = "courseCode")
     private String courseCode;
+
+    @Column(name = "semesterCode")
     private String semesterCode;
+
+    @Column(name = "className")
     private String className;
 
-    // Getters and Setters
+    // Constructors
+    public CourseClassId() {
+    }
 
+    public CourseClassId(String courseCode, String semesterCode, String className) {
+        this.courseCode = courseCode;
+        this.semesterCode = semesterCode;
+        this.className = className;
+    }
+
+    // Getters, Setters, equals, hashCode
     public String getCourseCode() {
         return courseCode;
     }
@@ -35,7 +52,6 @@ public class CourseClassId implements Serializable {
         this.className = className;
     }
 
-    // Override equals and hashCode
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -43,9 +59,9 @@ public class CourseClassId implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         CourseClassId that = (CourseClassId) o;
-        return Objects.equals(courseCode, that.courseCode) &&
-                Objects.equals(semesterCode, that.semesterCode) &&
-                Objects.equals(className, that.className);
+        return courseCode.equals(that.courseCode) &&
+                semesterCode.equals(that.semesterCode) &&
+                className.equals(that.className);
     }
 
     @Override

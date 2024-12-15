@@ -28,6 +28,6 @@ public class CreateSheetMarkWhenInit {
     List<Double> BT;
     List<Double> TN;
     List<Double> BTL;
-    List<Double> GK;
-    List<Double> CK;
+    Double GK;
+    Double CK;
 }
