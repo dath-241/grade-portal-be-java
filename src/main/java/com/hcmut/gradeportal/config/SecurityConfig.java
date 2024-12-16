@@ -47,13 +47,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Các endpoint không yêu cầu xác thực
                         .requestMatchers("/", "/health_check", "/login", "/error", "/oauth2/authorization/google",
-                                "/auth/login", "/admin/auth/login", "/hall-of-fame", "/init-data",
+                                "/auth/login", "/admin/auth/login", "/hall-of-fame",
                                 "/hall-of-fame/get-all")
                         .permitAll()
                         // OAuth2 login
                         .requestMatchers("/login/redirect", "/login/error").permitAll()
                         // Các endpoint yêu cầu xác thực và phân quyền
-                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/**", "/init-data").hasAuthority("ADMIN")
                         .requestMatchers("/teacher/**").hasAnyAuthority("ADMIN", "TEACHER")
                         .requestMatchers("/student/**").hasAnyAuthority("ADMIN", "STUDENT")
                         // Các request còn lại cần xác thực

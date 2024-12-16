@@ -38,7 +38,7 @@ public class SheetMarkSpecification {
     }
 
     public static Specification<SheetMark> hasNonNullFinalMark() {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.isNotNull(root.get("finalMark"));
+        return (root, query, builder) -> builder.isNotNull(root.get("finalMark"));
     }
 
 }

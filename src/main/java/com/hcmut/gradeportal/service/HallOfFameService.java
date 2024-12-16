@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.hcmut.gradeportal.dtos.hall_of_fame.GetAllHallOfFameRequest;
 import com.hcmut.gradeportal.dtos.hall_of_fame.GetHallOfFameRequest;
 import com.hcmut.gradeportal.dtos.hall_of_fame.TopGradeForCourse;
 import com.hcmut.gradeportal.dtos.sheetMark.SheetMarkDtoForHallOfFame;
@@ -19,7 +20,6 @@ import com.hcmut.gradeportal.repositories.CourseRepository;
 import com.hcmut.gradeportal.repositories.SemesterRepository;
 import com.hcmut.gradeportal.repositories.SheetMarkRepository;
 import com.hcmut.gradeportal.specification.CourseClassSpecification;
-import com.hcmut.gradeportal.specification.SheetMarkSpecification;
 
 @Service
 public class HallOfFameService {
@@ -43,6 +43,9 @@ public class HallOfFameService {
     // Get hall of fame for one course
     public TopGradeForCourse getHallOfFameForCourse(GetHallOfFameRequest request) {
         try {
+            System.out.println("Get hall of fame for course " + request.getCourseCode() + " in semester "
+                    + request.getSemesterCode());
+
             String semeterCode = request.getSemesterCode();
             String courseCode = request.getCourseCode();
             Integer noOfRanks = (request.getNoOfRanks() == null) ? 10 : request.getNoOfRanks();
@@ -55,12 +58,10 @@ public class HallOfFameService {
                     .orElseThrow(() -> new IllegalArgumentException("Semester not found with code: " + semeterCode));
 
             // Tìm các SheetMark liên quan
-            Specification<SheetMark> spec = Specification
-                    .where(SheetMarkSpecification.hasCourseCode(courseCode))
-                    .and(SheetMarkSpecification.hasSemesterCode(semeterCode))
-                    .and(SheetMarkSpecification.hasNonNullFinalMark());
+            List<SheetMark> sheetMarks = sheetMarkRepository
+                    .findByCourseCodeAndSemesterCodeAndFinalMarkNotNull(courseCode, semester.getSemesterCode());
 
-            List<SheetMark> sheetMarks = sheetMarkRepository.findAll(spec);
+            System.out.println("SheetMarks: " + sheetMarks.size());
 
             if (sheetMarks.isEmpty()) {
                 throw new IllegalArgumentException(
@@ -95,8 +96,8 @@ public class HallOfFameService {
         }
     }
 
-    // Get all hall of fame of all course in current semester
-    public List<TopGradeForCourse> getAllHallOfFame(GetHallOfFameRequest request) {
+    // Get all hall of fame of all course in semester
+    public List<TopGradeForCourse> getAllHallOfFame(GetAllHallOfFameRequest request) {
         List<TopGradeForCourse> result = new ArrayList<>();
         Semester semester = semesterRepository.findBySemesterCode(request.getSemesterCode())
                 .orElseThrow(() -> new IllegalArgumentException("Semester not found"));
