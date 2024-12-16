@@ -16,11 +16,15 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, JpaSpecificationExecutor<SheetMark> {
+
+        // Lấy danh sách SheetMark theo courseCode
         @Query("SELECT sm FROM SheetMark sm WHERE sm.courseClass.id.courseCode = :courseCode")
         List<SheetMark> findByCourseCode(@Param("courseCode") String courseCode);
 
+        // Lấy danh sách SheetMark theo teacherId
         List<SheetMark> findByTeacherId(String teacherId);
 
+        // Tìm SheetMark theo studentId, courseCode, semesterCode, và className
         @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId "
                         + "AND sm.courseClass.id.courseCode = :courseCode "
                         + "AND sm.courseClass.id.semesterCode = :semesterCode "
@@ -31,9 +35,21 @@ public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, J
                         @Param("semesterCode") String semesterCode,
                         @Param("className") String className);
 
+        // Lấy danh sách SheetMark theo studentId
         @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId")
         List<SheetMark> findByStudentId(@Param("studentId") String studentId);
 
+        // Lấy danh sách SheetMark có finalMark khác null theo courseCode và
+        // semesterCode
+        @Query("SELECT sm FROM SheetMark sm " +
+                        "WHERE sm.courseClass.id.courseCode = :courseCode " +
+                        "AND sm.courseClass.id.semesterCode = :semesterCode " +
+                        "AND sm.finalMark IS NOT NULL")
+        List<SheetMark> findByCourseCodeAndSemesterCodeAndFinalMarkNotNull(
+                        @Param("courseCode") String courseCode,
+                        @Param("semesterCode") String semesterCode);
+
+        // Xóa SheetMark theo studentId, courseCode, semesterCode và className
         @Modifying
         @Transactional
         @Query("DELETE FROM SheetMark sm WHERE sm.student.id = :studentId "

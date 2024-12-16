@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcmut.gradeportal.dtos.hall_of_fame.GetAllHallOfFameRequest;
 import com.hcmut.gradeportal.dtos.hall_of_fame.GetHallOfFameRequest;
 import com.hcmut.gradeportal.dtos.hall_of_fame.TopGradeForCourse;
 import com.hcmut.gradeportal.response.ApiResponse;
@@ -48,7 +49,7 @@ public class HallOfFameController {
 
     @GetMapping("/get-all")
     public ResponseEntity<ApiResponse<List<TopGradeForCourse>>> getAllHallOfFame(
-            @RequestBody GetHallOfFameRequest request) {
+            @RequestBody GetAllHallOfFameRequest request) {
         try {
             List<TopGradeForCourse> topGradeForCourses = hallOfFameService.getAllHallOfFame(request);
             ApiResponse<List<TopGradeForCourse>> response = new ApiResponse<>(HttpStatus.OK.value(),
