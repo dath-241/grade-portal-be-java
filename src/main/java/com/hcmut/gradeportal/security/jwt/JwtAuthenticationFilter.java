@@ -39,8 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (requestUri.equals("/") || requestUri.equals("/health_check") || requestUri.startsWith("/login")
                 || requestUri.startsWith("/oauth2/authorization/google") || requestUri.startsWith("/auth/login")
                 || requestUri.startsWith("/admin/auth/login") || requestUri.startsWith("/hall-of-fame")
-                || requestUri.startsWith("/hall-of-fame/get-all")
-                || requestUri.startsWith("/init-data")) {
+                || requestUri.startsWith("/hall-of-fame/get-all")) {
             filterChain.doFilter(request, response);
             return;
         }
