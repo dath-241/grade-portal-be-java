@@ -6,133 +6,145 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcmut.gradeportal.dtos.courseClass.CourseClassDto;
-import com.hcmut.gradeportal.dtos.courseClass.CourseClassDtoConverter;
+import com.hcmut.gradeportal.dtos.courseClass.CourseClassDetailDtoForTeacher;
+import com.hcmut.gradeportal.dtos.courseClass.CourseClassDetailDtoForTeacherConverter;
+import com.hcmut.gradeportal.dtos.courseClass.CourseClassDtoForTeacher;
+import com.hcmut.gradeportal.dtos.courseClass.CourseClassDtoForTeacherConverter;
 import com.hcmut.gradeportal.dtos.courseClass.request.AddStudentRequest;
-import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequest;
+import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequestForTeacher;
+import com.hcmut.gradeportal.dtos.courseClass.request.GetDetailCourseClassRequestForTeacher;
 import com.hcmut.gradeportal.dtos.courseClass.request.RemoveStudentRequest;
-import com.hcmut.gradeportal.dtos.student.StudentDto;
-import com.hcmut.gradeportal.dtos.student.StudentDtoConverter;
+import com.hcmut.gradeportal.dtos.courseClass.request.UpdateClassStatusRequest;
 import com.hcmut.gradeportal.entities.CourseClass;
-import com.hcmut.gradeportal.entities.Student;
 import com.hcmut.gradeportal.response.ApiResponse;
+import com.hcmut.gradeportal.security.utils.CurrentUser;
 import com.hcmut.gradeportal.service.CourseClassService;
 
 @RestController
 @RequestMapping("/teacher/manage-class")
 public class TeacherManageClassController {
     private final CourseClassService courseClassService;
-    private final CourseClassDtoConverter courseClassDtoConverter;
-    private final StudentDtoConverter studentDtoConverter;
+    private final CourseClassDtoForTeacherConverter courseClassDtoForTeacherConverter;
+    private final CourseClassDetailDtoForTeacherConverter courseClassDetailDtoForTeacherConverter;
 
     public TeacherManageClassController(CourseClassService courseClassService,
-            CourseClassDtoConverter courseClassDtoConverter, StudentDtoConverter StudentDtoConverter) {
+            CourseClassDtoForTeacherConverter courseClassDtoForTeacherConverter,
+            CourseClassDetailDtoForTeacherConverter courseClassDetailDtoForTeacherConverter) {
         this.courseClassService = courseClassService;
-        this.courseClassDtoConverter = courseClassDtoConverter;
-        this.studentDtoConverter = StudentDtoConverter;
+        this.courseClassDtoForTeacherConverter = courseClassDtoForTeacherConverter;
+        this.courseClassDetailDtoForTeacherConverter = courseClassDetailDtoForTeacherConverter;
     }
 
     // Xem các lớp đã và đang giảng dạy
     // bằng teacher ID
-    @GetMapping("/get-class-by-teacher-id/{teacherId}")
-    public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassByTeacherId(@PathVariable String teacherId) {
+    @GetMapping("/get-class-by-teacher")
+    public ResponseEntity<ApiResponse<List<CourseClassDtoForTeacher>>> getClassByTeacherId() {
         try {
-            List<CourseClassDto> courseClassDtos = courseClassDtoConverter
-                    .convert(courseClassService.getClassByTeacherId(teacherId));
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get classes",
+            String userId = CurrentUser.getUserId();
+            System.out.println("userId: " + userId);
+
+            List<CourseClassDtoForTeacher> courseClassDtos = courseClassDtoForTeacherConverter
+                    .convert(courseClassService.getClassByTeacherId(userId));
+            ApiResponse<List<CourseClassDtoForTeacher>> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Get classes",
                     courseClassDtos);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalStateException | IllegalArgumentException e) {
 
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+            ApiResponse<List<CourseClassDtoForTeacher>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             // Phản hồi lỗi
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ApiResponse<List<CourseClassDtoForTeacher>> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     "Failed to fetch classes", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // Bằng user ID
-    @GetMapping("/get-class-by-teacher-user-id/{UserId}")
-    public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassByTeacherUserId(@PathVariable String UserId) {
-        try {
-            List<CourseClassDto> courseClassDtos = courseClassDtoConverter
-                    .convert(courseClassService.getClassByTeacherUserId(UserId));
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.OK.value(), "Get classes",
-                    courseClassDtos);
+    // // Bằng user ID
+    // @GetMapping("/get-class-by-teacher-user-id/{UserId}")
+    // public ResponseEntity<ApiResponse<List<CourseClassDto>>>
+    // getClassByTeacherUserId(@PathVariable String UserId) {
+    // try {
+    // List<CourseClassDto> courseClassDtos = courseClassDtoConverter
+    // .convert(courseClassService.getClassByTeacherUserId(UserId));
+    // ApiResponse<List<CourseClassDto>> response = new
+    // ApiResponse<>(HttpStatus.OK.value(), "Get classes",
+    // courseClassDtos);
 
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (IllegalStateException | IllegalArgumentException e) {
+    // return new ResponseEntity<>(response, HttpStatus.OK);
+    // } catch (IllegalStateException | IllegalArgumentException e) {
 
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
-                    e.getMessage(), null);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            // Phản hồi lỗi
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "Failed to fetch classes", null);
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    // ApiResponse<List<CourseClassDto>> response = new
+    // ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+    // e.getMessage(), null);
+    // return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    // } catch (Exception e) {
+    // // Phản hồi lỗi
+    // ApiResponse<List<CourseClassDto>> response = new
+    // ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    // "Failed to fetch classes", null);
+    // return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     // get class by specification
-    @GetMapping("/teacher-get-class-by-specification/{teacherId}")
-    public ResponseEntity<ApiResponse<List<CourseClassDto>>> getClassBySpecification(
-            @PathVariable String teacherId,
-            @RequestBody GetCourseClassRequest request) {
+    @GetMapping("/get-class-by-specification")
+    public ResponseEntity<ApiResponse<List<CourseClassDtoForTeacher>>> getClassBySpecification(
+            @RequestBody GetCourseClassRequestForTeacher request) {
         try {
+            String teacherId = CurrentUser.getUserId();
+
             List<CourseClass> classes = courseClassService.teacherGetClassBySpecification(teacherId, request);
-            List<CourseClassDto> courseClassDtos = courseClassDtoConverter.convert(classes);
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.OK.value(),
+            List<CourseClassDtoForTeacher> courseClassDtos = courseClassDtoForTeacherConverter.convert(classes);
+            ApiResponse<List<CourseClassDtoForTeacher>> response = new ApiResponse<>(HttpStatus.OK.value(),
                     "Get class by specification",
                     courseClassDtos);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+            ApiResponse<List<CourseClassDtoForTeacher>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            ApiResponse<List<CourseClassDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ApiResponse<List<CourseClassDtoForTeacher>> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     // get student info by class
-    @GetMapping("/get-student-info-by-class/{teacherId}/{courseCode}/{semesterCode}/{className}")
-    public ResponseEntity<ApiResponse<List<StudentDto>>> getStudentInfoByClass(
-            @PathVariable String teacherId,
-            @PathVariable String courseCode,
-            @PathVariable String semesterCode,
-            @PathVariable String className) {
+    @GetMapping("/get-detail")
+    public ResponseEntity<ApiResponse<CourseClassDetailDtoForTeacher>> getStudentInfoByClass(
+            @RequestBody GetDetailCourseClassRequestForTeacher request) {
         try {
-            List<Student> students = courseClassService.getStudentsByTeacherClass(teacherId, courseCode, semesterCode,
-                    className);
+            String userId = CurrentUser.getUserId();
 
-            List<StudentDto> studentDtos = studentDtoConverter.convert(students);
+            CourseClass courseClass = courseClassService.getDetailCourseClass(request, userId);
+            CourseClassDetailDtoForTeacher courseClassDetailDto = courseClassDetailDtoForTeacherConverter
+                    .convert(courseClass);
 
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(
-                    HttpStatus.OK.value(),
-                    "Student information retrieved successfully",
-                    studentDtos);
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Get detail",
+                    courseClassDetailDto);
             return new ResponseEntity<>(response, HttpStatus.OK);
+
         } catch (IllegalArgumentException e) {
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            ApiResponse<List<StudentDto>> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -140,52 +152,89 @@ public class TeacherManageClassController {
 
     // Thêm sinh viên vào lớp học
     @PutMapping("/add-student")
-    public ResponseEntity<ApiResponse<CourseClassDto>> addStudentToClass(@RequestBody AddStudentRequest request) {
+    public ResponseEntity<ApiResponse<CourseClassDetailDtoForTeacher>> addStudentToClass(
+            @RequestBody AddStudentRequest request) {
         try {
+            String userId = CurrentUser.getUserId();
+
             // Thêm sinh viên vào lớp học
-            courseClassService.addStudentToClass(request);
+            CourseClass courseClass = courseClassService.addStudentToClass(request, userId);
+            CourseClassDetailDtoForTeacher courseClassDetailDto = courseClassDetailDtoForTeacherConverter
+                    .convert(courseClass);
 
             // Phản hồi thành công
-            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.OK.value(),
-                    "Student added successfully", null);
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Student added successfully", courseClassDetailDto);
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } catch (IllegalStateException | IllegalArgumentException e) {
 
-            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(),
                     null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
 
-            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     "Failed to add student", null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Cập nhật trạng thái của lớp học
+    @PutMapping("/update-class-status")
+    public ResponseEntity<ApiResponse<CourseClassDetailDtoForTeacher>> UpdateClassStatus(
+            @RequestBody UpdateClassStatusRequest request) {
+        try {
+            String userId = CurrentUser.getUserId();
+
+            CourseClassDetailDtoForTeacher courseClassDto = courseClassDetailDtoForTeacherConverter
+                    .convert(courseClassService.updateStatusCourseClassForTeacher(request, userId));
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Update class status",
+                    courseClassDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(),
+                    null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage(), null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     // Xóa sinh viên khỏi lớp học
     @DeleteMapping("/remove-student")
-    public ResponseEntity<ApiResponse<CourseClassDto>> removeStudentFromClass(
+    public ResponseEntity<ApiResponse<CourseClassDetailDtoForTeacher>> removeStudentFromClass(
             @RequestBody RemoveStudentRequest request) {
         try {
+            String userId = CurrentUser.getUserId();
+
             // Xóa sinh viên khỏi lớp học
-            courseClassService.removeStudentFromClass(request);
-
+            CourseClass courseClass = courseClassService.removeStudentFromClass(request, userId);
+            CourseClassDetailDtoForTeacher courseClassDetailDto = courseClassDetailDtoForTeacherConverter
+                    .convert(courseClass);
             // Phản hồi thành công
-            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.OK.value(),
-                    "Student removed successfully", null);
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.OK.value(),
+                    "Student removed successfully", courseClassDetailDto);
             return new ResponseEntity<>(response, HttpStatus.OK);
-
         } catch (IllegalStateException | IllegalArgumentException e) {
 
-            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(),
                     null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
 
-            ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ApiResponse<CourseClassDetailDtoForTeacher> response = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     "Failed to remove student", null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

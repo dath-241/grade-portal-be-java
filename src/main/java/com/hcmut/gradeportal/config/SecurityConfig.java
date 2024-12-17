@@ -47,8 +47,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Các endpoint không yêu cầu xác thực
                         .requestMatchers("/", "/health_check", "/login", "/error", "/oauth2/authorization/google",
-                                "/auth/login", "/admin/auth/login", "/hall-of-fame",
-                                "/hall-of-fame/get-all")
+                                "/auth/login", "/admin/auth/login")
                         .permitAll()
                         // OAuth2 login
                         .requestMatchers("/login/redirect", "/login/error").permitAll()
@@ -56,6 +55,9 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**", "/init-data").hasAuthority("ADMIN")
                         .requestMatchers("/teacher/**").hasAnyAuthority("ADMIN", "TEACHER")
                         .requestMatchers("/student/**").hasAnyAuthority("ADMIN", "STUDENT")
+                        .requestMatchers("/hall-of-fame",
+                                "/hall-of-fame/get-all")
+                        .hasAnyAuthority("ADMIN", "STUDENT", "TEACHER")
                         // Các request còn lại cần xác thực
                         .anyRequest().authenticated())
                 .oauth2Login(oauth2 -> oauth2

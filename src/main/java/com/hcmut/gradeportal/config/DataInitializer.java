@@ -1,6 +1,7 @@
 package com.hcmut.gradeportal.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.hcmut.gradeportal.dtos.admin.request.CreateAdminRequest;
 import com.hcmut.gradeportal.dtos.course.request.CreateCourseRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.CreateCourseClassRequest;
+import com.hcmut.gradeportal.dtos.courseClass.request.UpdateClassStatusRequest;
 import com.hcmut.gradeportal.dtos.semester.request.CreateSemesterRequest;
 import com.hcmut.gradeportal.dtos.student.request.CreateStudentRequest;
 import com.hcmut.gradeportal.dtos.teacher.request.CreateTeacherRequest;
@@ -218,9 +220,15 @@ public class DataInitializer implements CommandLineRunner {
     public void initializeCourseClassesAndSheetMarks() {
         System.out.println("Initializing CourseClasses and SheetMarks...");
         try {
+            Teacher fixedTeacher = teacherRepository.findByEmail("viet.trankhmtbk22@hcmut.edu.vn")
+                    .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+            Student fixedStudent = studentRepository.findByEmail("trandaiviet78@gmail.com")
+                    .orElseThrow(() -> new RuntimeException("Student not found"));
+
             List<Course> courses = courseRepository.findAll();
             Collections.shuffle(courses);
-            List<Course> selectedCourses = courses.stream().limit(10).collect(Collectors.toList());
+            List<Course> selectedCourses = courses.stream().limit(20).collect(Collectors.toList());
 
             List<Student> students = studentRepository.findAll();
             Collections.shuffle(students);
@@ -230,11 +238,25 @@ public class DataInitializer implements CommandLineRunner {
 
             List<Teacher> teachers = teacherRepository.findAll();
 
+            int courseCounter = 0;
+
             for (Course course : selectedCourses) {
                 for (int j = 0; j < 2; j++) {
                     String className = "L0" + (j + 1);
-                    Teacher randomTeacher = teachers.get(new Random().nextInt(teachers.size()));
-                    List<Student> assignedStudents = (j == 0) ? group1 : group2;
+                    Teacher randomTeacher = (courseCounter < 5) ? fixedTeacher
+                            : teachers.get(new Random().nextInt(teachers.size()));
+
+                    List<Student> assignedStudents;
+                    if (courseCounter < 5 && j == 0) {
+                        // Đảm bảo lớp học đầu tiên của 5 Course đầu có học sinh đặc biệt
+                        assignedStudents = new ArrayList<>(group1);
+                        if (!assignedStudents.contains(fixedStudent)) {
+                            assignedStudents.add(fixedStudent);
+                        }
+                    } else {
+                        // Lớp học còn lại hoặc các Course sau
+                        assignedStudents = (j == 0) ? group1 : group2;
+                    }
 
                     List<String> studentIds = assignedStudents.stream().map(Student::getId)
                             .collect(Collectors.toList());
@@ -260,7 +282,14 @@ public class DataInitializer implements CommandLineRunner {
 
                         sheetMarkRepository.save(sheetMark);
                     }
+
+                    UpdateClassStatusRequest updateRequest = new UpdateClassStatusRequest(
+                            courseClass.getId().getCourseCode(), courseClass.getId().getSemesterCode(),
+                            courseClass.getId().getClassName());
+                    courseClassService.updateStatusCourseClassForAdmin(updateRequest);
                 }
+
+                courseCounter++;
             }
         } catch (Exception e) {
             System.err.println("Failed to seed course classes or sheet marks: " + e.getMessage());

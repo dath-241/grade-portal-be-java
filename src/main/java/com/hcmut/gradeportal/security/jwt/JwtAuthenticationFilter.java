@@ -38,8 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Loại trừ các endpoint công khai
         if (requestUri.equals("/") || requestUri.equals("/health_check") || requestUri.startsWith("/login")
                 || requestUri.startsWith("/oauth2/authorization/google") || requestUri.startsWith("/auth/login")
-                || requestUri.startsWith("/admin/auth/login") || requestUri.startsWith("/hall-of-fame")
-                || requestUri.startsWith("/hall-of-fame/get-all")) {
+                || requestUri.startsWith("/admin/auth/login")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -57,10 +56,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         .getBody();
 
                 String role = claims.get("role", String.class);
-                String username = claims.getSubject();
+                String userId = claims.getSubject();
 
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        username, null, Collections.singletonList(new SimpleGrantedAuthority(role)));
+                        userId, null, Collections.singletonList(new SimpleGrantedAuthority(role)));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             } catch (ExpiredJwtException e) {
                 setUnauthorizedResponse(response, "Token has expired.");

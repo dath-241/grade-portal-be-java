@@ -49,10 +49,11 @@ public class TeacherService {
             var payload = googleTokenVerifierService.verify(idToken);
 
             String email = payload.getEmail();
-            String userId = payload.getSubject();
 
             Optional<Teacher> teacher = teacherRepository.findByEmailAndRole(email, Role.TEACHER);
             if (teacher.isPresent()) {
+                String userId = teacher.get().getId();
+
                 return new AuthResponse<>(jwtService.generateToken(userId, Role.TEACHER), teacher.get(), Role.TEACHER);
             } else {
                 throw new IllegalArgumentException("Teacher not found");
