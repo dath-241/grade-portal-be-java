@@ -6,9 +6,11 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateSheetMarkWhenInit {
     @NotBlank
     String studentId;
@@ -26,8 +28,12 @@ public class CreateSheetMarkWhenInit {
     String className;
 
     List<Double> BT;
+
     List<Double> TN;
+
     List<Double> BTL;
+
     Double GK;
+
     Double CK;
 }

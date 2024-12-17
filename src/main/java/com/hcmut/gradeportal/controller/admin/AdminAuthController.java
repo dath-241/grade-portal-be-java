@@ -15,6 +15,7 @@ import com.hcmut.gradeportal.dtos.auth.request.AuthRequestForAdmin;
 import com.hcmut.gradeportal.dtos.auth.response.AuthResponse;
 import com.hcmut.gradeportal.entities.Admin;
 import com.hcmut.gradeportal.response.ApiResponse;
+import com.hcmut.gradeportal.security.utils.CurrentUser;
 import com.hcmut.gradeportal.service.AdminService;
 
 @RestController
@@ -53,6 +54,27 @@ public class AdminAuthController {
     }
 
     ///////////////// All Get request for admin auth /////////////////
+    // Get own information
+    @GetMapping("/get-info")
+    public ResponseEntity<ApiResponse<AdminDto>> getOwnInfo() {
+        try {
+            String userId = CurrentUser.getUserId();
+
+            AdminDto adminDto = adminDtoConverter.convert(adminService.getAdminById(userId));
+            ApiResponse<AdminDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Get personal information",
+                    adminDto);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            ApiResponse<AdminDto> response = new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            ApiResponse<AdminDto> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(),
+                    null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     // Get Personal Information
     @GetMapping("/get-info/{id}")
     public ResponseEntity<ApiResponse<AdminDto>> getPersonalInfo(@PathVariable String id) {

@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
-import com.hcmut.gradeportal.entities.enums.SheetMarkStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UpdateSheetMarkWithEmailRequest {
     @NotBlank
     String studentEmail;
@@ -33,6 +33,4 @@ public class UpdateSheetMarkWithEmailRequest {
     Double GK;
 
     Double CK;
-
-    SheetMarkStatus sheetMarkStatus;
 }

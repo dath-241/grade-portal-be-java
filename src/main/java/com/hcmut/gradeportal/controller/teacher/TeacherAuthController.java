@@ -3,13 +3,13 @@ package com.hcmut.gradeportal.controller.teacher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcmut.gradeportal.dtos.teacher.TeacherDto;
 import com.hcmut.gradeportal.dtos.teacher.TeacherDtoConverter;
 import com.hcmut.gradeportal.response.ApiResponse;
+import com.hcmut.gradeportal.security.utils.CurrentUser;
 import com.hcmut.gradeportal.service.TeacherService;
 
 @RestController
@@ -25,10 +25,12 @@ public class TeacherAuthController {
 
     ///////////////// All Get request for teacher auth /////////////////
     // Get Personal Information
-    @GetMapping("/get-info/{id}")
-    public ResponseEntity<ApiResponse<TeacherDto>> getPersonalInfo(@PathVariable String id) {
+    @GetMapping("/get-info")
+    public ResponseEntity<ApiResponse<TeacherDto>> getPersonalInfo() {
         try {
-            TeacherDto teacherDto = teacherDtoConverter.convert(teacherService.getTeacherById(id));
+            String userId = CurrentUser.getUserId();
+
+            TeacherDto teacherDto = teacherDtoConverter.convert(teacherService.getTeacherById(userId));
             ApiResponse<TeacherDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Get personal information",
                     teacherDto);
 
