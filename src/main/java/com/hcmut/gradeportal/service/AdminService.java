@@ -40,10 +40,11 @@ public class AdminService {
             var payload = googleTokenVerifierService.verify(idToken);
 
             String email = payload.getEmail();
-            String userId = payload.getSubject();
 
             Optional<Admin> admin = adminRepository.findByEmailAndRole(email, Role.ADMIN);
             if (admin.isPresent()) {
+                String userId = admin.get().getId();
+
                 return new AuthResponse<>(jwtService.generateToken(userId, Role.ADMIN), admin.get(), Role.ADMIN);
             } else {
                 throw new IllegalArgumentException("Admin not found");

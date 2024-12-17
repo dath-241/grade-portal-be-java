@@ -29,6 +29,8 @@ public class SheetMarkDtoForHallOfFameConverter {
                 from.getGK(),
                 from.getCK(),
                 from.getFinalMark(),
+                from.getCreatedAt(),
+                from.getUpdatedAt(),
                 from.getSheetMarkStatus());
     }
 }

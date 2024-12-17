@@ -191,7 +191,7 @@ public class AdminManageClassController {
             @RequestBody UpdateClassStatusRequest request) {
         try {
             CourseClassDto courseClassDto = courseClassDtoConverter
-                    .convert(courseClassService.updateStatusCourseClass(request));
+                    .convert(courseClassService.updateStatusCourseClassForAdmin(request));
             ApiResponse<CourseClassDto> response = new ApiResponse<>(HttpStatus.OK.value(), "Update class status",
                     courseClassDto);
             return new ResponseEntity<>(response, HttpStatus.OK);

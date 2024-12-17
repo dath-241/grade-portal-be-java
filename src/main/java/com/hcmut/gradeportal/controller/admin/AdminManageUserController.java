@@ -355,7 +355,7 @@ public class AdminManageUserController {
             for (UpdateTeacherRequest request : requests) {
                 try {
                     TeacherDto teacherDto = teacherDtoConverter.convert(teacherService.updateTeacher(request));
-                    responses.add(new UpdateBulkTeacherResponse(teacherDto.email(), HttpStatus.OK.value(),
+                    responses.add(new UpdateBulkTeacherResponse(teacherDto.id(), HttpStatus.OK.value(),
                             "Teacher updated successfully"));
                 } catch (IllegalArgumentException e) {
                     responses.add(new UpdateBulkTeacherResponse(request.getUserId(), HttpStatus.BAD_REQUEST.value(),
@@ -410,7 +410,7 @@ public class AdminManageUserController {
             for (UpdateStudentRequest request : requests) {
                 try {
                     StudentDto studentDto = studentDtoConverter.convert(studentService.updateStudent(request));
-                    responses.add(new UpdateBulkStudentResponse(studentDto.email(), HttpStatus.OK.value(),
+                    responses.add(new UpdateBulkStudentResponse(studentDto.id(), HttpStatus.OK.value(),
                             "Student updated successfully"));
                 } catch (IllegalArgumentException e) {
                     responses.add(new UpdateBulkStudentResponse(request.getUserId(), HttpStatus.BAD_REQUEST.value(),

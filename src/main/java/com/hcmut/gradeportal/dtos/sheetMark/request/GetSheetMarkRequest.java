@@ -4,17 +4,17 @@ import com.hcmut.gradeportal.entities.enums.SheetMarkStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class GetSheetMarkRequest {
-    String studentId;
-
-    String teacherId;
     String courseCode;
+
     String semesterCode;
+
     String className;
 
     SheetMarkStatus sheetMarkStatus;
-
 }

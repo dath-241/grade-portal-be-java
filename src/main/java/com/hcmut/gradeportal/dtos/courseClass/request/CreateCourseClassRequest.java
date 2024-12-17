@@ -8,9 +8,11 @@ import com.hcmut.gradeportal.entities.enums.ClassStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateCourseClassRequest {
     @NotBlank
     private String courseCode;

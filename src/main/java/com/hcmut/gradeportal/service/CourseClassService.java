@@ -2,7 +2,9 @@ package com.hcmut.gradeportal.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ import com.hcmut.gradeportal.dtos.courseClass.request.AddStudentRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.ChangeTeacherRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.CreateCourseClassRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequest;
+import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequestForStudent;
+import com.hcmut.gradeportal.dtos.courseClass.request.GetCourseClassRequestForTeacher;
+import com.hcmut.gradeportal.dtos.courseClass.request.GetDetailCourseClassRequestForTeacher;
 import com.hcmut.gradeportal.dtos.courseClass.request.RemoveStudentRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.UpdateClassStatusRequest;
 import com.hcmut.gradeportal.dtos.courseClass.request.UpdateStudentsInClassRequest;
@@ -29,6 +34,8 @@ import com.hcmut.gradeportal.repositories.SheetMarkRepository;
 import com.hcmut.gradeportal.repositories.StudentRepository;
 import com.hcmut.gradeportal.repositories.TeacherRepository;
 import com.hcmut.gradeportal.specification.CourseClassSpecification;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class CourseClassService {
@@ -79,7 +86,8 @@ public class CourseClassService {
                 return courseClassRepository.findAll(spec);
         }
 
-        public List<CourseClass> teacherGetClassBySpecification(String teacherId, GetCourseClassRequest request) {
+        public List<CourseClass> teacherGetClassBySpecification(String teacherId,
+                        GetCourseClassRequestForTeacher request) {
                 if (teacherId == null || teacherId.isEmpty()) {
                         throw new IllegalArgumentException("Teacher ID cannot be null or empty");
                 }
@@ -104,7 +112,25 @@ public class CourseClassService {
                 return courseClassRepository.findAll(spec);
         }
 
-        public List<CourseClass> studentGetClassBySpecification(String studentId, GetCourseClassRequest request) {
+        public CourseClass getDetailCourseClass(GetDetailCourseClassRequestForTeacher request, String teacherId) {
+                Optional<Teacher> teacher = teacherRepository.findById(teacherId);
+                if (!teacher.isPresent()) {
+                        throw new IllegalArgumentException("Teacher not found with ID: " + teacherId);
+                }
+
+                CourseClass courseClass = courseClassRepository.findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
+                                request.getCourseCode(), request.getSemesterCode(), request.getClassName())
+                                .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+
+                if (!teacherId.equals(courseClass.getTeacher().getId())) {
+                        throw new IllegalArgumentException("Teacher does not teach this class");
+                }
+
+                return courseClass;
+        }
+
+        public List<CourseClass> studentGetClassBySpecification(String studentId,
+                        GetCourseClassRequestForStudent request) {
                 if (studentId == null || studentId.isEmpty()) {
                         throw new IllegalArgumentException("Student ID cannot be null or empty");
                 }
@@ -126,76 +152,20 @@ public class CourseClassService {
         // get course class by student id
 
         public List<CourseClass> getClassByStudentId(String studentId) {
-                if (studentId == null || studentId.isEmpty()) {
-                        throw new IllegalArgumentException("Student ID cannot be null or empty");
-                }
+                Student student = studentRepository.findById(studentId)
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "Student not found with ID: " + studentId));
 
-                List<CourseClass> courseClasses = courseClassRepository.findAll();
-                List<CourseClass> filteredClasses = new ArrayList<>();
-
-                for (CourseClass courseClass : courseClasses) {
-                        List<Student> studentsOfClass = courseClass.getListOfStudents();
-                        for (Student student : studentsOfClass) {
-                                if (studentId.equals(student.getStudentId())) {
-                                        filteredClasses.add(courseClass);
-                                        break;
-                                }
-                        }
-                }
-
-                if (filteredClasses.isEmpty()) {
-                        throw new IllegalArgumentException("No classes found for the given student ID");
-                }
-
-                return filteredClasses;
-        }
-
-        // get course class by student_user id
-
-        public List<CourseClass> getClassByStudentUserId(String UserId) {
-                if (UserId == null || UserId.isEmpty()) {
-                        throw new IllegalArgumentException("Student ID cannot be null or empty");
-                }
-
-                List<CourseClass> courseClasses = courseClassRepository.findAll();
-                List<CourseClass> filteredClasses = new ArrayList<>();
-
-                for (CourseClass courseClass : courseClasses) {
-                        List<Student> studentsOfClass = courseClass.getListOfStudents();
-                        for (Student student : studentsOfClass) {
-                                if (UserId.equals(student.getId())) {
-                                        filteredClasses.add(courseClass);
-                                        break;
-                                }
-                        }
-                }
-
-                if (filteredClasses.isEmpty()) {
-                        throw new IllegalArgumentException("No classes found for the given student ID");
-                }
-                return filteredClasses;
+                return student.getListOfCourseClasses();
         }
 
         // get course class by teacher id
-
         public List<CourseClass> getClassByTeacherId(String teacherId) {
                 if (teacherId == null || teacherId.isEmpty()) {
                         throw new IllegalArgumentException("Teacher ID cannot be null or empty");
                 }
 
-                List<CourseClass> courseClasses = courseClassRepository.findAll();
-                List<CourseClass> filteredClasses = new ArrayList<>();
-
-                for (CourseClass courseClass : courseClasses) {
-                        if (teacherId.equals(courseClass.getTeacher().getTeacherId())) {
-                                filteredClasses.add(courseClass);
-                        }
-                }
-
-                if (filteredClasses.isEmpty()) {
-                        throw new IllegalArgumentException("No classes found for the given teacher ID");
-                }
-                return filteredClasses;
+                return courseClassRepository.findByTeacher_Id(teacherId);
         }
 
         public List<CourseClass> getClassByTeacherUserId(String UserId) {
@@ -245,6 +215,7 @@ public class CourseClassService {
         // Hàm này dùng khi tạo mới CourseClass, lúc này teacherId sẽ là ID của
         // Teacher-User
         // Hàm này sẽ được controller gọi
+        @Transactional
         public CourseClass createCourseClass(CreateCourseClassRequest createCourseClassRequest) {
                 // Tạo composite key từ request
                 CourseClassId courseClassId = new CourseClassId(
@@ -253,23 +224,22 @@ public class CourseClassService {
                                 createCourseClassRequest.getClassName());
 
                 // Kiểm tra xem lớp học đã tồn tại chưa
-                Optional<CourseClass> optCourseClass = courseClassRepository.findById(courseClassId);
-                if (optCourseClass.isPresent()) {
+                if (courseClassRepository.existsById(courseClassId)) {
                         throw new IllegalArgumentException("Course class already exists");
                 }
 
+                // Lấy thông tin Course và Semester
                 Course course = courseRepository.findByCourseCode(createCourseClassRequest.getCourseCode())
                                 .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
-                // Gán thông tin Semester
                 Semester semester = semesterRepository.findBySemesterCode(createCourseClassRequest.getSemesterCode())
                                 .orElseThrow(() -> new IllegalArgumentException("Semester not found"));
 
                 // Tạo đối tượng CourseClass mới
                 CourseClass newClass = new CourseClass();
+                newClass.setId(courseClassId);
                 newClass.setCourse(course);
-                newClass.setSemester(semester); // Gán giá trị semester
-                newClass.setId(courseClassId); // Gán composite key
+                newClass.setSemester(semester);
                 newClass.setClassStatus(
                                 createCourseClassRequest.getClassStatus() != null
                                                 ? createCourseClassRequest.getClassStatus()
@@ -283,48 +253,27 @@ public class CourseClassService {
                         newClass.setTeacher(teacher);
                 }
 
+                // Lưu lớp học mới
                 courseClassRepository.save(newClass);
 
                 // Gán danh sách sinh viên nếu có
-                List<Student> studentsOfClass = new ArrayList<>();
                 if (createCourseClassRequest.getStudentIds() != null) {
-                        for (String studentId : createCourseClassRequest.getStudentIds()) {
-                                Student student = studentRepository.findById(studentId)
-                                                .orElseThrow(() -> new IllegalArgumentException(
-                                                                "Student not found with ID: " + studentId));
+                        List<Student> students = studentRepository
+                                        .findAllById(createCourseClassRequest.getStudentIds());
 
-                                // Kiểm tra xem lớp học đã tồn tại trong danh sách của sinh viên hay chưa
-                                if (student.getListOfCourseClasses() == null) {
-                                        student.setListOfCourseClasses(new ArrayList<>());
-                                }
-                                if (!student.getListOfCourseClasses().contains(newClass)) {
-                                        student.getListOfCourseClasses().add(newClass);
-                                        studentRepository.save(student); // Lưu lại sinh viên
-                                }
-
-                                studentsOfClass.add(student);
+                        // Kiểm tra có sinh viên nào không tồn tại
+                        if (students.size() != createCourseClassRequest.getStudentIds().size()) {
+                                throw new IllegalArgumentException("Some student IDs are invalid.");
                         }
-                }
-                newClass.setListOfStudents(studentsOfClass);
 
-                // Lưu CourseClass
-                courseClassRepository.save(newClass);
+                        newClass.setListOfStudents(students);
+                }
 
                 // Tạo SheetMark cho mỗi sinh viên nếu có giáo viên
-                if (newClass.getTeacher() != null && newClass.getTeacher().getId() != null) {
-                        for (Student student : studentsOfClass) {
-                                Optional<SheetMark> sheetMark = sheetMarkRepository
-                                                .findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                                                student.getId(),
-                                                                courseClassId.getCourseCode(),
-                                                                courseClassId.getSemesterCode(),
-                                                                courseClassId.getClassName());
-
-                                if (!sheetMark.isPresent()) {
-                                        SheetMark newSheetMark = new SheetMark(student, newClass.getTeacher(),
-                                                        newClass);
-                                        sheetMarkRepository.save(newSheetMark);
-                                }
+                if (newClass.getTeacher() != null) {
+                        for (Student student : newClass.getListOfStudents()) {
+                                SheetMark sheetMark = new SheetMark(student, newClass.getTeacher(), newClass);
+                                sheetMarkRepository.save(sheetMark);
                         }
                 }
 
@@ -334,35 +283,40 @@ public class CourseClassService {
         ////////////// Service for put method - update data //////////////
 
         // Thay đổi giáo viên của lớp học
+        @Transactional
         public CourseClass changeTeacherOfCourseClass(ChangeTeacherRequest request) {
-                // Tìm kiếm CourseClass bằng composite key
+                // Tạo composite key cho CourseClass
                 CourseClassId courseClassId = new CourseClassId(
                                 request.getCourseCode(),
                                 request.getSemesterCode(),
                                 request.getClassName());
+
+                // Tìm kiếm CourseClass
                 CourseClass courseClass = courseClassRepository.findById(courseClassId)
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
-                // Tìm kiếm Teacher bằng teacherId
+                // Tìm kiếm Teacher
                 Teacher teacher = teacherRepository.findById(request.getTeacherId())
                                 .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
 
-                // Gán lại giáo viên cho CourseClass
+                // Gán giáo viên mới cho CourseClass
                 courseClass.setTeacher(teacher);
                 courseClassRepository.save(courseClass);
 
-                // Cập nhật hoặc tạo mới SheetMark cho tất cả sinh viên trong CourseClass
-                for (Student student : courseClass.getListOfStudents()) {
-                        SheetMark sheetMark = sheetMarkRepository
-                                        .findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                                        student.getId(),
-                                                        courseClassId.getCourseCode(),
-                                                        courseClassId.getSemesterCode(),
-                                                        courseClassId.getClassName())
-                                        .orElseGet(() -> new SheetMark(student, teacher, courseClass)); // Tạo mới nếu
-                                                                                                        // không tồn tại
+                // Lấy danh sách SheetMark hiện tại một lần duy nhất
+                List<SheetMark> sheetMarks = sheetMarkRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                                courseClassId.getCourseCode(),
+                                courseClassId.getSemesterCode(),
+                                courseClassId.getClassName());
 
-                        // Cập nhật giáo viên cho SheetMark
+                // Tạo Map để truy cập nhanh các SheetMark hiện tại
+                Map<String, SheetMark> sheetMarkMap = sheetMarks.stream()
+                                .collect(Collectors.toMap(sm -> sm.getStudent().getId(), sm -> sm));
+
+                // Cập nhật hoặc tạo mới SheetMark cho mỗi sinh viên
+                for (Student student : courseClass.getListOfStudents()) {
+                        SheetMark sheetMark = sheetMarkMap.getOrDefault(student.getId(),
+                                        new SheetMark(student, teacher, courseClass));
                         sheetMark.setTeacher(teacher);
                         sheetMarkRepository.save(sheetMark);
                 }
@@ -371,6 +325,7 @@ public class CourseClassService {
         }
 
         // Cập nhập danh sách sinh viên trong lớp học
+        @Transactional
         public CourseClass updateStudentsOfCourseClass(UpdateStudentsInClassRequest request) {
                 // Sử dụng composite key để tìm kiếm CourseClass
                 CourseClassId courseClassId = new CourseClassId(
@@ -383,23 +338,22 @@ public class CourseClassService {
                 List<Student> oldStudents = courseClass.getListOfStudents();
                 List<String> newStudentIds = request.getNewStudentIds();
 
-                List<Student> newStudents = newStudentIds.stream()
-                                .map(studentId -> studentRepository.findById(studentId)
-                                                .orElseThrow(() -> new IllegalArgumentException(
-                                                                "Student not found with ID: " + studentId)))
+                List<Student> newStudents = studentRepository.findAllById(newStudentIds);
+                if (newStudents.size() != newStudentIds.size()) {
+                        throw new IllegalArgumentException("Some student IDs are invalid.");
+                }
+
+                List<String> removedStudentIds = oldStudents.stream()
+                                .filter(student -> !newStudentIds.contains(student.getId()))
+                                .map(Student::getId)
                                 .toList();
 
-                for (Student oldStudent : oldStudents) {
-                        if (!newStudentIds.contains(oldStudent.getId())) {
-                                sheetMarkRepository.deleteByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                                oldStudent.getId(),
-                                                courseClassId.getCourseCode(),
-                                                courseClassId.getSemesterCode(),
-                                                courseClassId.getClassName());
-                                oldStudent.getListOfCourseClasses().remove(courseClass);
-                                studentRepository.save(oldStudent);
-                        }
+                if (!removedStudentIds.isEmpty()) {
+                        sheetMarkRepository.deleteAllByStudentIdInAndCourseCodeAndSemesterCodeAndClassName(
+                                        removedStudentIds, courseClassId.getCourseCode(),
+                                        courseClassId.getSemesterCode(), courseClassId.getClassName());
                 }
+                System.out.println("CourseCode: " + request.getCourseCode());
 
                 courseClass.setListOfStudents(newStudents);
                 courseClassRepository.save(courseClass);
@@ -428,7 +382,7 @@ public class CourseClassService {
         }
 
         // Thêm sinh viên vào lớp học
-        public CourseClass addStudentToClass(AddStudentRequest request) {
+        public CourseClass addStudentToClass(AddStudentRequest request, String teacherId) {
                 // Tìm sinh viên theo Id trong request
                 Student student = studentRepository.findById(request.getStudentId())
                                 .orElseThrow(() -> new IllegalArgumentException(
@@ -438,6 +392,13 @@ public class CourseClassService {
                 CourseClass courseClass = courseClassRepository.findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+
+                // Kiểm tra xem giáo viên có quyền thêm sinh viên vào lớp học không
+                if (teacherId != null && !teacherId.isEmpty()) {
+                        if (!teacherId.equals(courseClass.getTeacher().getId())) {
+                                throw new IllegalArgumentException("Teacher does not teach this class");
+                        }
+                }
 
                 // Báo lỗi nếu sinh viên đã tham gia vào lớp học
                 if (courseClass.getListOfStudents().contains(student)) {
@@ -469,44 +430,56 @@ public class CourseClassService {
                 return courseClass;
         }
 
-        // Cập nhập trạng thái của lớp học
-        public CourseClass updateStatusCourseClass(UpdateClassStatusRequest request) {
-                // Sử dụng composite key để tìm kiếm CourseClass
+        @Transactional
+        public CourseClass updateStatusCourseClassForAdmin(UpdateClassStatusRequest request) {
+                return updateStatusForClassInternal(request, null);
+        }
+
+        @Transactional
+        public CourseClass updateStatusCourseClassForTeacher(UpdateClassStatusRequest request, String teacherId) {
+                return updateStatusForClassInternal(request, teacherId);
+        }
+
+        private CourseClass updateStatusForClassInternal(UpdateClassStatusRequest request, String teacherId) {
+                // Tạo composite key
                 CourseClassId courseClassId = new CourseClassId(
                                 request.getCourseCode(),
                                 request.getSemesterCode(),
                                 request.getClassName());
-                CourseClass updateClass = courseClassRepository.findById(courseClassId)
+
+                // Tìm CourseClass
+                CourseClass courseClass = courseClassRepository.findById(courseClassId)
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
 
-                if (updateClass.getClassStatus() == ClassStatus.Completed) {
-                        return updateClass;
-                }
-
-                List<Student> listStudents = updateClass.getListOfStudents();
-                boolean isCompleted = true;
-
-                for (Student student : listStudents) {
-                        SheetMark sheetMark = sheetMarkRepository
-                                        .findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                                        student.getId(),
-                                                        courseClassId.getCourseCode(),
-                                                        courseClassId.getSemesterCode(),
-                                                        courseClassId.getClassName())
-                                        .orElseThrow(() -> new IllegalArgumentException("SheetMark not found"));
-
-                        if (sheetMark.getFinalMark() == null) {
-                                isCompleted = false;
-                                break;
+                // Kiểm tra teacherId nếu cần
+                if (teacherId != null) {
+                        if (courseClass.getTeacher() == null || !courseClass.getTeacher().getId().equals(teacherId)) {
+                                throw new IllegalArgumentException("Teacher does not teach this class");
                         }
                 }
 
-                if (isCompleted) {
-                        updateClass.setClassStatus(ClassStatus.Completed);
-                        courseClassRepository.save(updateClass);
+                // Nếu đã Completed thì không cần làm gì thêm
+                if (courseClass.getClassStatus() == ClassStatus.Completed) {
+                        return courseClass;
                 }
 
-                return updateClass;
+                // Lấy tất cả SheetMark cho lớp học này
+                List<SheetMark> sheetMarks = sheetMarkRepository.findByCourseCodeAndSemesterCodeAndClassName(
+                                courseClassId.getCourseCode(),
+                                courseClassId.getSemesterCode(),
+                                courseClassId.getClassName());
+
+                // Kiểm tra tất cả SheetMark có FinalMark không null
+                boolean isCompleted = sheetMarks.stream()
+                                .allMatch(sheetMark -> sheetMark.getFinalMark() != null);
+
+                // Cập nhật trạng thái lớp học
+                if (isCompleted) {
+                        courseClass.setClassStatus(ClassStatus.Completed);
+                        courseClassRepository.save(courseClass);
+                }
+
+                return courseClass;
         }
 
         // Thay đổi course code của lớp học
@@ -552,30 +525,26 @@ public class CourseClassService {
         //////////// Service for delete method - delete data //////////////
 
         // Xóa sinh viên ra khỏi tất cả các lớp mà sinh viên đang tham gia
+        @Transactional
         public void removeStudentFromAllClasses(String studentId) {
                 // Tìm sinh viên theo ID
                 Student student = studentRepository.findById(studentId)
                                 .orElseThrow(() -> new IllegalArgumentException(
                                                 "Student not found with ID: " + studentId));
 
-                // Lấy danh sách các lớp học mà sinh viên đang tham gia
+                // Lấy tất cả các lớp học của sinh viên
                 List<CourseClass> courseClasses = student.getListOfCourseClasses();
 
-                for (CourseClass courseClass : courseClasses) {
-
-                        // Xóa sinh viên khỏi danh sách sinh viên trong lớp học
-                        List<Student> studentsInClass = courseClass.getListOfStudents();
-                        studentsInClass.remove(student);
-
-                        // Cập nhật lớp học
-                        courseClass.setListOfStudents(studentsInClass);
-
-                        // Lưu lớp học đã cập nhật
-                        courseClassRepository.save(courseClass);
+                if (!courseClasses.isEmpty()) {
+                        // Xóa sinh viên khỏi danh sách lớp học trong bảng quan hệ ManyToMany
+                        for (CourseClass courseClass : courseClasses) {
+                                courseClass.getListOfStudents().remove(student);
+                        }
+                        courseClassRepository.saveAll(courseClasses);
                 }
 
-                // Xóa sinh viên khỏi danh sách lớp học của sinh viên
-                student.setListOfCourseClasses(new ArrayList<>());
+                // Xóa tất cả lớp học khỏi danh sách của sinh viên
+                student.getListOfCourseClasses().clear();
                 studentRepository.save(student);
         }
 
@@ -583,7 +552,8 @@ public class CourseClassService {
         // lớp đó
         // Xóa sinh viên ra khỏi một lớp và đồng thời xóa bảng điểm của sinh viên trong
         // lớp đó
-        public void removeStudentFromClass(RemoveStudentRequest request) {
+        @Transactional
+        public CourseClass removeStudentFromClass(RemoveStudentRequest request, String teacherId) {
                 // Tìm sinh viên theo Id trong request
                 Student student = studentRepository.findById(request.getStudentId())
                                 .orElseThrow(() -> new IllegalArgumentException(
@@ -593,6 +563,13 @@ public class CourseClassService {
                 CourseClass courseClass = courseClassRepository.findById_CourseCodeAndId_SemesterCodeAndId_ClassName(
                                 request.getCourseCode(), request.getSemesterCode(), request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Course class not found"));
+
+                // Kiểm tra teacherId nếu cần
+                if (teacherId != null) {
+                        if (courseClass.getTeacher() == null || !courseClass.getTeacher().getId().equals(teacherId)) {
+                                throw new IllegalArgumentException("Teacher does not teach this class");
+                        }
+                }
 
                 // Báo lỗi nếu sinh viên chưa tham gia lớp học
                 if (!courseClass.getListOfStudents().contains(student)) {
@@ -617,6 +594,8 @@ public class CourseClassService {
                 if (student.getListOfCourseClasses().remove(courseClass)) {
                         studentRepository.save(student);
                 }
+
+                return courseClass;
         }
 
 }

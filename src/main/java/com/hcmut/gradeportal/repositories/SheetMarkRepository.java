@@ -35,9 +35,26 @@ public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, J
                         @Param("semesterCode") String semesterCode,
                         @Param("className") String className);
 
+        @Query("SELECT sm FROM SheetMark sm WHERE sm.student.studentId = :studentId "
+                        + "AND sm.courseClass.id.courseCode = :courseCode "
+                        + "AND sm.courseClass.id.semesterCode = :semesterCode "
+                        + "AND sm.courseClass.id.className = :className")
+        Optional<SheetMark> findByStudentStudentIdAndCourseCodeAndSemesterCodeAndClassName(
+                        @Param("studentId") String studentId,
+                        @Param("courseCode") String courseCode,
+                        @Param("semesterCode") String semesterCode,
+                        @Param("className") String className);
+
         // Lấy danh sách SheetMark theo studentId
         @Query("SELECT sm FROM SheetMark sm WHERE sm.student.id = :studentId")
         List<SheetMark> findByStudentId(@Param("studentId") String studentId);
+
+        // Lấy danh sách SheetMark theo courseCode, semesterCode và className
+        @Query("SELECT sm FROM SheetMark sm WHERE sm.courseClass.id.courseCode = :courseCode "
+                        + "AND sm.courseClass.id.semesterCode = :semesterCode "
+                        + "AND sm.courseClass.id.className = :className")
+        List<SheetMark> findByCourseCodeAndSemesterCodeAndClassName(String courseCode, String semesterCode,
+                        String className);
 
         // Lấy danh sách SheetMark có finalMark khác null theo courseCode và
         // semesterCode
@@ -60,4 +77,21 @@ public interface SheetMarkRepository extends JpaRepository<SheetMark, String>, J
                         @Param("courseCode") String courseCode,
                         @Param("semesterCode") String semesterCode,
                         @Param("className") String className);
+
+        @Modifying
+        @Transactional
+        @Query("DELETE FROM SheetMark sm WHERE sm.student.id IN :studentIds "
+                        + "AND sm.courseClass.id.courseCode = :courseCode "
+                        + "AND sm.courseClass.id.semesterCode = :semesterCode "
+                        + "AND sm.courseClass.id.className = :className")
+        void deleteAllByStudentIdInAndCourseCodeAndSemesterCodeAndClassName(
+                        @Param("studentIds") List<String> studentIds,
+                        @Param("courseCode") String courseCode,
+                        @Param("semesterCode") String semesterCode,
+                        @Param("className") String className);
+
+        @Modifying
+        @Transactional
+        @Query("DELETE FROM SheetMark sm WHERE sm.student.id = :studentId")
+        void deleteByStudentId(@Param("studentId") String studentId);
 }
