@@ -33,6 +33,8 @@ public class SheetMarkDtoForTeacherConverter {
                 from.getGK(),
                 from.getCK(),
                 from.getFinalMark(),
+                from.getCreatedAt(),
+                from.getUpdatedAt(),
                 from.getSheetMarkStatus());
     }
 
