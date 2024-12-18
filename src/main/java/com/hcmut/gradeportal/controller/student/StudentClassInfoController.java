@@ -59,7 +59,7 @@ public class StudentClassInfoController {
     }
 
     // get class by specification
-    @GetMapping("/student-by-specification")
+    @GetMapping("/get-by-specification")
     public ResponseEntity<ApiResponse<List<CourseClassDtoForStudent>>> getClassBySpecification(
             @RequestBody GetCourseClassRequestForStudent request) {
         try {

@@ -156,6 +156,8 @@ public class SheetMarkService {
         // Update sheet mark with student id
         @Transactional
         public SheetMark updateSheetMark(UpdateSheetMarkWithStudentIdRequest request, String teacherId) {
+                System.out.println("Request: " + request.toString());
+
                 Student student = studentRepository.findByStudentId(request.getStudentId())
                                 .orElseThrow(() -> new IllegalArgumentException("Student not found"));
 
@@ -168,9 +170,11 @@ public class SheetMarkService {
                         throw new IllegalStateException("Course class cannot be updated after 6 months.");
                 }
 
-                SheetMark sheetMark = sheetMarkRepository.findByStudentIdAndCourseCodeAndSemesterCodeAndClassName(
-                                student.getStudentId(), request.getCourseCode(), request.getSemesterCode(),
-                                request.getClassName())
+                SheetMark sheetMark = sheetMarkRepository
+                                .findByStudentStudentIdAndCourseCodeAndSemesterCodeAndClassName(
+                                                student.getStudentId(), request.getCourseCode(),
+                                                request.getSemesterCode(),
+                                                request.getClassName())
                                 .orElseThrow(() -> new IllegalArgumentException("Sheet mark not found"));
 
                 if (!sheetMark.getTeacher().getId().equals(teacherId)) {
