@@ -57,6 +57,11 @@ Kế hoạch làm việc chung của môn học như sau:
 |  #3  | 19.10.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_10_19_24.md) | [Result](/reports/weeklyReport/weekly_result/result_10_19_24.md) |
 |  #4  | 27.10.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_10_27_24.md) | [Result](/reports/weeklyReport/weekly_result/result_10_27_24.md) |
 |  #5  | 03.11.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_11_03_24.md) | [Result](/reports/weeklyReport/weekly_result/result_11_03_24.md) |
+|  #6  | 10.11.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_11_10_24.md) | [Result](/reports/weeklyReport/weekly_result/result_11_10_24.md) |
+|  #7  | 17.11.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_11_17_24.md) | [Result](/reports/weeklyReport/weekly_result/result_11_17_24.md) |
+|  #8  | 01.12.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_12_01_24.md) | [Result](/reports/weeklyReport/weekly_result/result_12_01_24.md) |
+|  #9  | 08.12.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_12_08_24.md) | [Result](/reports/weeklyReport/weekly_result/result_12_08_24.md) |
+| #10  | 16.12.24 | [Report](/reports/weeklyReport/meeting_minute_report/meeting_minute_report_12_16_24.md) | [Result](/reports/weeklyReport/weekly_result/result_12_16_24.md) |
 
 ## Tự đánh giá tiến độ thành viên
 
@@ -70,12 +75,12 @@ Kế hoạch làm việc chung của môn học như sau:
 
 | MSSV    | Tên thành viên     | Vai trò | Tuần 1 | Tuần 2 | Tuần 3 | Tuần 4 | Tuần 5 | Tuần 6 | Tuần 7 | Tuần 8 | Tuần 9 | Tuần 10 |
 | ------- | ------------------ | ------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------- |
-| 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
-| 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
-| 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
-| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
-| 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
-| 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | -      | -      | -      | -      | -      | -       |
+| 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
+| 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
+| 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
+| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
+| 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
+| 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
 
 ### Đánh giá của nhóm
 
