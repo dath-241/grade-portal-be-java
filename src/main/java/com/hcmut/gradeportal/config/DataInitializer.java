@@ -226,6 +226,12 @@ public class DataInitializer implements CommandLineRunner {
             Student fixedStudent = studentRepository.findByEmail("trandaiviet78@gmail.com")
                     .orElseThrow(() -> new RuntimeException("Student not found"));
 
+            Teacher fixedTeacher2 = teacherRepository.findByEmail("thuanle@hcmut.edu.vn")
+                    .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+            Student fixedStudent2 = studentRepository.findByEmail("thuanle@hcmut.edu.vn")
+                    .orElseThrow(() -> new RuntimeException("Student not found"));
+
             List<Course> courses = courseRepository.findAll();
             Collections.shuffle(courses);
             List<Course> selectedCourses = courses.stream().limit(20).collect(Collectors.toList());
@@ -244,7 +250,8 @@ public class DataInitializer implements CommandLineRunner {
                 for (int j = 0; j < 2; j++) {
                     String className = "L0" + (j + 1);
                     Teacher randomTeacher = (courseCounter < 5) ? fixedTeacher
-                            : teachers.get(new Random().nextInt(teachers.size()));
+                            : (courseCounter < 10) ? fixedTeacher2
+                                    : teachers.get(new Random().nextInt(teachers.size()));
 
                     List<Student> assignedStudents;
                     if (courseCounter < 5 && j == 0) {
@@ -252,6 +259,12 @@ public class DataInitializer implements CommandLineRunner {
                         assignedStudents = new ArrayList<>(group1);
                         if (!assignedStudents.contains(fixedStudent)) {
                             assignedStudents.add(fixedStudent);
+                        }
+                    } else if (courseCounter < 10 && j == 0) {
+                        // Đảm bảo lớp học đầu tiên của 5 Course sau có học sinh đặc biệt
+                        assignedStudents = new ArrayList<>(group1);
+                        if (!assignedStudents.contains(fixedStudent2)) {
+                            assignedStudents.add(fixedStudent2);
                         }
                     } else {
                         // Lớp học còn lại hoặc các Course sau

@@ -102,5 +102,4 @@ public class ClientAuthController {
                     .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null));
         }
     }
-
 }
