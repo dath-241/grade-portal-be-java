@@ -1,6 +1,9 @@
 package com.hcmut.gradeportal.controller.teacher;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import java.util.ArrayList;
 
 import org.springframework.http.HttpStatus;
@@ -34,7 +37,7 @@ public class TeacherManageSheetMarkController {
     // Update Sheet Mark with student ID
     @PutMapping("/update/student-id")
     public ResponseEntity<ApiResponse<SheetMarkDto>> updateSheetMarkWithStudentId(
-            @RequestBody UpdateSheetMarkWithStudentIdRequest request) {
+            @RequestBody @Valid UpdateSheetMarkWithStudentIdRequest request) {
         try {
             String userId = CurrentUser.getUserId();
 
