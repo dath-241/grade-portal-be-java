@@ -184,7 +184,7 @@ public class TeacherManageClassController {
     }
 
     // Cập nhật trạng thái của lớp học
-    @PutMapping("/update-class-status")
+    @PutMapping("/update-status")
     public ResponseEntity<ApiResponse<CourseClassDetailDtoForTeacher>> UpdateClassStatus(
             @RequestBody UpdateClassStatusRequest request) {
         try {
