@@ -54,5 +54,13 @@
     "givenName": "Văn Quốc Việt",
     "phone": "0123456789",
     "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "ADMIN",
+    "email": "thuanle@hcmut.edu.vn",
+    "familyName": "Lê",
+    "givenName": "Đình Thuận",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
   }
 ]
