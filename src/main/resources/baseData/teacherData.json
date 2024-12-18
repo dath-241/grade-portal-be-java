@@ -55,6 +55,15 @@
   },
   {
     "role": "TEACHER",
+    "email": "thuanle@hcmut.edu.vn",
+    "familyName": "Lê",
+    "givenName": "Đình Thuận",
+    "studentId": "2999999",
+    "phone": "0123456789",
+    "faculty": "Khoa Khoa học và Kỹ Thuật Máy tính"
+  },
+  {
+    "role": "TEACHER",
     "email": "teacher1.bku@hcmut.edu.vn",
     "familyName": "Do",
     "givenName": "teacher1",
