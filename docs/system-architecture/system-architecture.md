@@ -49,6 +49,8 @@ Dự án hướng đến mục tiêu xây dựng một trang web cung cấp dị
 
 Dưới đây là tài liệu Kiến trúc Hệ thống được team sử dụng trong dự án.
 
+Tài liệu bản pdf sẽ nằm ở [đây](./system_architecture.pdf).
+
 ## Kiến trúc Phân lớp (Layered Architecture)
 
 ![alt text](LayeredArchitecture.png)

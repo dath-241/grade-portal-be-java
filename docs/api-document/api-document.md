@@ -33,6 +33,17 @@ Tài liệu này cung cấp thông tin chi tiết về các **endpoint**, phươ
 
 Các API được xây dựng theo chuẩn **Restful**, giúp đảm bảo khả năng mở rộng và tương thích cao trong các ứng dụng hiện đại. Mỗi endpoint đi kèm với mô tả chi tiết về chức năng, yêu cầu đầu vào, và ví dụ về phản hồi trả về.
 
+---
+
+## Tài liệu API chi tiết
+
+Dưới đây là tài liệu mô tả chi tiết cho mỗi endpoint, bao gồm các phương thức HTTP, yêu cầu đầu vào, và ví dụ về phản hồi trả về.
+Document Api nằm ở [đây](https://documenter.getpostman.com/view/36861276/2sAYJ1m3AX).
+
+Hoặc có thể tải về bản json ở [đây](./Grade%20Portal%20Api%20Document.postman_collection.json).
+
+---
+
 ## Các Endpoint Chính
 
 ### /admin
@@ -102,13 +113,6 @@ Các API được xây dựng theo chuẩn **Restful**, giúp đảm bảo khả
 4. **/student-info**:
    - **Mô tả**: Các API cho phép **Teacher** truy xuất thông tin sinh viên cần thiết.
    - **Phương thức**: `GET`
-
----
-
-## Tài liệu API chi tiết
-
-Dưới đây là tài liệu mô tả chi tiết cho mỗi endpoint, bao gồm các phương thức HTTP, yêu cầu đầu vào, và ví dụ về phản hồi trả về.
-Document Api nằm ở [đây](https://documenter.getpostman.com/view/36861276/2sAY4uDid7)
 
 ---
 
