@@ -19,17 +19,17 @@ public class SheetMarkSpecification {
 
     public static Specification<SheetMark> hasCourseCode(String courseCode) {
         return (root, query, builder) -> (courseCode == null || courseCode.equals("")) ? null
-                : builder.equal(root.get("courseClass").get("courseCode"), courseCode);
+                : builder.equal(root.get("courseClass").get("id").get("courseCode"), courseCode);
     }
 
     public static Specification<SheetMark> hasSemesterCode(String semesterCode) {
         return (root, query, builder) -> (semesterCode == null || semesterCode.equals("")) ? null
-                : builder.equal(root.get("courseClass").get("semesterCode"), semesterCode);
+                : builder.equal(root.get("courseClass").get("id").get("semesterCode"), semesterCode);
     }
 
     public static Specification<SheetMark> hasClassName(String className) {
         return (root, query, builder) -> (className == null || className.equals("")) ? null
-                : builder.equal(root.get("courseClass").get("className"), className);
+                : builder.equal(root.get("courseClass").get("id").get("className"), className);
     }
 
     public static Specification<SheetMark> hasSheetMarkStatus(SheetMarkStatus sheetMarkStatus) {
