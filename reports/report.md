@@ -48,6 +48,10 @@
 
 ## Biên bản họp nhóm hàng tuần
 
+Sơ đồ Gantt thể hiện quy trình hiện thực dự án của nhóm ở [đây](https://docs.google.com/spreadsheets/d/1gHI25VZbI2IiyjJD7OkQ2sZHf8J-NaBwq7-RNx2U5-0/edit?usp=sharing).
+
+## Biên bản họp nhóm hàng tuần
+
 Kế hoạch làm việc chung của môn học như sau:
 
 | Tuần |   Ngày   | Biên bản                                                                                | Kết quả làm việc                                                 |
@@ -75,12 +79,12 @@ Kế hoạch làm việc chung của môn học như sau:
 
 | MSSV    | Tên thành viên     | Vai trò | Tuần 1 | Tuần 2 | Tuần 3 | Tuần 4 | Tuần 5 | Tuần 6 | Tuần 7 | Tuần 8 | Tuần 9 | Tuần 10 |
 | ------- | ------------------ | ------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------- |
-| 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
-| 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
-| 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
-| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
-| 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
-| 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | -       |
+| 2213951 | Trần Đại Việt      | PO      | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢      |
+| 2213950 | Phạm Văn Quốc Việt | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢      |
+| 2211629 | Nguyễn Nhật Khoa   | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢      |
+| 2210128 | Phạm Việt Anh      | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢      |
+| 2212303 | Nguyễn Gia Nguyên  | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢      |
+| 2211599 | Lê Đăng Khoa       | DEV     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢     | 🟢      |
 
 ### Đánh giá của nhóm
 
