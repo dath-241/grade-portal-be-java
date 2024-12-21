@@ -277,7 +277,7 @@ public class CourseClassService {
                         }
                 }
 
-                return newClass;
+                return courseClassRepository.save(newClass);
         }
 
         ////////////// Service for put method - update data //////////////
