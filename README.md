@@ -47,6 +47,7 @@
 - [Backend Server](https://a2-grade.thuanle.me/)
 - [API docs](https://documenter.getpostman.com/view/36861276/2sAYJ1m3AX)
 - [Final Report](./reports/mainReport/241_DA_CNPM.pdf)
+- [Slide báo cáo](./reports/mainReport/241-DA-CNPM-SLIDE.pdf)
 <!-- ABOUT THE PROJECT -->
 
 <a id="about-the-project"></a>
