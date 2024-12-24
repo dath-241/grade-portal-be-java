@@ -30,6 +30,7 @@
 # Tài liệu dự án
 
 Đây là nơi nhóm sẽ hệ thống lại những tài liệu quan trọng trong quá trình hiện thực dự án, cũng như hướng dẫn sử dụng dự án hay các quy trình làm việc sẽ được hệ thống lại.
+Ngoài ra một số tài liệu chi tiết sẽ nằm ở trong Report sau đây: [Final Report](../reports/mainReport/241_DA_CNPM.pdf)
 
 ## Mục lục
 
